@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Insurance Claim Portal</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f4f6f8;
+      margin: 0;
+      padding: 20px;
+    }
+    .container {
+      background: #fff;
+      padding: 30px;
+      max-width: 600px;
+      margin: auto;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+      border-radius: 8px;
+    }
+    h2 {
+      text-align: center;
+      color: #333;
+    }
+    label {
+      display: block;
+      margin-top: 15px;
+      font-weight: bold;
+    }
+    input, textarea, select {
+      width: 100%;
+      padding: 10px;
+      margin-top: 5px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      box-sizing: border-box;
+    }
+    button {
+      margin-top: 20px;
+      background-color: #007bff;
+      color: white;
+      border: none;
+      padding: 12px 20px;
+      border-radius: 4px;
+      cursor: pointer;
+      width: 100%;
+    }
+    button:hover {
+      background-color: #0056b3;
+    }
+    .success-message {
+      margin-top: 20px;
+      color: green;
+      font-weight: bold;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+
+<div class="container">
+  <h2>Formulário de reclamação de seguro</h2>
+  <form id="claimForm" action="/claimForm" method="POST">
+    <label for="name">Nome Completo</label>
+    <input type="text"  name="fname"  id="name" required>
+
+    <label for="email">Endereço Email</label>
+    <input type="email" name="email" id="email" required>
+
+    <label for="clinicID">ID Da Clinica</label>
+    <input type="text" name="clinicID" id="clinicID" required>
+
+    <label for="policyNumber">Número da apólice</label>
+    <input type="text" name="policeNumber" id="policyNumber" required>
+
+    <label for="claimType">Tipo de reclamação</label>
+    <select id="typeOfPolice" name="typeOfPolice"required>
+      <option value="">Selecione um tipo</option>
+      <option>Dental</option>
+      <option>Optometrista</option>
+      <option>Consulta Normal</option>
+      <option>Medicamentos</option>
+    </select>
+
+    <label for="description">Descrição da reivindicação</label>
+    <textarea id="description" name="description" rows="5" ></textarea>
+
+    <label for="documents">Carregar documentos de suporte</label>
+    <input type="file" id="documents" name="document" multiple>
+
+    <button type="submit">Enviar reivindicação</button>
+  </form>
+  <a href="insurance">Back to home</a>
+
+  <!-- <div class="success-message" id="successMessage" style="display: none;">
+    ✅ Your claim has been submitted successfully!
+  </div> -->
+</div>
+<!-- 
+<script>
+  document.getElementById('claimForm').addEventListener('submit', function(e) {
+    e.preventDefault();
+    // In a real app, form data would be sent to a backend server here.
+    document.getElementById('successMessage').style.display = 'block';
+    document.getElementById('claimForm').reset();
+  });
+</script> -->
+
+</body>
+</html>

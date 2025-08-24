@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Professional Sidebar Navigation</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+  <!-- Optional: Use Font Awesome for icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      display: flex;
+      height: 100vh;
+      background-color: #f8f9fa;
+      color: #333;
+    }
+
+    .sidebar {
+      width: 240px;
+      background-color: #1e293b;
+      color: #fff;
+      padding: 30px 20px;
+      display: flex;
+      flex-direction: column;
+      position: fixed;
+      height: 100%;
+    }
+
+    .sidebar .logo {
+      font-size: 20px;
+      font-weight: 600;
+      margin-bottom: 40px;
+      text-align: center;
+    }
+
+    .nav-link {
+      display: flex;
+      align-items: center;
+      padding: 12px 15px;
+      border-radius: 6px;
+      color: #cbd5e1;
+      text-decoration: none;
+      margin-bottom: 10px;
+      transition: background 0.3s, color 0.3s;
+    }
+
+    .nav-link:hover {
+      background-color: #334155;
+      color: #ffffff;
+    }
+
+    .nav-link i {
+      margin-right: 12px;
+      font-size: 16px;
+      width: 20px;
+      text-align: center;
+    }
+
+    .main-content {
+      margin-left: 240px;
+      padding: 40px;
+      flex: 1;
+    }
+
+    .main-content h1 {
+      font-size: 28px;
+      font-weight: 600;
+      margin-bottom: 10px;
+      text-align: center;
+    }
+
+    .main-content p {
+      font-size: 16px;
+      color: #555;
+      text-align: center;
+    }
+    .appointment {
+      position: absolute;
+      top: 200px;
+      left: 300px;
+      height: 100px;
+      width: 150px;
+       padding: 12px 24px;
+      font-size: 16px;
+      border: none;
+      background-color: #007bff;
+      color: white;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+      
+    }
+    .Laboratory {
+      position: absolute;
+      top: 200px;
+      left: 600px;
+      height: 100px;
+      width: 150px;
+      padding: 12px 24px;
+      font-size: 16px;
+      border: none;
+      background-color: #007bff;
+      color: white;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+  .Insurance {
+      position: absolute;
+      top: 300px;
+      left: 450px;
+      height: 100px;
+      width: 150px;
+       padding: 12px 24px;
+      font-size: 16px;
+      border: none;
+      background-color: #007bff;
+      color: white;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+    .newsLetter {
+      background-image: url('images/green_leaves.jpg');
+       position: absolute;
+      top: 5px;
+      right: 0px;
+      height: 100%;
+      width: 200px;
+      background-color: rgb(96, 100, 96);
+      color: white;
+      text-align: center;
+
+    }
+     footer {
+      position: absolute;
+      text-align: center;
+     background-color: rgb(245, 249, 245);
+      color: black;
+      padding: 20px 0;
+      margin-top: 20px;
+      opacity: .7;
+      bottom: 0px;
+      left: 50%;
+    }
+    .resource{
+      position: relative;
+      left: 700px;
+      top: 250px;
+      background-color: #1e293b;;
+      color: white;
+      height: 50px;
+       width: 310px;
+      border-radius: 1px;
+      text-align: center;
+    }
+    .resourceContent{
+      position: relative;
+      left: 700px;
+      top: 250px;
+      background-color: #c5d2e9;;
+      color: black;
+      height: 250px;
+      width: 310px;
+      border-radius: 1px;
+      text-align: center;
+      text-align: left;
+    }
+
+  
+
+  </style>
+</head>
+<body>
+
+  <nav class="sidebar">
+    <div class="logo">Agendamento.com</div>
+    <a href="home" class="nav-link"><i class="fas fa-home"></i> Dashboard</a>
+    <a href="userProfile" class="nav-link"><i class="fas fa-user"></i> Profile</a>
+    <a href="appointment" class="nav-link"><i class="fas fa-calendar-alt"></i> Appointments</a>
+    <a href="laboratory" class="nav-link"><i class="fa-solid fa-flask-vial"></i>Laboratory</a>
+    <a href="insurance" class="nav-link"><i class="fa-solid fa-suitcase-medical"></i>Insurance</a>
+     <a href="#" class="nav-link"><i class="fas fa-cog"></i> Settings</a>
+    <a href="#" class="nav-link"><i class="fas fa-sign-out-alt"></i> Logout</a>
+    
+  </nav>
+
+  <div class="main-content">
+    <h1 class="topTitle">Bem Vindo Ao Agendamento</h1>
+    <p>Encontre aqui tudo que necessita</p>
+  
+  <a href="appointment"><div class="appointment">Appointments </div></a>
+  <a href="laboratory"><div class="Laboratory">Laboratory</div></a>
+  <a href="insurance"><div class="Insurance">Insurance Providers </div></a>
+  
+
+  <div class="newsLetter"></div>
+
+<div class="resource">Resource Center</div>
+<div class="resourceContent">
+    <br>
+    <li>Frenquently Asked Questions (FAQs)</li><br>
+    <li>Tell Me More </li><br>
+    <li>List of Sign-In Partners</li><br>
+    <li>Terms and Conditions </li>
+ 
+
+
+
+</div>
+
+
+
+
+  </div>
+ <footer>
+    &copy; 2025 Moz Insurance Network.
+  </footer>
+</body>
+</html>

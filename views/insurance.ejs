@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>HealthyCare Insurance</title>
+  <style>
+    body {
+    
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0 15px;
+      background: #f0f4f8;
+    }
+    header {
+      background-color: #0077b6;
+      color: white;
+      padding: 20px 0;
+      text-align: center;
+    }
+    nav {
+      background-color: #023e8a;
+      text-align: center;
+      padding: 10px;
+    }
+    nav a {
+      color: white;
+      margin: 0 15px;
+      text-decoration: none;
+      font-weight: bold;
+    }
+   
+    .content {
+            position: relative;
+            top: -200px;
+            padding: 40px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 30px;
+            justify-content: center;
+        }
+
+    .plans {
+      display: flex;
+      justify-content: space-around;
+      flex-wrap: wrap;
+    }
+    .plan {
+      border: 1px solid #ccc;
+      border-radius: 10px;
+      padding: 20px;
+      margin: 10px;
+      flex: 1 1 30%;
+      text-decoration: none;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+    footer {
+      text-align: center;
+      background-color: #0077b6;
+      color: white;
+      padding: 20px 0;
+      margin-top: 20px;
+    }
+
+    .card {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            width: 300px;
+        }
+
+        .card h2 {
+            color: #0077b6;
+        }
+        .hero {
+            background: url('https://via.placeholder.com/1500x400?text=Medical+Insurance') center/cover no-repeat;
+            color: white;
+            text-align: center;
+            padding: 100px 20px;
+        }
+
+        .hero h1 {
+            font-size: 3em;
+        }
+    
+        
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Mozambican Health Insurance Providers Network</h1>
+    <p>Your Health, Our Priority</p>
+  </header>
+
+  <nav>
+    <a href="#plans">Claims</a>
+    <a href="#benefits">Benefits</a>
+    <a href="#contact">Contact</a>
+    <a href="insuranceLogin">Login</a>
+  </nav>
+
+  <div class="hero"></div>
+
+  <div class="content">
+    <section id="plans">
+      <h2>Our Insurance Plans</h2>
+      <div class="plans">
+        <div class="plan">
+          <h3>Claim History</h3>
+          <p>Keep track of your benefits and claims.</p>
+          
+        </div>
+        <div class="plan"><a href="insuranceClaim">
+          <h3 style="text-decoration: none;">Submit Claim</h3> </a>
+          <p>Comprehensive coverage for your family.</p>
+         
+         
+        </div>
+        <div class="plan">
+          <h3>Premium Plan</h3>
+          <p>Full coverage with extra benefits and global access.</p>
+          <p><strong>$299/month</strong></p>
+        </div>
+      </div>
+    </section>
+  </div>
+<section class="content">
+    <div class="card">
+        <h2>Family Plans</h2>
+        <p>Protect your entire family with customizable and affordable plans.</p>
+    </div>
+    <div class="card">
+        <h2>Individual Coverage</h2>
+        <p>Personalized health insurance tailored for individuals of all ages.</p>
+    </div>
+    <div class="card">
+        <h2>24/7 Support</h2>
+        <p>Our experts are here for you anytime, anywhere you need help.</p>
+    </div>
+</section>
+
+  <footer>
+    &copy; 2025 Moz Insurance Network.
+  </footer>
+</body>
+</html>

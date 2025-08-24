@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   
+    
+    <title>Registration</title>
+   
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
+    <style>
+        
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: #f4f6f9;
+      margin: 0;
+      padding: 0;
+    }
+     .container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+.first-box{
+    background-color: rgba(207, 230, 235, 0.9);
+    height: 630px;
+    width: 59.1%;   
+    position: absolute;
+    top: 50px;
+    left: 318px;
+    border-radius: 5px;
+    opacity: 0.9;
+    display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+    
+}
+
+.appointment {
+    position: relative;
+    left: 550px;
+    top: 60px;
+    height: 580px;
+    width: 440px;
+    background: #ffffff;
+      padding: 40px;
+      border-radius: 8px;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+    
+
+}
+#fname {
+    position: relative;
+    box-shadow: inset;
+    top: 20px;
+    left: 10px;
+    border-radius: 3px;
+    width: 380px;
+    border-color: rgba(236, 229, 229, 0.96);
+    height: 40px;
+}
+
+h2{text-align: center;}
+.form-radio {
+    
+    text-align: center;
+}
+.error-message{
+    position: relative;
+    background-color:red;
+    text-align: center;
+    top: 5px;
+    left: 460px;
+    width: 380px;
+}
+
+.submete{
+    background-color: rgba(0,147,173,0.9);
+    position: relative;
+    left: 10px;
+    top: 90px;
+    width: 380px;
+    height: 40px;
+    border-radius: 3px;
+    border:none;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+
+}
+
+
+    .submete:hover {
+      background-color: #0056b3;
+    }
+.top-line {
+    position: relative;
+    top: 15px;
+
+border-top: 1px solid gray;
+}
+
+.titulo {
+    position: relative;
+    top: 10px;
+}
+
+.message {
+   
+   text-align: center;
+   position: absolute;
+   left: 20px;
+   top: 130px;
+   width: 350px;
+   height: 400px;
+}
+#datadacon {
+position: relative;
+box-shadow: inset;
+left: 10px;
+top: 90px;
+border-radius: 3px;
+border-color: rgba(236, 229, 229, 0.96);
+background-color: rgb(250, 245, 245);
+height: 40px;
+width: 185px;
+
+}
+.principal{color:gray;}
+
+.voltar {
+
+    position: relative;
+    top: 80px;
+    left: 380px;
+    text-decoration: none;
+}
+
+    </style>
+</head>
+<body>
+    
+    <div class="first-box">
+
+                 
+            </div> 
+            <div class="appointment">
+            <h2 class="principal">Registo De Usuarios</h2>
+            <hr class="top-line">
+        <form action="/registration" method="POST" id="form-user">
+    <div class="content">
+            
+            <div id="fname">
+                <input type="text" id="fname" name="fname" placeholder="Nome"><br><br>
+            </div>
+
+            <br>
+
+            <div id="fname">
+                <input type="text" id="fname" name="lastname" placeholder="Apelido"><br><br>
+            </div>
+
+            <br>
+
+            <div id="fname">
+                <input type="email" id="fname" name="username" placeholder="Email"><br><br>
+            </div>
+
+            <br>
+
+            <div id="fname">
+                <input type="text" id="fname" name="phoneNumber" placeholder="Telephone"><br><br>
+            </div>
+
+            <br>
+
+            <div id="fname">
+                <input type="password" id="fname" name="password" placeholder="Password" required><br><br>
+            </div>
+            
+            <br>
+            <div id="fname">
+                <input type="password" id="fname" name="passwordConfirm" placeholder="Confirm Password" required><br><br>
+            </div>
+
+
+             <br>  
+                      
+
+             <button type="submit" class="submete">Registo De Usuarios</button>
+
+           
+        </div>
+       
+ 
+        </form>
+        <a href="login"><p class="voltar">Sign in</p></a>
+    </div>
+   
+    </div>
+
+    
+
+</body>
+</html>

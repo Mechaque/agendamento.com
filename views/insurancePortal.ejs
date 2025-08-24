@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Simple Navbar</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.0.0-beta2/css/bootstrap.min.css" integrity="sha512-aqT9YD5gLuLBr6ipQAS+72o5yHKzgZbGxEh6iY8lW/r6gG14e2kBTAJb8XrxzZrMOgSmDqtLaF76T0Z6YY2IHg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+    }
+
+    .navbar {
+      
+      display: flex;
+      justify-content: flex-end;
+      background-color: #333;
+      overflow: hidden;
+    }
+
+    .navbar a {
+      padding: 14px 20px;
+      color: white;
+      text-decoration: none;
+      text-align: center;
+    }
+
+    .navbar a:hover {
+      background-color: #ddd;
+      color: black;
+    }
+
+    @media screen and (max-width: 600px) {
+      .navbar {
+        flex-direction: column;
+      }
+    }
+  </style>
+  
+  
+</head>
+<body>
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.0.0-beta2/js/bootstrap.bundle.min.js" integrity="sha512-43iShtbiyImxjjU4a9rhXBy7eKtIsrpll8xKhe1ghKqh5NyfME8phZs5JRFZpRBe1si44WM3tNmnqMym7JRmDQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <div class="navbar">
+    <a href="#home">Home</a>
+    <a href="#about">About</a>
+    <a href="#services">Services</a>
+    <a href="#contact">Contact</a>
+  </div>
+ 
+  <div class="container">
+    <div class="row my-4">
+        <div class="col-lg-12">
+            <div class="table-responsive">
+               <table id="table" class="table table-striped text-center my-3"> 
+                <thead>
+                    <tr class="table-dark">
+                        <th>Full Name</th>
+                        <th>Email</th>
+                        <th>Policy</th>
+                        <th>Reclamacao</th>
+                        <th>ID da Clinica</th>
+                        <th>Factura</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% Claims.forEach(function(Claims){ %>
+
+                    <tr>
+                        <td><%= Claims.fullName %></td>
+                        <td><%= Claims.email %></td>
+                        <td><%= Claims.policeNumber %></td>
+                        <td><%= Claims.typeOfPolice %></td>
+                        <td><%= Claims.clinicID %></td>
+                        <td><%= Claims.documents %></td>
+                    <td>
+                    <a href="" class="text-sucess"><i class="fas fa-edit fa-lg mx-1"></i></a>
+                    <a href="" class="text-danger"><i class="fas fa-trash fa-lg mx-1"></i></a>
+                    </td>
+                    </tr>
+                    <%  }); %>
+                </tbody>
+               </table>
+            </div>
+        </div>
+    </div>
+  </div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="https://cdn.datatables.net/v/dt/dt-2.3.1/datatables.min.js" integrity="sha384-1LmfH5u7+DRwux/q4YYqAi+OjwkIVYJdPQijPS9S28cj8AeFnpNCkSVlZgvRdOzb" crossorigin="anonymous"></script>
+<script>
+  $(document).ready(function(){
+  $("table").DataTable({
+    order:[0, 'desc']
+  });
+  });
+  </script>
+</body>
+</html>

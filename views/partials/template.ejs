@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Professional Sidebar Navigation</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+  <!-- Optional: Use Font Awesome for icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      display: flex;
+      height: 100vh;
+      background-color: #f8f9fa;
+      color: #333;
+    }
+
+    .sidebar {
+      width: 240px;
+      background-color: #1e293b;
+      color: #fff;
+      padding: 30px 20px;
+      display: flex;
+      flex-direction: column;
+      position: fixed;
+      height: 100%;
+    }
+
+    .sidebar .logo {
+      font-size: 20px;
+      font-weight: 600;
+      margin-bottom: 40px;
+      text-align: center;
+    }
+
+    .nav-link {
+      display: flex;
+      align-items: center;
+      padding: 12px 15px;
+      border-radius: 6px;
+      color: #cbd5e1;
+      text-decoration: none;
+      margin-bottom: 10px;
+      transition: background 0.3s, color 0.3s;
+    }
+
+    .nav-link:hover {
+      background-color: #334155;
+      color: #ffffff;
+    }
+
+    .nav-link i {
+      margin-right: 12px;
+      font-size: 16px;
+      width: 20px;
+      text-align: center;
+    }
+
+    .main-content {
+      margin-left: 240px;
+      padding: 40px;
+      flex: 1;
+    }
+
+    .main-content h1 {
+      font-size: 28px;
+      font-weight: 600;
+      margin-bottom: 10px;
+      text-align: center;
+    }
+
+    .main-content p {
+      font-size: 16px;
+      color: #555;
+      text-align: center;
+    }
+    .appointment {
+      position: absolute;
+      top: 200px;
+      left: 380px;
+      height: 100px;
+      width: 200px;
+      border-radius: 5px;
+      background-color: #007bff;
+      color: white;
+      text-align: center;
+      padding: 12px 24px;
+      font-size: 16px;
+      border: none;
+      cursor: pointer;
+      transition: background-color 0.3s ease;      
+      
+    }
+    .Laboratory {
+      position: absolute;
+      top: 200px;
+      left: 900px;
+      height: 100px;
+      width: 200px;
+      border-radius: 10px;
+      background-color: #1e293b;
+      color: white;
+      text-align: center;
+    }
+  .Insurance {
+      position: absolute;
+      top: 300px;
+      left: 640px;
+      height: 100px;
+      width: 200px;
+      border-radius: 5px;
+     background-color: #007bff;
+      color: white;
+      text-align: center;
+       border: none;
+      cursor: pointer;
+      transition: background-color 0.3s ease; 
+    }
+    .newsLetter {
+      background-image: url('images/green_leaves.jpg');
+       position: absolute;
+       background-attachment: fixed;
+      top: 0px;
+      right: 0px;
+      height: 950px;
+      width: 202px;
+      color: white;
+      text-align: center;
+
+    }
+     footer {
+      position: absolute;
+      text-align: center;
+     background-color: rgb(245, 249, 245);
+      color: black;
+      padding: 20px 0;
+      margin-top: 20px;
+      opacity: .7;
+      bottom: -10px;
+      left: 40%;
+    }
+  </style>
+</head>
+<body>
+
+  <nav class="sidebar">
+    <div class="logo">Agendamento.com</div>
+    <a href="/home" class="nav-link"><i class="fas fa-home"></i> Dashboard</a>
+    <a href="userProfile" class="nav-link"><i class="fas fa-user"></i>Profile</a>
+    <a href="appointment" class="nav-link"><i class="fas fa-calendar-alt"></i> Appointments</a>
+    <a href="laboratory" class="nav-link"><i class="fa-solid fa-flask-vial"></i>Laboratory</a>
+    <a href="insurance" class="nav-link"><i class="fa-solid fa-suitcase-medical"></i>Insurances</a>
+     <a href="" class="nav-link"><i class="fas fa-cog"></i> Settings</a>
+    <a href="" class="nav-link"><i class="fas fa-sign-out-alt"></i> Logout</a>
+    
+  </nav>
+
+  <div class="main-content">
+
+  </div>
+
+
+  </div>
+  <div class="newsLetter"></div>
+
+ <footer>
+    &copy; 2025 Moz Insurance Network.
+  </footer>
+</body>
+</html>

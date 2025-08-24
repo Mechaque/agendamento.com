@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <%- include("partials/template.ejs") %>
+</head>
+<body>
+<style>
+.title {
+position: absolute;
+top: 5px;
+left: 500px;
+
+
+}
+
+#openModalBtn {
+      padding: 12px 24px;
+      font-size: 16px;
+      border: none;
+      background-color: #007bff;
+      color: white;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    #openModalBtn:hover {
+      background-color: #0056b3;
+    }
+
+    /* Modal styles */
+    .modal {
+      display: none;
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background-color: rgba(0, 0, 0, 0.6);
+      z-index: 1000;
+      justify-content: center;
+      align-items: center;
+      animation: fadeIn 0.3s ease-in-out;
+    }
+
+    .modal.active {
+      display: flex;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    .modal-content {
+      background-color: #fff;
+      padding: 30px;
+      border-radius: 10px;
+      width: 400px;
+      max-width: 90%;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+      animation: slideIn 0.3s ease-out;
+    }
+
+    @keyframes slideIn {
+      from { transform: translateY(-30px); opacity: 0; }
+      to { transform: translateY(0); opacity: 1; }
+    }
+
+    .modal-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 20px;
+    }
+
+    .modal-header h2 {
+      margin: 0;
+      font-size: 20px;
+    }
+
+    .close {
+      font-size: 24px;
+      cursor: pointer;
+      color: #aaa;
+    }
+
+    .close:hover {
+      color: #333;
+    }
+
+    .modal-body select {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 20px;
+      font-size: 16px;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+    }
+
+    .modal-footer {
+      text-align: right;
+    }
+
+    .modal-footer button {
+      padding: 10px 20px;
+      font-size: 16px;
+      border: none;
+      border-radius: 5px;
+      background-color: #28a745;
+      color: white;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    .modal-footer button:hover {
+      background-color: #218838;
+    }
+
+
+
+
+</style>
+<h1 class="title">This your health appointment portal</h1>
+
+
+
+<a href="appointmentHistory"><div class="appointment">Appointment History</div></a>
+<a href="searchClinic"><button class="Insurance">Search A Clinic</button></a>
+<a href="appointmentHistory"><button class="appointment">View Appointments History</button></a>
+
+<div class="container">
+    <button class="Laboratory" id="openModalBtn">Book Appointment</button>
+   <div id="customModal" class="modal">
+    <form action="/provClinic" method="post" id="form-user" class="account">
+  <div class="modal-content">
+    <div class="modal-header">
+      <h2>Selecione A Provincia</h2>
+      <span class="close" id="closeModal">&times;</span>
+    </div>
+    <div class="modal-body">
+      <select name="provName" id="dropdownMenu" required>
+        <option disabled selected>Selecione A Provincia</option>
+        <option value="Maputo">Maputo</option>
+        <option value="Gaza">Gaza</option>
+        <option value="Inhambane">Inhambane</option>
+        <option value="Sofala">Sofala</option>
+        <option value="Manica">Manica</option>
+        <option value="Zambeze">Zambeze</option>
+        <option value="Tete">Tete</option>
+        <option value="Nampula">Nampula</option>
+        <option value="Niassa">Niassa</option>
+        <option value="caboDelgado">Cabo Delgado</option>
+
+      </select>
+      
+    </div>
+    <div class="modal-footer">
+      <button onclick="submitSelection()">Submit</button>
+    </div>
+  
+  </div>
+    </form>
+</div>
+<script>
+  const openModalBtn = document.getElementById('openModalBtn');
+  const modal = document.getElementById('customModal');
+  const closeModal = document.getElementById('closeModal');
+
+  openModalBtn.onclick = () => modal.classList.add('active');
+  closeModal.onclick = () => modal.classList.remove('active');
+
+  window.onclick = (e) => {
+    if (e.target === modal) {
+      modal.classList.remove('active');
+    }
+  };
+
+  function submitSelection() {
+    const dropdown = document.getElementById('dropdownMenu');
+    const value = dropdown.value;
+    if (value) {
+      alert(`You selected: ${value}`);
+      modal.classList.remove('active');
+    } else {
+      alert('Please select a fruit first.');
+    }
+  }
+</script>
+
+
+
+
+    
+</body>
+</html>

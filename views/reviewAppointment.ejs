@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+   
+    <%- include("partials/template.ejs") %>
+    <style>
+.first-box{
+      position: relative;
+      left: -400px;
+      width: 800px;
+      margin: auto;
+      padding: 30px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+ .form {
+      background: rgb(197, 225, 243);
+      padding: 30px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+ h2 {
+    
+    top: 15px;
+      text-align: center;
+      margin-bottom: 25px;
+    }
+    label {
+      display: block;
+      margin: 10px 0 5px;
+    }
+    input, select, textarea {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 15px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+    button {
+      background-color: #2e86de;
+      color: white;
+      padding: 12px;
+      border: none;
+      width: 100%;
+      border-radius: 5px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #1e6ab7;
+    }
+
+
+    </style>
+</head>
+<body>
+    <div class="first-box">
+        
+      <div class="container">
+       
+          
+    <form class="form"  action="/addAppointment" id="form-user" method="post">
+       <input type="text" id="clinicID" name="numeroDaClinica" value="<%= clID %>" hidden>
+    <h2>Review Your Appointment</h2>
+      <label for="fullname">Full Name</label>
+      <input type="text" id="fullname" name="fname" value="<%= name %> <%= lname %>" readonly>
+
+      <label for="email">Email Address</label>
+      <input type="email" id="email" name="email" value="<%= email %>" readonly>
+
+      <label for="phone">Phone Number</label>
+      <input type="tel" id="phone" name="phoneNumber" value="<%= telephone %>" readonly>
+
+        <label for="phone">Clinic Name</label>
+      <input type="tel" id="phone" name="clinicName" value="<%= clname %>" readonly>
+
+      <label>Select Date</label>
+      <input type="date" id="phone" name="appointmentDate" >
+
+      <label for="time">Selected Time</label>
+      <input type="text" id="timeInput" name="appointmentTime" maxlength="5" placeholder="HHMM" />
+
+       
+
+      <label for="doctor">Service Type</label>
+      <select id="doctor" name="doctor" required>
+        <option value="">-- Select --</option>
+        <option value="dr_smith">Consulta Normal</option>
+        <option value="dr_lee">Verificação de rotina</option>
+        <option value="dr_khan">Tratamento</option>
+        <option value="dr_khan">follow-up</option>
+      </select>
+
+      <label for="notes">Additional Notes</label>
+      <textarea id="notes" name="reasonForVisit" rows="4" placeholder="Reason for visit, symptoms, etc."></textarea>
+
+      <button type="submit">Book Appointment</button>
+    </form>
+    <script>
+document.getElementById('timeInput').addEventListener('input', function(e) {
+  let value = e.target.value.replace(/\D/g, ''); // Remove non-digits
+
+  // Limit to 4 digits
+  if (value.length > 4) value = value.slice(0, 4);
+
+  // Extract hours and minutes
+  let hours = value.slice(0, 2);
+  let minutes = value.slice(2, 4);
+
+  // Enforce valid hours (00-23)
+  if (hours.length === 2) {
+    let h = parseInt(hours, 10);
+    if (h > 23) hours = '23';
+  }
+
+  // Enforce valid minutes (00-59)
+  if (minutes.length === 2) {
+    let m = parseInt(minutes, 10);
+    if (m > 59) minutes = '59';
+  }
+
+  // Format with colon
+  let formatted = hours;
+  if (minutes.length > 0) {
+    formatted += ':' + minutes;
+  }
+
+  e.target.value = formatted;
+});
+</script>
+
+  </div>
+ 
+     
+    </div>
+
+   
+
+
+    
+</body>
+</html>
