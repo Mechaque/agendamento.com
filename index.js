@@ -525,23 +525,23 @@ app.get('/labTestRequest', (req, res)=> {
 app.get('/labHistory', async(req, res)=> {
     if (req.isAuthenticated()) {
 
-  //       var authenticatedUser = req.user.userID;
-  //       var model = authenticatedUser.slice(0, 7);
+        var authenticatedUser = req.user.userID;
+        var model = authenticatedUser.slice(0, 7);
 
-  //  await connection.query('SELECT * FROM externalUsers',function(error, result){
+   await connection.query('SELECT * FROM externalUsers',function(error, result){
             
-  //           if (error) console.log(error);
-  //        let lastUser = result[result.length - 1];
-  //        let lastUser1 = lastUser.userID;
-  //        let model1 = lastUser1.slice(0, 7);
-  //        str = lastUser1.substring(7, lastUser1.length );
-  //        var str1 = parseInt(str,10);
-  //        str1 ++;
-  //       var externalID = model1 + str1;
-  //       console.log(externalID);
-  //   });
+            if (error) console.log(error);
+         let lastUser = result[result.length - 1];
+         let lastUser1 = lastUser.userID;
+         let model1 = lastUser1.slice(0, 7);
+         str = lastUser1.substring(7, lastUser1.length );
+         var str1 = parseInt(str,10);
+         str1 ++;
+        var externalID = model1 + str1;
+        console.log(externalID);
+    });
 
-     res.send('Still under construction, we will be available soon')
+     res.render('labTestHistory.ejs')
 
     } else {
 

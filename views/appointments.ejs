@@ -20,21 +20,29 @@
 
     /* Title */
     .title {
-      position: absolute;
-      left: 500px;
-      font-weight: 700;;
+      font-weight: 700;
       color: #1e293b;
-    font-size: clamp(20px, 3vw, 32px);  /* ✅ responsive font */
-     margin: 20px auto 24px;
+      font-size: clamp(20px, 3vw, 32px); 
+      margin: 20px auto 24px;
       line-height: 1.4;
       word-break: break-word;
-       max-width: 90%;
+      max-width: 90%;
+      text-align: center;
     }
 
-    /* Clickable div “buttons” */
+    /* Button container */
+    .button-group {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 16px;
+      margin-bottom: 30px;
+    }
+
+    /* Buttons */
     .appointment, .Insurance, .Laboratory {
-      display: inline-block;
-      margin: 10px;
+      flex: 1 1 220px; /* grow/shrink but min width ~220px */
+      max-width: 300px;
       padding: 14px 28px;
       font-size: clamp(15px, 2vw, 18px);
       background-color: #007bff;
@@ -53,29 +61,6 @@
       outline-offset: 2px;
     }
 
-    /* Make the “buttons” stack nicely on small screens */
-    @media (max-width: 768px) {
-      body { padding: 16px; }
-
-      .appointment, .Insurance, .Laboratory {
-        display: block;
-        width: 100%;
-        max-width: 480px;
-        margin: 12px auto;
-        padding: 16px;
-        font-size: 18px;
-        line-height: 1.3;
-        white-space: normal;
-      }
-    }
-    @media (max-width: 420px) {
-      .appointment, .Insurance, .Laboratory {
-        max-width: 100%;
-        font-size: 16px;
-        padding: 14px;
-      }
-    }
-
     /* Modal */
     .modal {
       display: none;
@@ -84,7 +69,7 @@
       width: 100%;
       height: 100%;
       background: rgba(0,0,0,.6);
-      z-index: 1000;
+      z-index: 9999;
       justify-content: center;
       align-items: center;
       padding: 16px;
@@ -130,7 +115,7 @@
     .modal-footer button:hover { background: #218838; }
 
     @media (max-width: 768px) {
-      .modal-content { padding: 20px; }
+      body { padding: 16px; }
       .modal-footer { text-align: center; }
       .modal-footer button {
         width: 100%;
@@ -144,42 +129,41 @@
 
   <h1 class="title">This is your health appointment portal</h1>
 
-  <div class="appointment" onclick="window.location.href='appointmentHistory'">Appointment History</div>
-  <div class="Insurance"   onclick="window.location.href='searchClinic'">Search A Clinic</div>
-  <div class="appointment" onclick="window.location.href='appointmentHistory'">View Appointments History</div>
-
-  <div class="container" style="max-width: 900px; margin: 0 auto;">
+  <div class="button-group">
+    <div class="appointment" onclick="window.location.href='appointmentHistory'">Appointment History</div>
+    <div class="Insurance" onclick="window.location.href='searchClinic'">Search A Clinic</div>
+    <div class="appointment" onclick="window.location.href='appointmentHistory'">View Appointments History</div>
     <div class="Laboratory" id="openModalBtn">Book Appointment</div>
+  </div>
 
-    <!-- Modal -->
-    <div id="customModal" class="modal">
-      <form action="/provClinic" method="post" id="form-user" class="account">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h2>Selecione A Provincia</h2>
-            <span class="close" id="closeModal" aria-label="Close">&times;</span>
-          </div>
-          <div class="modal-body">
-            <select name="provName" id="dropdownMenu" required>
-              <option disabled selected>Selecione A Provincia</option>
-              <option value="Maputo">Maputo</option>
-              <option value="Gaza">Gaza</option>
-              <option value="Inhambane">Inhambane</option>
-              <option value="Sofala">Sofala</option>
-              <option value="Manica">Manica</option>
-              <option value="Zambeze">Zambeze</option>
-              <option value="Tete">Tete</option>
-              <option value="Nampula">Nampula</option>
-              <option value="Niassa">Niassa</option>
-              <option value="caboDelgado">Cabo Delgado</option>
-            </select>
-          </div>
-          <div class="modal-footer">
-            <button type="submit">Submit</button>
-          </div>
+  <!-- Modal -->
+  <div id="customModal" class="modal">
+    <form action="/provClinic" method="post" id="form-user" class="account">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h2>Selecione A Provincia</h2>
+          <span class="close" id="closeModal" aria-label="Close">&times;</span>
         </div>
-      </form>
-    </div>
+        <div class="modal-body">
+          <select name="provName" id="dropdownMenu" required>
+            <option disabled selected>Selecione A Provincia</option>
+            <option value="Maputo">Maputo</option>
+            <option value="Gaza">Gaza</option>
+            <option value="Inhambane">Inhambane</option>
+            <option value="Sofala">Sofala</option>
+            <option value="Manica">Manica</option>
+            <option value="Zambeze">Zambeze</option>
+            <option value="Tete">Tete</option>
+            <option value="Nampula">Nampula</option>
+            <option value="Niassa">Niassa</option>
+            <option value="caboDelgado">Cabo Delgado</option>
+          </select>
+        </div>
+        <div class="modal-footer">
+          <button type="submit">Submit</button>
+        </div>
+      </div>
+    </form>
   </div>
 
   <script>
