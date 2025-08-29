@@ -66,8 +66,8 @@
           <table id="table" class="table table-striped table-hover text-center align-middle mb-0"> 
             <thead class="table-dark">
               <tr>
-                <th>ID da Clínica</th>
-                <th>Nome da Clínica</th>
+                <th>Lab ID</th>
+                <th>Nome de Lab</th>
                 <th>Endereço</th>
                 <th>Telefone</th>
                 <th>Província</th>
@@ -77,10 +77,10 @@
             <tbody>
               <% appointment.forEach(function(appointment){ %>
                 <tr>
-                  <td><%= appointment.clinicID %></td>
-                  <td><%= appointment.clinicName %></td>
-                  <td><%= appointment.clinicAddress %></td>
-                  <td><%= appointment.clinicTelephone %></td>
+                  <td><%= appointment.labID %></td>
+                  <td><%= appointment.labName %></td>
+                  <td><%= appointment.labAddress %></td>
+                  <td><%= appointment.labTelephone %></td>
                   <td><%= appointment.province %></td>
                   <td>
                     <a href="viewCliList?clinicID=<%= appointment.clinicID %>" class="btn btn-sm btn-outline-primary">

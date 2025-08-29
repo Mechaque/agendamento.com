@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">    
+    <title>update</title>
+    <%- include("partials/template.ejs") %>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    </head>
+
+<style>
+@import url("https://fonts.googleapis.com/css2?family=Poppins&display=swap");
+
+body {
+
+    background-color: #f3f3f9;
+}
+.container {
+display: flex;
+margin: 0px 20px ;
+}
+.account {
+flex: 2;
+margin-left: 60px;
+margin-right: 300px;
+background-color: #e4eceea6;
+box-shadow: rgba(0,0,0,0.16) 0px 1px 4px;
+border-radius: 5px;
+height: max-content;
+}
+
+.account-header {
+display: flex;
+justify-content: space-between;
+align-items: end;
+padding: 10px;
+border-bottom: 1px solid #768499;
+}
+
+.account-title {
+    font-family: "Poppins", sans-serif;
+    font-size: 20px;
+    color:#030000fa;
+    font-weight: 500;
+    margin: 60px 20px ;
+}
+
+.account-edit {
+    display: flex;
+    justify-content: space-between;
+    margin: 40px 0;
+}
+.input-container {
+width: 100%;
+display: flex;
+flex-direction: column;
+margin: 0 20px;
+
+}
+
+.input-contentor {
+width: 45.5%;
+display: flex;
+flex-direction: column;
+margin: 0 20px;
+border-radius: 5px;
+
+}
+
+.input-container label {
+font-family: "Poppins", sans-serif;
+color: #010409ed;
+font-size: 14px;
+}
+.input-container input {
+height: 25px;
+border: 1.5px solid #768499;
+border-radius: 5px;
+padding: 5px;
+color: #768499;
+font-family: "poppins", sans-serif;
+}
+.input-container input:focus {
+    outline:none;
+    border: 1.5px solid #536dfe;
+}
+.input-container textarea {
+    display: block;
+    width: 100%;
+    height: 100px;
+    padding: 5px;
+    border: 1.5px solid #768499;
+    border-radius: 5px;
+    font-family: "Poppins sans-serif";
+    color: #768499;
+}
+.input-container textarea:focus {
+    outline: none;
+    border: 1.5px solid #536dfe;
+}
+.insira {
+     width: 8em;
+     height: 3em;
+     cursor: pointer;
+     border: 1px solid #768499;
+     border-radius: 2em;
+     color: #1e293b;
+     font-weight: bold;
+     margin-right: 5px;
+     background-color: #fff;
+     transition-duration: 0.3s;
+     box-shadow: rgba(0,0,0,0.1);
+}
+.insira:hover {background-color: #f1f5f9;}
+
+.cancel {
+     width: 8em;
+     height: 3em;
+     cursor: pointer;
+     border: 1px solid #458ff6;
+     border-radius: 2em;
+     color: #fff;
+     font-weight: bold;
+     margin-right: 5px;
+     background-color: #536dfe;
+     transition-duration: 0.3s;
+     box-shadow: rgba(0,0,0,0.1);
+}
+.cancel:hover {background-color: #4053c9;}
+
+</style>
+
+<body>
+<div class="container">
+    <div class="profile">
+        <div class="profile-header">
+
+        </div>
+    </div>
+    <form action="/labtestes" method="POST" id="form-user" class="account">
+    <div class="account-header">
+
+        <h1 class="account-title">Adicione Testes</h1>
+    </div>
+    <div class="account-edit">
+        <div class="input-container">
+        <label for="fname">Nome</label>
+        <input type="text" name="fname" placeholder="Full Name" required >
+        </div>
+
+        <div class="input-container">
+            <label for="lname">Apelido</label>
+            <input type="text" name="lname" placeholder="Last Name" required >
+            </div>
+         </div>
+         <div class="account-edit">
+            <div class="input-container">
+            <label for="fname">Appointment ID</label>
+            <input type="text" name="appointmentID" placeholder="Appointment ID" required>
+            </div>    
+            <div class="input-container">
+                <label for="lname">Patient ID</label>
+                <input type="text" name="patientID" placeholder="Patient ID" required >
+                </div>
+
+                <div class="input-container">
+            <label for="fname">Phone Number</label>
+            <input type="text" name="phoneNumber" placeholder="Phone Number" required>
+            </div>
+             </div>
+
+         <div class="selection">
+            <label for="lab selection">Laboratorio</label>
+            <select name="labName" id="lab" required>
+                <option value = "lab">--Lab--</option>
+            <option value = "primaLab">Prima Lab</option>
+            <option value = "HCMLab">Lab HCM</option>
+            </select>
+
+         </div>
+    
+   
+
+    <div class="account-edit">
+        <div class="input-container">
+                <label for="address">Nome De Testes</label>
+                <textarea name="testName" id="" placeholder="Nome De Testes" required></textarea>
+                </div>
+        </div>
+
+
+        <button type="submit" class="insira">Submit</button>
+        <button type="submit" class="cancel">cancel</button>
+
+
+
+    </form>
+
+
+
+</div>
+
+
+</body>
+</html>

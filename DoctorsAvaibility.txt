@@ -196,7 +196,7 @@ h1 .fa-user {
       <div class="section">
       
         
-        <h1>Dr. <%= docFName %> <%= docLName %></h1>
+        <h1>Dr. <%= fname %></h1>
         
        
             <div class="info-item"><span>Speciality</span><%= speciality %></div>
@@ -217,7 +217,11 @@ h1 .fa-user {
 
    
   
-   <input type="text" value="<%= date %>" class="tempo">
+   <input type="text" value="<%= tempo %>" class="tempo">
+
+
+
+   
 
 <input type="hidden" id="userID" value="<%= id %>">
 
@@ -226,11 +230,9 @@ h1 .fa-user {
     <input type="hidden" name="userID" value="<%= id %>" />
     <input type="date" name="date" id="dateInput" value="dateInput" onchange="document.getElementById('dateForm').submit()" />
   </form>
-<div class="availableTime">
- 
+<div class="availableTime"> </div>
 
-      </div>
-      </div>
+</div>
 
 
 

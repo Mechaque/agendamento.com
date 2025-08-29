@@ -1,0 +1,73 @@
+
+app.get('/change-date', (req, res) => {
+
+    if (req.isAuthenticated()) {
+  
+  const { date, userID } = req.query;
+  const selectedDate = date || new Date().toISOString().split('T')[0];
+  const id = userID;
+  
+var data = date.toString();
+
+
+
+ 
+ try {
+    connection.query("SELECT * FROM doctors WHERE doctoreID = ?", [id], (error, results) => {
+      if (error) {
+        console.log(error);
+       
+      }
+
+      if (results.length > 0) {
+        var clinicID = results[0].clinics;
+        var fname = results[0].fname;
+        var speciality = results[0].speciality;
+        var email = results[0].email;
+        var clinicID = results[0].clinics;
+       
+
+      const sql = "SELECT time FROM availableDays WHERE date = ?";
+
+        connection.query(sql, [data], function(err, result) {
+        if (err) {
+            console.error('Error executing multiple queries:', err);
+            return;
+        }
+       
+
+        if (result.length === 0) {
+             var tempo = "No Time available";
+        res.render('doctorAvaiability.ejs', {tempo,clinicID,fname,speciality, email, clinicID, id});
+        console.log(tempo);
+         return;
+        } else {
+            var tempo = result;
+            console.log(tempo);
+        res.render('doctorAvaiability.ejs', {tempo,clinicID,fname,speciality, email, clinicID,id});
+         return;
+        }
+
+        
+
+         
+    });
+
+        
+       
+      } else {
+       
+      }
+    });
+  } catch (err) {
+    console.log(err);
+  
+  }
+
+   
+} else {
+
+        res.redirect('login')
+    }
+});
+

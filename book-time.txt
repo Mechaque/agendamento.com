@@ -1,0 +1,14 @@
+
+app.post("/book-time", (req, res) => {
+  const { doctorID, time, clinicID, } = req.body;  
+
+  if (!time) {
+    return res.send("Please select a time!");
+  }
+
+  console.log("Doctor ID:", doctorID);
+  console.log("Selected Time:", time);
+
+  // Save booking to DB here
+  res.send(`Booked ${time} with doctor ${doctorID} at clinic ${clinicID}`);
+});

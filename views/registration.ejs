@@ -148,10 +148,26 @@ width: 185px;
             </div> 
             <div class="appointment">
             <h2 class="principal">Registo De Usuarios</h2>
+                 <% if (error && error.length > 0) { %>
+  <div class="alert alert-danger alert-dismissible fade show" role="alert">
+    <%= error[0] %>
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+  </div>
+<% } %>
+
+<% if (success && success.length > 0) { %>
+  <div class="alert alert-success alert-dismissible fade show" role="alert">
+    <%= success[0] %>
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+  </div>
+<% } %>
+
+
             <hr class="top-line">
         <form action="/registration" method="POST" id="form-user">
     <div class="content">
             
+ 
             <div id="fname">
                 <input type="text" id="fname" name="fname" placeholder="Nome"><br><br>
             </div>
@@ -202,6 +218,7 @@ width: 185px;
     </div>
 
     
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 
 </body>
 </html>

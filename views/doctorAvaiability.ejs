@@ -110,9 +110,9 @@ button.submit-btn:hover {
 }
 
 #dateInput{
-  position: relative;
-  left: 580px;
-  top: -480px;
+  position: fixed;
+  left: 950px;
+  top: 200px;
   border: none;
 }
 #avaiButton{
@@ -128,9 +128,10 @@ button.submit-btn:hover {
 .tempo {
   position: relative;
    border: none;
-  width: 100px;
-  top: -430px;
+  width: 140px;
+  top: -380px;
   left: 600px;
+
 }
 
 h1 .fa-user {
@@ -183,6 +184,40 @@ h1 .fa-user {
   transform: translateY(0);
 }
 
+  .time-btn:hover {
+    background-color: #28a745 !important; /* brighter green */
+    transform: scale(1.05);              /* subtle zoom */
+    box-shadow: 0 4px 10px rgba(40, 167, 69, 0.3);
+    transition: all 0.2s ease-in-out;
+  }
+
+  /* Active (when selected) */
+  .btn-check:checked + .time-btn {
+    background-color: #218838 !important; /* darker green */
+    color: #fff;
+    box-shadow: 0 4px 10px rgba(33, 136, 56, 0.4);
+  }
+
+    /* Default time buttons */
+  .time-btn {
+    transition: all 0.2s ease-in-out;
+  }
+
+  /* When hovered */
+  .time-btn:hover {
+    background-color: #218838 !important; /* darker green */
+    color: #fff;
+    transform: scale(1.05);
+  }
+
+  /* When selected */
+  .btn-check:checked + .time-btn {
+    background-color: #0d6efd !important; /* Bootstrap blue (or your highlight color) */
+    color: #fff !important;
+    box-shadow: 0 0 8px rgba(13, 110, 253, 0.6);
+    transform: scale(1.05);
+  }
+
   </style>
 </head>
 <body>
@@ -196,7 +231,7 @@ h1 .fa-user {
       <div class="section">
       
         
-        <h1>Dr. <%= docFName %> <%= docLName %></h1>
+        <h1>Dr. <%= docFName %></h1>
         
        
             <div class="info-item"><span>Speciality</span><%= speciality %></div>
@@ -211,13 +246,66 @@ h1 .fa-user {
 <div id="bookings">
   <div class="card p-4 text-center">
     <span class="fa-solid fa-suitcase-medical" style="color: red;"></span>
-    <button id="avaiButton">&nbsp;Check Availability</button>
+    <button id="avaiButton">&nbsp;View Availability</button>
   </div>
 </div>
 
+
+
+<div class="tempo">
+  <% if (message) { %>
+    <p class="text-danger"><%= message %></p>
+  <% } else { %>
+    <form id="timeForm" action="/book-time" method="POST">
+      <input type="hidden" name="doctorID" value="<%= id %>">
+      <input type="hidden" name="clinicID" value="<%= clinicID %>">
+      <input type="hidden" name="date" value="<%= data %>">
+      <input type="hidden" name="docFName" value="<%= docFName %>">
+       <input type="hidden" name="docLName" value="<%= docLName %>">
+      
+     
+      
+      <div class="row row-cols-3 g-2"> 
+        <% tempo.forEach(function(t, index){ %>
+          <div class="col text-center">
+            <!-- Radio button -->
+            <input class="btn-check" type="radio" name="time" id="time-<%= index %>" value="<%= t %>" autocomplete="off">
+            
+            <!-- Label styled as button -->
+            <label class="btn btn-success btn-sm w-100 time-btn" 
+                   style="font-size: 0.8rem;" 
+                   for="time-<%= index %>">
+              <%= t %>
+            </label>
+          </div>
+        <% }) %>
+      </div>
+
+      <div class="text-center mt-3 d-flex justify-content-center gap-3">
+        <!-- Submit button -->
+        <button type="submit" class="btn btn-success px-4 py-2">Book Time</button>
+        <!-- Reset button -->
+        <button type="button" id="resetTime" class="btn btn-outline-danger px-4 py-2">Reset</button>
+      </div>
+    </form>
+  <% } %>
+</div>
+
+
+<script>
+  document.getElementById("resetTime").addEventListener("click", function() {
+    // Uncheck all radio buttons
+    document.querySelectorAll("#timeForm input[type='radio']").forEach(radio => {
+      radio.checked = false;
+    });
+  });
+</script>
+
+
+
+
+
    
-  
-   <input type="text" value="<%= date %>" class="tempo">
 
 <input type="hidden" id="userID" value="<%= id %>">
 
@@ -226,11 +314,9 @@ h1 .fa-user {
     <input type="hidden" name="userID" value="<%= id %>" />
     <input type="date" name="date" id="dateInput" value="dateInput" onchange="document.getElementById('dateForm').submit()" />
   </form>
-<div class="availableTime">
- 
+<div class="availableTime"> </div>
 
-      </div>
-      </div>
+</div>
 
 
 

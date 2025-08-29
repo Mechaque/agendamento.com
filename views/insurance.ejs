@@ -2,92 +2,201 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>HealthyCare Insurance</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Mozambican Health Insurance Portal</title>
+  <%- include("partials/template.ejs") %>
+
   <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html, body { overflow-x: hidden; -webkit-text-size-adjust: 100%; }
+
     body {
-    
       font-family: Arial, sans-serif;
-      margin: 0;
-      padding: 0 15px;
-      background: #f0f4f8;
+      background: #f8f9fa;
+      color: #333;
+      line-height: 1.6;
+      text-align: center;
     }
+
+    /* Header */
     header {
-      background-color: #0077b6;
-      color: white;
-      padding: 20px 0;
-      text-align: center;
+      background: #0077b6;
+      color: #fff;
+      padding: 30px 15px;
     }
+    header h1 {
+      font-size: clamp(22px, 4vw, 36px);
+      margin-bottom: 8px;
+    }
+    header p { font-size: clamp(14px, 2.5vw, 18px); opacity: 0.9; }
+
+    /* Navigation */
     nav {
-      background-color: #023e8a;
-      text-align: center;
-      padding: 10px;
+      background: #023e8a;
+      padding: 12px;
     }
     nav a {
-      color: white;
-      margin: 0 15px;
+      color: #fff;
+      margin: 0 14px;
       text-decoration: none;
-      font-weight: bold;
+      font-weight: 600;
+      transition: color .2s ease;
     }
-   
-    .content {
-            position: relative;
-            top: -200px;
-            padding: 40px;
-            display: flex;
-            flex-wrap: wrap;
-            gap: 30px;
-            justify-content: center;
-        }
+    nav a:hover { color: #90e0ef; }
 
+    /* Hero Section */
+    .hero {
+      background: url('https://via.placeholder.com/1500x400?text=Health+Insurance') center/cover no-repeat;
+      color: #fff;
+      padding: 90px 20px;
+    }
+    .hero h1 {
+      font-size: clamp(28px, 6vw, 48px);
+      text-shadow: 1px 2px 5px rgba(0,0,0,0.4);
+      margin-bottom: 20px;
+    }
+
+    /* Clickable div buttons */
+    .appointment, .Insurance, .Laboratory {
+      display: inline-block;
+      margin: 10px;
+      padding: 14px 28px;
+      font-size: clamp(15px, 2vw, 18px);
+      background: #007bff;
+      color: #fff;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: background .2s ease, transform .2s ease;
+      text-decoration: none;
+      user-select: none;
+    }
+    .appointment:hover, .Insurance:hover, .Laboratory:hover {
+      background: #0056b3;
+      transform: translateY(-3px);
+    }
+
+    /* Plans Section */
+    .content {
+      max-width: 1100px;
+      margin: 50px auto;
+      padding: 0 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 40px;
+    }
     .plans {
       display: flex;
-      justify-content: space-around;
       flex-wrap: wrap;
+      gap: 20px;
+      justify-content: center;
     }
     .plan {
-      border: 1px solid #ccc;
+      flex: 1 1 300px;
+      background: #fff;
       border-radius: 10px;
       padding: 20px;
-      margin: 10px;
-      flex: 1 1 30%;
-      text-decoration: none;
-      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+      transition: transform .2s ease, box-shadow .2s ease;
     }
-    footer {
-      text-align: center;
-      background-color: #0077b6;
-      color: white;
-      padding: 20px 0;
-      margin-top: 20px;
+    .plan:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 6px 16px rgba(0,0,0,0.15);
     }
+    .plan h3 { color: #0077b6; margin-bottom: 10px; }
 
+    /* Info Cards */
+    .cards {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+      justify-content: center;
+    }
     .card {
-            background: white;
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-            width: 300px;
-        }
+      background: #fff;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+      width: 300px;
+      transition: transform .2s ease, box-shadow .2s ease;
+    }
+    .card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 6px 16px rgba(0,0,0,0.15);
+    }
+    .card h2 { color: #0077b6; margin-bottom: 10px; }
 
-        .card h2 {
-            color: #0077b6;
-        }
-        .hero {
-            background: url('https://via.placeholder.com/1500x400?text=Medical+Insurance') center/cover no-repeat;
-            color: white;
-            text-align: center;
-            padding: 100px 20px;
-        }
+    /* Modal */
+    .modal {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,.6);
+      z-index: 1000;
+      justify-content: center;
+      align-items: center;
+      padding: 16px;
+    }
+    .modal.active { display: flex; }
 
-        .hero h1 {
-            font-size: 3em;
-        }
-    
-        
+    .modal-content {
+      background: #fff;
+      padding: 24px;
+      border-radius: 10px;
+      width: min(400px, 100%);
+      box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+    }
+    .modal-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 16px;
+    }
+    .modal-header h2 { font-size: clamp(18px, 4.5vw, 22px); margin: 0; }
+    .close { font-size: 26px; cursor: pointer; color: #aaa; }
+    .close:hover { color: #333; }
+    .modal-body select {
+      width: 100%;
+      padding: 12px;
+      margin-bottom: 16px;
+      border-radius: 6px;
+      border: 1px solid #ccc;
+    }
+    .modal-footer { text-align: right; }
+    .modal-footer button {
+      padding: 12px 22px;
+      font-size: 16px;
+      border: none;
+      border-radius: 6px;
+      background: #28a745;
+      color: #fff;
+      cursor: pointer;
+    }
+    .modal-footer button:hover { background: #218838; }
+
+    /* Footer */
+    footer {
+      background: #0077b6;
+      color: #fff;
+      padding: 20px 10px;
+      margin-top: 40px;
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      nav a { display: inline-block; margin: 10px; }
+      .hero { padding: 60px 15px; }
+      .plans, .cards { flex-direction: column; align-items: center; }
+      .appointment, .Insurance, .Laboratory {
+        display: block;
+        width: 100%;
+        max-width: 480px;
+        margin: 12px auto;
+      }
+    }
   </style>
 </head>
 <body>
+
   <header>
     <h1>Mozambican Health Insurance Providers Network</h1>
     <p>Your Health, Our Priority</p>
@@ -100,7 +209,12 @@
     <a href="insuranceLogin">Login</a>
   </nav>
 
-  <div class="hero"></div>
+  <div class="hero">
+    <h1>Protect Your Health with Confidence</h1>
+    <div class="appointment" onclick="window.location.href='appointmentHistory'">Appointment History</div>
+    <div class="Insurance" onclick="window.location.href='searchClinic'">Search A Clinic</div>
+    <div class="Laboratory" id="openModalBtn">Book Appointment</div>
+  </div>
 
   <div class="content">
     <section id="plans">
@@ -109,13 +223,10 @@
         <div class="plan">
           <h3>Claim History</h3>
           <p>Keep track of your benefits and claims.</p>
-          
         </div>
-        <div class="plan"><a href="insuranceClaim">
-          <h3 style="text-decoration: none;">Submit Claim</h3> </a>
-          <p>Comprehensive coverage for your family.</p>
-         
-         
+        <div class="plan"><a href="insuranceClaim" style="text-decoration:none; color:inherit;">
+          <h3>Submit Claim</h3></a>
+          <p>Submit and manage claims quickly and securely.</p>
         </div>
         <div class="plan">
           <h3>Premium Plan</h3>
@@ -124,24 +235,75 @@
         </div>
       </div>
     </section>
-  </div>
-<section class="content">
-    <div class="card">
+
+    <section class="cards">
+      <div class="card">
         <h2>Family Plans</h2>
         <p>Protect your entire family with customizable and affordable plans.</p>
-    </div>
-    <div class="card">
+      </div>
+      <div class="card">
         <h2>Individual Coverage</h2>
         <p>Personalized health insurance tailored for individuals of all ages.</p>
-    </div>
-    <div class="card">
+      </div>
+      <div class="card">
         <h2>24/7 Support</h2>
         <p>Our experts are here for you anytime, anywhere you need help.</p>
-    </div>
-</section>
+      </div>
+    </section>
+  </div>
+
+  <!-- Modal -->
+  <div id="customModal" class="modal">
+    <form action="/provClinic" method="post" id="form-user">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h2>Selecione A Provincia</h2>
+          <span class="close" id="closeModal" aria-label="Close">&times;</span>
+        </div>
+        <div class="modal-body">
+          <select name="provName" required>
+            <option disabled selected>Selecione A Provincia</option>
+            <option value="Maputo">Maputo</option>
+            <option value="Gaza">Gaza</option>
+            <option value="Inhambane">Inhambane</option>
+            <option value="Sofala">Sofala</option>
+            <option value="Manica">Manica</option>
+            <option value="Zambeze">Zambeze</option>
+            <option value="Tete">Tete</option>
+            <option value="Nampula">Nampula</option>
+            <option value="Niassa">Niassa</option>
+            <option value="caboDelgado">Cabo Delgado</option>
+          </select>
+        </div>
+        <div class="modal-footer">
+          <button type="submit">Submit</button>
+        </div>
+      </div>
+    </form>
+  </div>
 
   <footer>
     &copy; 2025 Moz Insurance Network.
   </footer>
+
+  <script>
+    // Modal
+    const openModalBtn = document.getElementById('openModalBtn');
+    const modal        = document.getElementById('customModal');
+    const closeModal   = document.getElementById('closeModal');
+
+    openModalBtn.onclick = () => modal.classList.add('active');
+    closeModal.onclick   = () => modal.classList.remove('active');
+    window.onclick = (e) => { if (e.target === modal) modal.classList.remove('active'); };
+
+    // Keyboard support for div buttons
+    document.querySelectorAll('.appointment, .Insurance, .Laboratory').forEach(el => {
+      el.setAttribute('role','button');
+      el.setAttribute('tabindex','0');
+      el.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); el.click(); }
+      });
+    });
+  </script>
 </body>
 </html>

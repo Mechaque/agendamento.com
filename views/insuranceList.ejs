@@ -57,7 +57,7 @@
 
   <div class="container">
     <!-- Title -->
-    <h1 class="title">Search Clinic</h1>
+    <h1 class="title">Search Insurance</h1>
 
     <!-- Card for table -->
     <div class="card my-4">
@@ -66,10 +66,10 @@
           <table id="table" class="table table-striped table-hover text-center align-middle mb-0"> 
             <thead class="table-dark">
               <tr>
-                <th>ID da Clínica</th>
-                <th>Nome da Clínica</th>
+                <th>Nome</th>
                 <th>Endereço</th>
                 <th>Telefone</th>
+                <th>Email</th>
                 <th>Província</th>
                 <th>Ação</th>
               </tr>
@@ -77,10 +77,10 @@
             <tbody>
               <% appointment.forEach(function(appointment){ %>
                 <tr>
-                  <td><%= appointment.clinicID %></td>
-                  <td><%= appointment.clinicName %></td>
-                  <td><%= appointment.clinicAddress %></td>
-                  <td><%= appointment.clinicTelephone %></td>
+                  <td><%= appointment.insuranceName %></td>
+                  <td><%= appointment.insuranceAddress %></td>
+                  <td><%= appointment.insurancePhone %></td>
+                  <td><%= appointment.insuranceEmail %></td>
                   <td><%= appointment.province %></td>
                   <td>
                     <a href="viewCliList?clinicID=<%= appointment.clinicID %>" class="btn btn-sm btn-outline-primary">

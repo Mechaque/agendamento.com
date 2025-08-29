@@ -1,13 +1,11 @@
-
 <style>
-
 body {
   background-color: #E8ECEF;
 }
 
 .centered {
-    padding-top: 200px;
-    text-align: center;
+  padding-top: 150px;
+  text-align: center;
 }
 
 .secret-text {
@@ -17,15 +15,28 @@ body {
   background-color: #000;
 }
 
-
-
+/* Responsive tweaks */
+@media (max-width: 768px) {
+  .centered {
+    padding-top: 100px; /* less padding on smaller screens */
+  }
+  .centered h1 {
+    font-size: 1.75rem; /* scale down heading */
+  }
+  .centered p {
+    font-size: 1rem;
+  }
+  .centered i {
+    font-size: 3rem; /* shrink the key icon */
+  }
+  .btn-lg {
+    width: 100%; 
+    margin: 8px 0; /* stack buttons */
+  }
+}
 </style>
 
-
-
-
 <%- include('partials/header') %>
-
 
 <div class="jumbotron centered">
   <div class="container">
@@ -35,7 +46,6 @@ body {
     <hr>
     <a class="btn btn-light btn-lg" href="/admin" role="button">Admin</a>
     <a class="btn btn-dark btn-lg" href="/login" role="button">Login</a>
-
   </div>
 </div>
 

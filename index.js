@@ -17,13 +17,14 @@ const app = express();
 var authRouter = require('./routes/auth/auth');
 
 //===========================================passport config ================
-const flash = require('express-flash');
+// const flash = require('express-flash');
+const flash = require("connect-flash");
 
 
 
 
 // session
-app.use(flash());
+
 app.use(session ({
 secret:'SecretStringForCookies',
 resave:false,
@@ -32,6 +33,7 @@ cookie: {
 //maxAge: 24 * 60 * 60 * 1000
 }
 }));
+app.use(flash());
 app.use(passport.initialize())
 app.use(passport.session());
 
@@ -66,20 +68,18 @@ app.use(express.urlencoded({extended:false}));
 app.use('/', require('./routes/auth/auth'));
 
 
-                                                   // Add Appointments z
+// make flash messages available in all views
+app.use((req, res, next) => {
+  res.locals.success_msg = req.flash("success_msg");
+  res.locals.error_msg = req.flash("error_msg");
+  next();
+});
+// ---------------- Main Page ----------------
+app.get("/", (req, res) => {
+  res.render("front.ejs");
+});
 
-
-//============================================login get request route=============================
-
-
-//=============================================login post request route===========================
-app.get("/", (req, res) =>{
-
-    res.render('front.ejs')
-
-})
-
-//==================================================Clinic List
+//================================================== Clinic per province==================================
   app.post('/provClinic', async(req, res)=>{
      if (req.isAuthenticated()) {
     
@@ -109,7 +109,7 @@ app.get("/", (req, res) =>{
 
 
     })
-//==============================================================Doctors List==========================================
+//==================================== View details of theSelected Clinic ==========================================
 
 app.get('/viewCliList', async(req,res) => {
     if (req.isAuthenticated()) {
@@ -140,7 +140,7 @@ app.get('/viewCliList', async(req,res) => {
     }
 });
 
-//==============================================================Doctors Profile==========================================
+//===================================Doctors of the selected doctors==========================================
 
 app.get('/doctorsProfile', async(req,res) => {
 
@@ -161,16 +161,17 @@ app.get('/doctorsProfile', async(req,res) => {
             return;
         }
         // `results` will be an array, where each element corresponds to the result of one statement.
-        var fname = results[0].fname;
-        var lname = results[0].lname;
+        var docFName = results[0].fname;
+        var docLName = results[0].lname;
         var speciality = results[0].speciality;
         var email = results[0].email;
         console.log('Result of first query:', results);
-        console.log(fname);
+        console.log(docFName);
+          console.log(docLName);
         console.log(date);
         
 
-         res.render('doctorsProfile.ejs', {appointment:results,fname,lname,speciality,id,date,email});
+         res.render('doctorsProfile.ejs', {appointment:results,docFName,docLName,speciality,id,date,email});
     });
    
       } else {
@@ -179,37 +180,6 @@ app.get('/doctorsProfile', async(req,res) => {
     }
  
 });
-//=========================================== Review appointment=======================
-app.get("/form", (req, res) =>{
-
-    res.render('reviewAppointment.ejs')
-
-})
-
-
-
-//============================================ post a schedule====================
-app.get('/verifyDate', (req, res) => {
-  const selectedDate = req.query.date;
-
-  const Identif = req.query.doctoreID;
-  
-
-//   const sql = 'INSERT INTO datetime_entries (selected_datetime) VALUES (?)';
-//   db.query(sql, [datetime], (err, result) => {
-//     if (err) return res.status(500).json({ message: 'Database error' });
-//     res.json({ message: 'Date & Time saved!' });
-//   });
-console.log(selectedDate);
-
-console.log(Identif);
-
-//  res.render('doctorsProfile', { date: selectedDate }) 
-// }
-
-});
-
-
 
 //=============================view doctors list from selected clinic===========================================
 
@@ -241,8 +211,7 @@ app.get("/viewDocList", (req, res) =>{
 
 })
 
-
-//======================================================================Booking page==========================
+//=================================================To view the Booking page==========================
 app.get("/appointmentBooking", async (req, res) => {
 
      if (req.isAuthenticated()) {
@@ -334,50 +303,16 @@ app.post('/addAppointment',
            // req.flash('user',successfullReg);
             return res.redirect('/appointmentHistory');
             });
-
-
-
-
-
-
-
-
-
-
-
                 console.log(result);
                 console.log(lastID);
-
-
 
             }
             });
         
-        
-
-
-
-
-
             } else {
               console.log(authenticatedUser);
                 console.log("User not found");
-            
-        //  var sql = "INSERT INTO appointment (appointmentID,appointmentDate,appointmentTime,reasonForVisit,patientID,fname, phoneNumber) \
-        //             VALUES ('"+lastID+"','"+ req.body.appointmentDate+"','"+ req.body.appointmentTime+"', '"+ req.body.reasonForVisit+"','"+ req.body.fname+"','"+ req.body.phoneNumber+"',)";
-        //      connection.query(sql, function (err, rows, fields){
-            
-        //     if (err) console.log(err)
-        
-        //     console.log(rows);
-        //    res.redirect('/appointmentHistory');
-        //     });
-
-
-            
-
-
-            
+             
             }
             
             });
@@ -392,26 +327,15 @@ app.post('/addAppointment',
         
 });
 
+//==================================================== Route to login page============================================================================
+app.get("/login", (req, res) => {
+  res.render("login", {
+    success: req.flash("success"),
+    error: req.flash("error")
+  });
+});
 
-
-
-
-
-
-
-
-
-
-//================================================================================================================================
-
-
-
-app.get("/login", (req, res) =>{
-
-    res.render('login.ejs')
-
-})
-//=================================================================
+//================================================Home page after successful login=====================================
 app.get('/home', (req,res) => {
     if (req.isAuthenticated()) {
 
@@ -439,13 +363,14 @@ app.get('/userProfile', (req,res) => {
     
        
     });
-//=========================================
+//=========================================Route to the insurance page ===============================================
 
 app.get("/insurance", (req, res) =>{
 
     res.render('insurance1.ejs')
 
 })
+
 //========================================================Appointment Router=======================================
 app.get("/appointment", (req, res) =>{
 if (req.isAuthenticated()) {
@@ -459,7 +384,7 @@ if (req.isAuthenticated()) {
 
 })
 
-//============================================
+//============================================ laboratories route =============================================
 app.get("/laboratory", (req, res) =>{
 
     res.render('laboratories.ejs')
@@ -495,58 +420,168 @@ else {
 
 
 
+//==========================registration page =========================================
+app.post("/registration", async (req, res) => {
+  const { fname, lname, username, password, passwordConfirm, phoneNumber } = req.body;
+  const hashedPassword = await bcrypt.hash(password, 10);
 
+  const dupplicateMessage = "That email is already registered, try logging in.";
+  const passwordMisMatch = "Passwords do not match!";
+  const successfullReg = "✅ You have successfully registered, you can login now.";
 
+  try {
+    connection.query("SELECT username FROM externalUsers WHERE username = ?", [username], (error, results) => {
+      if (error) {
+        console.log(error);
+        req.flash("error", "Something went wrong. Please try again.");
+        return res.redirect("/registration");
+      }
 
+      if (results.length > 0) {
+        req.flash("error", dupplicateMessage);
+        return res.redirect("/registration");
+      } else if (password !== passwordConfirm) {
+        req.flash("error", passwordMisMatch);
+        return res.redirect("/registration");
+      } else {
 
+        
+   
 
+        const sql = "INSERT INTO externalUsers (fname, lastName, phoneNumber, username, password) VALUES (?, ?, ?, ?, ?)";
+        connection.query(sql, [fname, lname, phoneNumber, username, hashedPassword], (err) => {
+          if (err) {
+            console.log(err);
+            req.flash("error", "Registration failed, please try again.");
+            return res.redirect("/registration");
+          }
+          req.flash("success", successfullReg);
+          return res.redirect("/login");
+        });
+      }
+    });
+  } catch (err) {
+    console.log(err);
+    req.flash("error", "Unexpected server error.");
+    res.redirect("/registration");
+  }
+});
 
+//========================Laboratories list of labs ======================================
 
+app.get("/searchLab", (req, res) => {
+      if (req.isAuthenticated()) {
 
+  const sql = "SELECT * FROM laboratories";
 
+        connection.query(sql, function(err, results) {
+        if (err) {
+            console.error('Error executing multiple queries:', err);
+            return;
+        }
+         console.log(results);
 
+         res.render('labList.ejs', {appointment: results});
+    });
+   } else {
 
+        res.redirect('login')
+    }
 
+})
+//============================lab test history===========================
+app.get("/appointmentHistory",async (req, res) =>{
+    if (req.isAuthenticated()) {
+        var authenticatedUser = req.user.phoneNumber;
 
+        // console.log(model);
 
+        try {
+        await connection.query('SELECT * FROM appointment where phoneNumber = ?', [authenticatedUser] ,function(error, result){
+            
+            if (error) console.log(error);
+        // console.log(result);
+        res.render('appointmentHistory.ejs', {appointment: result});
+    });
+    } catch (err) {
+        console.log(err);
+    }
+    
+}
+else {
+    res.redirect('login')
 
+}
 
+        });
+//============================================lab test request =====================================
+app.get('/labTestRequest', (req, res)=> {
 
+    res.render('labTestRequest.ejs')
+})
 
+//==============================================lab testing history====================================
 
+app.get('/labHistory', async(req, res)=> {
+    if (req.isAuthenticated()) {
 
+  //       var authenticatedUser = req.user.userID;
+  //       var model = authenticatedUser.slice(0, 7);
 
+  //  await connection.query('SELECT * FROM externalUsers',function(error, result){
+            
+  //           if (error) console.log(error);
+  //        let lastUser = result[result.length - 1];
+  //        let lastUser1 = lastUser.userID;
+  //        let model1 = lastUser1.slice(0, 7);
+  //        str = lastUser1.substring(7, lastUser1.length );
+  //        var str1 = parseInt(str,10);
+  //        str1 ++;
+  //       var externalID = model1 + str1;
+  //       console.log(externalID);
+  //   });
 
+     res.send('Still under construction, we will be available soon')
 
+    } else {
 
-
-
-
-
-
-
-
-//==============================================appointment history route=====================================
+      res.redirect('login')
+    }
+   
+})
 
 //==============================================appointment history route=====================================
 app.get("/searchClinic", (req, res) =>{
 if (req.isAuthenticated()) {
-    res.render('searchClinic.ejs')
+const sql = "SELECT * FROM clinics";
+
+        connection.query(sql, function(err, results) {
+        if (err) {
+            console.error('Error executing multiple queries:', err);
+            return;
+        }
+//         // `results` will be an array, where each element corresponds to the result of one statement.
+        
+//         console.log(id);
+         console.log(results);
+
+        
+
+     res.render('searchClinic.ejs',{appointment: results})
+    });
+   
 } else {
 
         res.redirect('login')
     }
 })
 //==============================================Registration page=================================
-app.get("/registration", (req, res) =>{
-
-    res.render('registration.ejs')
-
-})
-
-
-
-// Availability check route
+app.get("/registration", (req, res) => {
+  res.render("registration", {
+    error: req.flash("error"),
+    success: req.flash("success"),
+  });
+});
 
 app.get('/change-date', (req, res) => {
 
@@ -556,58 +591,83 @@ app.get('/change-date', (req, res) => {
   const selectedDate = date || new Date().toISOString().split('T')[0];
   const id = userID;
   
-let data = date.toString();
+var data = date.toString();
+ 
+ try {
+    connection.query("SELECT * FROM doctors WHERE doctoreID = ?", [id], (error, results) => {
+      if (error) {
+        console.log(error);
+       
+      }
 
-  const sql = "SELECT time FROM availableDays WHERE doctoreID  = ?";
+      if (results.length > 0) {
+        var clinicID = results[0].clinics;
+        var docFName = results[0].fname;
+        var docLName = results[0].lname;
+        var speciality = results[0].speciality;
+        var email = results[0].email;
+        var clinicID = results[0].clinics;
   
 
-        connection.query(sql, [userID], function(err, results) {
-        if (err) {
-            console.error('Error executing multiple queries:', err);
-            return;
-        }
-        // `results` will be an array, where each element corresponds to the result of one statement.
-        var selectedTime = results[0].time;
-        console.log(id);
-        console.log(selectedTime);
-        console.log(results);
-        
+      const sql = "SELECT time FROM availableDays WHERE date = ?";
 
-        
-         
-res.render('doctorsProfile.ejs', {appointment: results});
+        connection.query(sql, [data], function(err, result) {
+      if (result.length === 0) {
+    var tempo = [];
+    res.render('doctorAvaiability.ejs', { tempo, clinicID,docFName, speciality,docLName, email, id,data, message: "No Time available" });
+} else {
+    var tempo = result.map(r => r.time); // extract only the time field
+    res.render('doctorAvaiability.ejs', { tempo, clinicID,docFName, speciality,docLName, email, id,data, message: null });
+}
+          
     });
+       
+      } else {
+       
+      }
+    });
+  } catch (err) {
+    console.log(err);
+  
+  }
    
 } else {
 
         res.redirect('login')
     }
 });
+//====================================appointment booking  Router==============================================================
+ 
+app.post("/book-time", async(req, res) => {
 
+ if (req.isAuthenticated()) {
+ let authenticatedUser = req.user.username;
+  const { doctorID, time, clinicID,date,docLName,docFName } = req.body;  
 
-//====================================Registration Router==============================================================
+  if (!time) {
+    return res.send("Please select a time!");
+  }
 
-app.get("/registration", async (req, res) => {
-
-     if (req.isAuthenticated()) {
-             const id = req.query.clinicID;
-            let authenticatedUser = req.user.username;
-    
-    try {
+try {
     
     await connection.query('SELECT * FROM externalUsers WHERE username = ?', [authenticatedUser], (error, results) => {
     if(error) {
     console.log(error);
     }
     if (results.length > 0){
-     const sql = "'SELECT * FROM clinics where clinicID = ?";
-    connection.query(sql, [id], function (err,result){
+     const sql = "SELECT * FROM clinics WHERE clinicID = ?";
+    connection.query(sql, [clinicID], function (err,result){
+        const name = results[0].fname;
+        const lname = results[0].lastName;
+        const email = results[0].username;
+        const telephone = results[0].phoneNumber;
+        const clname = result[0].clinicName;
+        const clID = result[0].clinicID;
+        console.log(time);
+         console.log(docLName);
 
-        console.log(result);
-         console.log(results);
-
-      
-    });;
+      res.render('reviewAppointmentPreferredDoctor.ejs',{clname,lname,name,email,telephone,clID,doctorID,time,date,docFName,docLName})
+    });
     }
     else {
         console.log("User not authenticated")
@@ -618,52 +678,66 @@ app.get("/registration", async (req, res) => {
     }
     catch (err) {
     console.log(err);
-    }} else {
+    }
+
+  } else {
             res.redirect('login')
 
         }
-    
+});
+
+//======================================= Insurance================================================================
+app.get('/claimList', async(req, res)=>{
+  if (req.isAuthenticated()) {
+    let authenticatedUser = req.user.ID;
+     let  sql = "select * from Claims";
+    try {
+    let query = await connection.query(sql, (err, rows) => {
+        if(err) throw err;
+        
+        let clinica = rows[0].clinicID;
+        
+          res.render('insurancePortal.ejs',{Claims: rows});
+        console.log(authenticatedUser);
+        console.log(clinica);
+        
+        });
+        } catch (err) {
+            console.log(err)
+        }
+  } else 
+{
+    res.render('login.ejs');
+}
+ 
+})
+
+app.get('/insuranceClaim', (req,res) => {
+    res.render('insuranceClaim.ejs');
+
+})
+
+//=============================================Search Insurance =========================
+app.get('/insuranceSearch', (req,res) => {
+ if (req.isAuthenticated()) {
+
+  const sql = "SELECT * FROM insurance";
+
+        connection.query(sql, function(err, results) {
+        if (err) {
+            console.error('Error executing multiple queries:', err);
+            return;
+        }
+         console.log(results);
+
+         res.render('insuranceList.ejs', {appointment: results});
     });
+   } else {
 
+        res.redirect('login')
+    }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+})
 
 
 // confirming that the server is running  on port 3000
