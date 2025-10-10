@@ -464,7 +464,7 @@ app.get("/appointmentHistory",ensureAuthenticated, async (req, res) =>{
 
 //==========================registration page =========================================
 app.post("/registration", async (req, res) => {
-  const { fname, lastName, username, password, passwordConfirm, phoneNumber } = req.body;
+  const { fname, lname, username, password, passwordConfirm, phoneNumber } = req.body;
   const hashedPassword = await bcrypt.hash(password, 10);
 
   const dupplicateMessage = "That email is already registered, try logging in.";
@@ -490,8 +490,8 @@ app.post("/registration", async (req, res) => {
         
    
 
-        const sql = "INSERT INTO externalUsers (fname, lastName, phoneNumber, username, password) VALUES (?, ?, ?, ?, ?)";
-        connection.query(sql, [fname, lastName, phoneNumber, username, hashedPassword], (err) => {
+        const sql = "INSERT INTO externalUsers (fname, lname, phoneNumber, username, password) VALUES (?, ?, ?, ?, ?)";
+        connection.query(sql, [fname, lname, phoneNumber, username, hashedPassword], (err) => {
           if (err) {
             console.log(err);
             req.flash("error", "Registration failed, please try again.");
