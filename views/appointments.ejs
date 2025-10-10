@@ -20,14 +20,18 @@
 
     /* Title */
     .title {
-      font-weight: 700;
-      color: #1e293b;
-      font-size: clamp(20px, 3vw, 32px); 
-      margin: 20px auto 24px;
-      line-height: 1.4;
+      position: absolute;
+      left: 500px;
+      font-family: 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
+      font-weight: 600;
+      color: #004080; /* Deep healthcare blue */
+      font-size: clamp(24px, 4vw, 36px);
+      margin: 40px auto 40px;
+      line-height: 1.4; 
       word-break: break-word;
       max-width: 90%;
       text-align: center;
+     
     }
 
     /* Button container */
@@ -41,26 +45,76 @@
 
     /* Buttons */
     .appointment, .Insurance, .Laboratory {
-      flex: 1 1 220px; /* grow/shrink but min width ~220px */
-      max-width: 300px;
-      padding: 14px 28px;
-      font-size: clamp(15px, 2vw, 18px);
-      background-color: #007bff;
-      color: #fff;
-      border-radius: 6px;
+     background-color: rgb(253, 254, 255);
+      border-radius: 12px;
+      border-color: #28a745;
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+      width: calc(33% - 20px);
+      padding: 25px;
+      
+      text-align: center;
       cursor: pointer;
-      transition: background .2s ease;
-      text-decoration: none;
-      user-select: none;
-      -webkit-tap-highlight-color: transparent;
-      touch-action: manipulation;
+      transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+       /* Add this line to shift left */
+      transform: translateX(-80px);
+       height: 190px;
     }
-    .appointment:hover, .Insurance:hover, .Laboratory:hover { background-color: #0056b3; }
+    .appointment:hover, .Insurance:hover, .Laboratory:hover {
+       background-color: #a9c1e5; 
+       
+      box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+      }
     .appointment:focus-visible, .Insurance:focus-visible, .Laboratory:focus-visible {
       outline: 3px solid #80bdff;
       outline-offset: 2px;
     }
 
+    .appointment:hover, .Insurance:hover, .Laboratory h3 {
+      
+      color: lab(98.65% -1.49 0.01); /* Teal */
+      margin-bottom: 15px;
+      font-weight: 500;
+    }
+
+    .Insurance {
+  margin-top: 100px;
+    }
+   .card h3 {
+      font-size: 24px;
+      color: #00796b; /* Teal */
+      margin-bottom: 15px;
+      font-weight: 500;
+    }
+
+    .card p {
+      color: #666;
+      font-size: 16px;
+      margin-bottom: 20px;
+    }
+
+    .para {
+      color: #00796b; /* Teal */
+      font-weight: 500;
+      text-decoration: none;
+      border: 2px solid #00796b; /* Teal */
+      padding: 8px 20px;
+      border-radius: 6px;
+      transition: background-color 0.3s ease-in-out;
+    }
+
+    .cabelo {
+      color: #00796b; /* Teal */
+      font-weight: 500;
+     
+      padding: 8px 20px;
+      border-radius: 6px;
+      transition: background-color 0.3s ease-in-out;
+    }
+
+    .card a:hover {
+      background-color: #00796b; /* Teal */
+      color: white;
+    }
     /* Modal */
     .modal {
       display: none;
@@ -127,13 +181,23 @@
 </head>
 <body>
 
-  <h1 class="title">This is your health appointment portal</h1>
+  <h1 class="title">Your Trusted Gateway to Health Appointments</h1>
 
   <div class="button-group">
-    <div class="appointment" onclick="window.location.href='appointmentHistory'">Appointment History</div>
-    <div class="Insurance" onclick="window.location.href='searchClinic'">Search A Clinic</div>
-    <div class="appointment" onclick="window.location.href='appointmentHistory'">View Appointments History</div>
-    <div class="Laboratory" id="openModalBtn">Book Appointment</div>
+    <div class="Insurance" onclick="window.location.href='searchClinic'"><h4 class="cabelo">Search A Clinic</h4>
+      <p style="color: black;">🔍 Where Healing Begins — Find a Clinic Today, Smart Clinic Search for Smarter Healthcare.</p>
+      <p class="para">Clinic Listing</p>
+    </div>
+    <div class="appointment" onclick="window.location.href='appointmentHistory'"><h4 class="cabelo">View Appointments History</h4>
+      <p style="color: black;">🕓 Easily browse your past appointment Booking and keep track of your healthcare history with confidence.</p>
+      <p class="para">Appointment History</p>
+    </div>
+    <div class="Laboratory" id="openModalBtn"><h4 class="cabelo">Book Appointment</h4>
+      <p style="color: black;">📅 Quality Care Starts With a Click, One Portal. All Your Appointments, Making It Easier to See the Right Doctor.</p>
+      <p class="para">Appointment Booking</p>
+    </div>
+
+    
   </div>
 
   <!-- Modal -->

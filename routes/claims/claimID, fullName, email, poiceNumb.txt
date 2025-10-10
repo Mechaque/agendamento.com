@@ -1,0 +1,5 @@
+claimID, fullName, email, poiceNumber, typeOfPolice, description, documents and clinicID
+
+Muheti1!
+
+Mozambique1975!

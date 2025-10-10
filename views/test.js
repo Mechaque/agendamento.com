@@ -1,97 +1,97 @@
-//======================================================================Booking page==========================
-app.get("/appointmentBooking", async (req, res) => {
+app.post('/addAppointment', async (req, res) => {
+  if (req.isAuthenticated()) {
+    const authenticatedUser = req.user.phoneNumber;
+    const {
+      numeroDaClinica,
+      fname,
+      email,
+      phoneNumber,
+      appointmentDate,
+      appointmentTime,
+      reasonForVisit
+    } = req.body;
 
-     if (req.isAuthenticated()) {
-             const id = req.query.clinicID;
-            let authenticatedUser = req.user.username;
-    
+    // ✅ Validate required fields
+    if (!appointmentDate || !appointmentTime) {
+      console.log("❌ Missing date or time:", appointmentDate, appointmentTime);
+      req.flash("error_msg", "Date and time are required to book an appointment.");
+      return res.redirect("back"); // redirect to the form
+    }
+
     try {
-    
-    await connection.query('SELECT * FROM externalUsers WHERE username = ?', [authenticatedUser], (error, results) => {
-    if(error) {
-    console.log(error);
-    }
-    if (results.length > 0){
-     const sql = "SELECT * FROM clinics WHERE clinicID = ?";
-    connection.query(sql, [id], function (err,result){
-        const name = results[0].fname;
-        const lname = results[0].lastName;
-        const email = results[0].username;
-        const telephone = results[0].phoneNumber;
-        const clname = result[0].clinicName;
-        const clID = result[0].clinicID;
+      connection.query(
+        'SELECT patientID FROM patient WHERE phoneNumber = ?',
+        [authenticatedUser],
+        function (error, results) {
+          if (error) {
+            console.log(error);
+            return res.status(500).send("DB Error");
+          }
 
-      res.render('reviewAppointment.ejs',{clname,lname,name,email,telephone,clID})
-    });
-    }
-    else {
-        console.log("User not authenticated")
-    }
-    
-    });
-    
-    }
-    catch (err) {
-    console.log(err);
-    }} else {
-            res.redirect('login')
+          if (results.length > 0) {
+            const selectedUser = results[0].patientID;
 
+            connection.query(
+              'SELECT * FROM appointment WHERE appointmentID LIKE ?',
+              ['%' + numeroDaClinica + '%'],
+              function (error, result) {
+                if (error) {
+                  console.log(error);
+                  return res.status(500).send("DB Error");
+                }
+
+                let lastID;
+                if (result.length > 0) {
+                  const lastUser = result[result.length - 1].appointmentID;
+                  const model1 = lastUser.slice(0, 9);
+                  let str = lastUser.substring(9);
+                  let str1 = parseInt(str, 10) || 0;
+                  str1++;
+                  lastID = model1 + str1;
+                } else {
+                  // If no appointments yet, start fresh
+                  lastID = numeroDaClinica + "0001";
+                }
+
+                console.log("Generated Appointment ID:", lastID);
+
+                const sql =
+                  "INSERT INTO appointment (appointmentID, fname, appointmentDate, appointmentTime, reasonForVisit, phoneNumber) VALUES (?, ?, ?, ?, ?, ?)";
+
+                connection.query(
+                  sql,
+                  [
+                    lastID,
+                    fname,
+                    appointmentDate,
+                    appointmentTime,
+                    reasonForVisit,
+                    phoneNumber
+                  ],
+                  function (err, rows) {
+                    if (err) {
+                      console.log(err);
+                      return res.status(500).send("DB Insert Error");
+                    }
+
+                    console.log("✅ Inserted appointment:", rows);
+                    req.flash("success_msg", "Appointment booked successfully!");
+                    return res.redirect('/appointmentHistory');
+                  }
+                );
+              }
+            );
+          } else {
+            console.log("❌ User not found:", authenticatedUser);
+            res.redirect('login');
+          }
         }
-    
-    });
-
- 
-
-
-    
-app.post("/book-time", async(req, res) => {
-
- if (req.isAuthenticated()) {
- let authenticatedUser = req.user.username;
-  const { doctorID, time, clinicID, } = req.body;  
-
-  if (!time) {
-    return res.send("Please select a time!");
-  }
-
-try {
-    
-    await connection.query('SELECT * FROM externalUsers WHERE username = ?', [authenticatedUser], (error, results) => {
-    if(error) {
-    console.log(error);
+      );
+    } catch (err) {
+      console.log("Server error:", err);
+      res.status(500).send("Server Error");
     }
-    if (results.length > 0){
-     const sql = "SELECT * FROM clinics WHERE clinicID = ?";
-    connection.query(sql, [clinicID], function (err,result){
-        const name = results[0].fname;
-        const lname = results[0].lastName;
-        const email = results[0].username;
-        const telephone = results[0].phoneNumber;
-        const clname = result[0].clinicName;
-        const clID = result[0].clinicID;
-
-      res.render('reviewAppointment.ejs',{clname,lname,name,email,telephone,clID,doctorID})
-    });
-    }
-    else {
-        console.log("User not authenticated")
-    }
-    
-    });
-    
-    }
-    catch (err) {
-    console.log(err);
-    }
-
-
-
-
-
-
   } else {
-            res.redirect('login')
-
-        }
+    res.redirect('login');
+  }
 });
-

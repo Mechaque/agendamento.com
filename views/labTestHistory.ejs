@@ -80,29 +80,31 @@
 
             <thead>
               <tr>
-                <th>Appointment ID</th>
-                <th>Nome</th>
-                <th>Phone</th>
-                <th>Date</th>
-                <th>Time</th>
-                <th>Razao</th>
+                <th>Name</th>
+                <th>Lab ID</th>
+                <th>Test ID</th>
+                <th>Data </th>
+                <th>Nome de teste</th>
+                <th>Resultado</th>
+               
                 <th>Ação</th>
               </tr>
             </thead>
             <tbody>
               <% appointment.forEach(function(appointment){ %>
               <tr>
-                <td><%= appointment.appointmentID %></td>
                 <td><%= appointment.fname %></td>
-                <td><%= appointment.phoneNumber %></td>
-                <td><%= appointment.appointmentDate %></td>
-                <td><%= appointment.appointmentTime %></td>
-                <td><%= appointment.reasonForVisit %></td>
+                <td><%= appointment.labID %></td>
+                <td><%= appointment.testID %></td>
+                <td><%= formattedDate %></td>
+                <td><%= appointment.testName   %></td>
+                <td><%= appointment.resultDate %></td>
+                
                 <td>
-                  <a href="deleteAppointments?appointmentID=<%= appointment.appointmentID %>" class="btn btn-sm btn-danger">
+                  <a href="deleteAppointments?appointmentID=<%= appointment.testID %>" class="btn btn-sm btn-danger">
                     <i class="fa-solid fa-trash"></i> Delete
                   </a>
-                  <a href="viewPages?patientID=<%= appointment.patientID %>" class="btn btn-sm btn-primary">
+                  <a href="viewPages?patientID=<%= appointment.testID %>" class="btn btn-sm btn-primary">
                     <i class="fa-solid fa-eye"></i> View
                   </a>
                 </td>

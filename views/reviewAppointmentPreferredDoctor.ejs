@@ -63,7 +63,7 @@
       <div class="container">
        
           
-    <form class="form"  action="/addAppointment" id="form-user" method="post">
+    <form class="form"  action="/makeAppointment" id="form-user" method="post">
        <input type="text" id="clinicID" name="numeroDaClinica" value="<%= clID %>" hidden>
     <h2>Review Your Appointment</h2>
       <label for="fullname">Full Name</label>
@@ -82,7 +82,7 @@
       <input type="date" id="phone" name="appointmentDate" value="<%= date %>" readonly>
 
       <label for="time">Selected Time</label>
-      <input type="text" id="timeInput" name="time" maxlength="5" value="<%= time %>"placeholder="HHMM" />
+      <input type="text" id="timeInput" name="appointmentTime" maxlength="5" value="<%= time %>"placeholder="HHMM" />
 
        <label for="time">Prefered Doctor</label>
       <input type="text" id="timeInput" name="PreferedDoctor" value="<%= docFName %> <%= docLName %>"  readonly/>

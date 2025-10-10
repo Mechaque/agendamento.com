@@ -86,7 +86,8 @@
                 <th>Date</th>
                 <th>Time</th>
                 <th>Razao</th>
-                <th>Ação</th>
+                 <th>ID Paciente</th>
+                <th>Status</th>
               </tr>
             </thead>
             <tbody>
@@ -98,14 +99,8 @@
                 <td><%= appointment.appointmentDate %></td>
                 <td><%= appointment.appointmentTime %></td>
                 <td><%= appointment.reasonForVisit %></td>
-                <td>
-                  <a href="deleteAppointments?appointmentID=<%= appointment.appointmentID %>" class="btn btn-sm btn-danger">
-                    <i class="fa-solid fa-trash"></i> Delete
-                  </a>
-                  <a href="viewPages?patientID=<%= appointment.patientID %>" class="btn btn-sm btn-primary">
-                    <i class="fa-solid fa-eye"></i> View
-                  </a>
-                </td>
+                 <td><%= appointment.patientID %></td>
+                <td> <%= appointment.status %></td>
               </tr>
               <% }); %>
             </tbody>

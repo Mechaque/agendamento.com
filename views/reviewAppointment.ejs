@@ -78,8 +78,8 @@
         <label for="phone">Clinic Name</label>
       <input type="tel" id="phone" name="clinicName" value="<%= clname %>" readonly>
 
-      <label>Select Date</label>
-      <input type="date" id="phone" name="appointmentDate" >
+     <label>Select Date</label>
+    <input type="date" id="appointmentDate" name="appointmentDate" required>
 
       <label for="time">Selected Time</label>
       <input type="text" id="timeInput" name="appointmentTime" maxlength="5" placeholder="HHMM" />
@@ -92,11 +92,11 @@
 
       <label for="doctor">Service Type</label>
       <select id="doctor" name="doctor" required>
-        <option value="">-- Select --</option>
-        <option value="dr_smith">Consulta Normal</option>
-        <option value="dr_lee">Verificação de rotina</option>
-        <option value="dr_khan">Tratamento</option>
-        <option value="dr_khan">follow-up</option>
+        <option>-- Select --</option>
+        <option >Consulta Normal</option>
+        <option>Verificação de rotina</option>
+        <option >Tratamento</option>
+        <option >follow-up</option>
       </select>
 
       <label for="notes">Additional Notes</label>
@@ -135,6 +135,10 @@ document.getElementById('timeInput').addEventListener('input', function(e) {
 
   e.target.value = formatted;
 });
+
+  // display dates in the future
+  const today = new Date().toISOString().split('T')[0];
+  document.getElementById("appointmentDate").setAttribute("min", today);
 </script>
 
   </div>

@@ -1,0 +1,20 @@
+Mozambique1975!
+
+medicHistory.ejs, and conditions.ejs
+conditionID, conditionName, diagnosisDate, status and notes
+
+
+
+
+
+transaction_date
+
+14474929 Canada Inc
+
+
+ec74d7711db9
+
+MAC-EC74D7711DB9
+
+
+I want modal for allergies, appointments, medic history and current conditions

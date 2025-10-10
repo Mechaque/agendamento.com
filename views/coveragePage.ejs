@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Medical Coverage Information</title>
+   <%- include("partials/template.ejs") %>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background-color: #f4f6f9;
+      margin: 0;
+      padding: 20px;
+    }
+
+    .container {
+      position: absolute;
+      max-width: 900px;
+      margin: auto;
+      background-color: white;
+      padding: 30px;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+      left: 300px;
+    }
+
+    h1 {
+      text-align: center;
+      color: #333;
+    }
+
+    .coverage-type {
+      border-left: 5px solid #007bff;
+      padding: 15px;
+      margin: 20px 0;
+      background-color: #f9f9f9;
+      border-radius: 5px;
+    }
+
+    .coverage-type h3 {
+      margin-top: 0;
+      color: #007bff;
+    }
+
+    .coverage-type ul {
+      margin-top: 10px;
+      padding-left: 20px;
+    }
+
+    .back-button {
+      display: inline-block;
+      margin-top: 20px;
+      background-color: #007bff;
+      color: white;
+      padding: 10px 15px;
+      text-decoration: none;
+      border-radius: 5px;
+    }
+
+    .back-button:hover {
+      background-color: #0056b3;
+    }
+
+    /* Modal styles */
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 999;
+  left: 0; top: 0;
+  width: 100%; height: 100%;
+  overflow: auto;
+  background-color: rgba(0,0,0,0.4);
+}
+
+.modal-content {
+  background-color: white;
+  margin: 10% auto;
+  padding: 20px;
+  border-radius: 8px;
+  width: 80%;
+  max-width: 500px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.3);
+}
+
+.modal-content input,
+.modal-content textarea {
+  width: 100%;
+  padding: 8px;
+  margin-top: 10px;
+  margin-bottom: 15px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.modal-content .close {
+  color: #aaa;
+  float: right;
+  font-size: 24px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.modal-content .close:hover {
+  color: #000;
+}
+
+.coverage-form {
+  max-width: 600px;
+  margin: 30px auto;
+  padding: 25px;
+  background-color: #ffffff;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.form-title {
+  text-align: center;
+  color: #007bff;
+  margin-bottom: 25px;
+}
+
+.form-group {
+  margin-bottom: 20px;
+}
+
+label {
+  display: block;
+  margin-bottom: 8px;
+  font-weight: 600;
+  color: #333;
+}
+
+select,
+textarea,
+input[type="text"] {
+  width: 100%;
+  padding: 10px 12px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  font-size: 16px;
+  background-color: #fdfdfd;
+  transition: border-color 0.3s;
+}
+
+select:focus,
+textarea:focus,
+input[type="text"]:focus {
+  border-color: #007bff;
+  outline: none;
+}
+
+.submit-btn {
+  width: 100%;
+  background-color: #007bff;
+  color: white;
+  padding: 12px;
+  font-size: 16px;
+  font-weight: bold;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.submit-btn:hover {
+  background-color: #0056b3;
+}
+
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Medical Coverage Information</h1>
+<button id="addCoverageBtn" class="back-button" style="margin-bottom: 20px; background-color: #28a745;">➕ Add Coverage</button>
+
+    <% coverages.forEach(coverage => { %>
+      <div class="coverage-type">
+        <h3><%= coverage.icon %> <%= coverage.coverageType %></h3>
+        <p><strong>Description:</strong> <%= coverage.description %></p>
+        <% if (coverage.details) { %>
+          <ul>
+            <% coverage.details.split(',').forEach(detail => { %>
+              <li><%= detail.trim() %></li>
+            <% }); %>
+          </ul>
+        <% } %>
+        <% if (coverage.coverageLimit) { %>
+          <p><strong>Limit:</strong> <%= coverage.coverageLimit %></p>
+        <% } %>
+      </div>
+    <% }); %>
+
+    <a href="/insurance" class="back-button">⬅ Back to Insurance Portal</a>
+  </div>
+  <div id="coverageModal" class="modal">
+  <div class="modal-content">
+    <span class="close">&times;</span>
+  <h2 class="form-title">➕ Add New Coverage</h2>
+
+<form action="/addCoverage" method="POST" class="coverage-form">
+  <div class="form-group">
+    <label for="icon">Select Icon</label>
+    <select name="icon" id="icon" required>
+      <option value="">-- Choose an Icon --</option>
+      <option value="🏥">🏥 General</option>
+      <option value="🦷">🦷 Dental</option>
+      <option value="👓">👓 Vision</option>
+      <option value="💊">💊 Medication</option>
+      <option value="🧪">🧪 Laboratory</option>
+    </select>
+  </div>
+
+  <div class="form-group">
+    <label for="coverageType">Select Coverage Type</label>
+    <select name="coverageType" id="coverageType" required>
+      <option value="">-- Choose Coverage Type --</option>
+      <option value="General Consultation">General Consultation</option>
+      <option value="Dental Coverage">Dental Coverage</option>
+      <option value="Vision Care">Vision Care</option>
+      <option value="Medication Coverage">Medication Coverage</option>
+      <option value="Lab Tests">Lab Tests</option>
+    </select>
+  </div>
+
+  <div class="form-group">
+    <label for="description">Coverage Description</label>
+    <textarea name="description" id="description" rows="4" placeholder="Enter coverage description..." required></textarea>
+  </div>
+
+  <div class="form-group">
+    <label for="details">Coverage Details (comma-separated)</label>
+    <textarea name="details" id="details" rows="3" placeholder="e.g. Includes follow-up, Covers checkups" required></textarea>
+  </div>
+
+  <div class="form-group">
+    <label for="coverageLimit">Coverage Limit</label>
+    <input type="text" name="coverageLimit" id="coverageLimit" placeholder="e.g. $500/year" />
+  </div>
+
+  <button type="submit" class="submit-btn">Add Coverage</button>
+</form>
+
+  </div>
+</div>
+<script>
+  const modal = document.getElementById("coverageModal");
+  const btn = document.getElementById("addCoverageBtn");
+  const span = document.getElementsByClassName("close")[0];
+
+  btn.onclick = () => modal.style.display = "block";
+  span.onclick = () => modal.style.display = "none";
+
+  window.onclick = function(event) {
+    if (event.target === modal) {
+      modal.style.display = "none";
+    }
+  }
+</script>
+
+</body>
+</html>

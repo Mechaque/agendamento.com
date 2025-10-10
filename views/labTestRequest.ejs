@@ -1,205 +1,212 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">    
-    <title>update</title>
-    <%- include("partials/template.ejs") %>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    </head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Adicionar Testes</title>
+  <%- include("partials/template.ejs") %>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <style>
+    @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap");
 
-<style>
-@import url("https://fonts.googleapis.com/css2?family=Poppins&display=swap");
-
-body {
-
-    background-color: #f3f3f9;
-}
+    body {
+      background-color: #f3f3f9;
+      font-family: "Poppins", sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f3f3f9;
+      min-height: 105vh; /* 5% taller than the viewport height */
+    }
 .container {
-display: flex;
-margin: 0px 20px ;
-}
-.account {
-flex: 2;
-margin-left: 60px;
-margin-right: 300px;
-background-color: #e4eceea6;
-box-shadow: rgba(0,0,0,0.16) 0px 1px 4px;
-border-radius: 5px;
-height: max-content;
+  display: flex;
+  justify-content: flex-start; /* align left */
+  padding: 40px 20px;
+  margin-left: 2%; /* shift 20% from the left edge */
+  margin-top: -2%;  /* move it up by 2% */
+  
 }
 
-.account-header {
-display: flex;
-justify-content: space-between;
-align-items: end;
-padding: 10px;
-border-bottom: 1px solid #768499;
+
+
+    .account {
+      width: 100%;
+      max-width: 800px;
+      background-color: #fff;
+      box-shadow: rgba(0,0,0,0.1) 0px 2px 8px;
+      border-radius: 10px;
+      padding: 30px;
+    }
+
+    .account-header {
+      margin-bottom: 20px;
+      border-bottom: 2px solid #e5e7eb;
+      padding-bottom: 10px;
+    }
+
+    .account-title {
+      font-size: 22px;
+      font-weight: 600;
+      color: #1f2937;
+      margin: 0;
+    }
+
+    fieldset {
+      border: none;
+      margin: 20px 0;
+      padding: 0;
+    }
+
+    legend {
+      font-size: 16px;
+      font-weight: 500;
+      margin-bottom: 10px;
+      color: #374151;
+    }
+
+    .input-group {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+      margin-bottom: 15px;
+    }
+
+    .input-container {
+      flex: 1;
+      min-width: 220px;
+      display: flex;
+      flex-direction: column;
+    }
+
+    label {
+      font-size: 14px;
+      color: #374151;
+      margin-bottom: 5px;
+    }
+
+    input, select, textarea {
+      padding: 10px;
+      border: 1.5px solid #cbd5e1;
+      border-radius: 6px;
+      font-size: 14px;
+      font-family: inherit;
+      transition: border-color 0.2s;
+    }
+
+    input:focus, select:focus, textarea:focus {
+      outline: none;
+      border-color: #536dfe;
+    }
+
+    textarea {
+      min-height: 100px;
+      resize: vertical;
+    }
+
+    .form-actions {
+      display: flex;
+      justify-content: flex-end;
+      gap: 15px;
+      margin-top: 20px;
+    }
+
+    .btn {
+      width: 140px;
+      padding: 10px 0;
+      border: none;
+      border-radius: 25px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background-color 0.2s;
+    }
+
+    .btn-submit {
+      background-color: #536dfe;
+      color: white;
+    }
+
+    .btn-submit:hover {
+      background-color: #4053c9;
+    }
+
+    .btn-cancel {
+      background-color: #e5e7eb;
+      color: #374151;
+    }
+
+    .btn-cancel:hover {
+      background-color: #d1d5db;
+    }
+
+    footer {
+  margin-top: 2%;
 }
 
-.account-title {
-    font-family: "Poppins", sans-serif;
-    font-size: 20px;
-    color:#030000fa;
-    font-weight: 500;
-    margin: 60px 20px ;
-}
-
-.account-edit {
-    display: flex;
-    justify-content: space-between;
-    margin: 40px 0;
-}
-.input-container {
-width: 100%;
-display: flex;
-flex-direction: column;
-margin: 0 20px;
-
-}
-
-.input-contentor {
-width: 45.5%;
-display: flex;
-flex-direction: column;
-margin: 0 20px;
-border-radius: 5px;
-
-}
-
-.input-container label {
-font-family: "Poppins", sans-serif;
-color: #010409ed;
-font-size: 14px;
-}
-.input-container input {
-height: 25px;
-border: 1.5px solid #768499;
-border-radius: 5px;
-padding: 5px;
-color: #768499;
-font-family: "poppins", sans-serif;
-}
-.input-container input:focus {
-    outline:none;
-    border: 1.5px solid #536dfe;
-}
-.input-container textarea {
-    display: block;
-    width: 100%;
-    height: 100px;
-    padding: 5px;
-    border: 1.5px solid #768499;
-    border-radius: 5px;
-    font-family: "Poppins sans-serif";
-    color: #768499;
-}
-.input-container textarea:focus {
-    outline: none;
-    border: 1.5px solid #536dfe;
-}
-.insira {
-     width: 8em;
-     height: 3em;
-     cursor: pointer;
-     border: 1px solid #768499;
-     border-radius: 2em;
-     color: #1e293b;
-     font-weight: bold;
-     margin-right: 5px;
-     background-color: #fff;
-     transition-duration: 0.3s;
-     box-shadow: rgba(0,0,0,0.1);
-}
-.insira:hover {background-color: #f1f5f9;}
-
-.cancel {
-     width: 8em;
-     height: 3em;
-     cursor: pointer;
-     border: 1px solid #458ff6;
-     border-radius: 2em;
-     color: #fff;
-     font-weight: bold;
-     margin-right: 5px;
-     background-color: #536dfe;
-     transition-duration: 0.3s;
-     box-shadow: rgba(0,0,0,0.1);
-}
-.cancel:hover {background-color: #4053c9;}
-
-</style>
-
+  </style>
+</head>
 <body>
-<div class="container">
-    <div class="profile">
-        <div class="profile-header">
-
-        </div>
-    </div>
+  <div class="container">
     <form action="/labtestes" method="POST" id="form-user" class="account">
-    <div class="account-header">
-
+      <div class="account-header">
         <h1 class="account-title">Adicione Testes</h1>
-    </div>
-    <div class="account-edit">
-        <div class="input-container">
-        <label for="fname">Nome</label>
-        <input type="text" name="fname" placeholder="Full Name" required >
-        </div>
+      </div>
 
-        <div class="input-container">
+      <fieldset>
+        <legend>Informações Pessoais</legend>
+        <div class="input-group">
+          <div class="input-container">
+            <label for="fname">Nome</label>
+            <input type="text" id="fname" name="fname" placeholder="Name" value="<%= fname %>">
+          </div>
+          <div class="input-container">
             <label for="lname">Apelido</label>
-            <input type="text" name="lname" placeholder="Last Name" required >
-            </div>
-         </div>
-         <div class="account-edit">
-            <div class="input-container">
-            <label for="fname">Appointment ID</label>
-            <input type="text" name="appointmentID" placeholder="Appointment ID" required>
-            </div>    
-            <div class="input-container">
-                <label for="lname">Patient ID</label>
-                <input type="text" name="patientID" placeholder="Patient ID" required >
-                </div>
-
-                <div class="input-container">
-            <label for="fname">Phone Number</label>
-            <input type="text" name="phoneNumber" placeholder="Phone Number" required>
-            </div>
-             </div>
-
-         <div class="selection">
-            <label for="lab selection">Laboratorio</label>
-            <select name="labName" id="lab" required>
-                <option value = "lab">--Lab--</option>
-            <option value = "primaLab">Prima Lab</option>
-            <option value = "HCMLab">Lab HCM</option>
-            </select>
-
-         </div>
-    
-   
-
-    <div class="account-edit">
-        <div class="input-container">
-                <label for="address">Nome De Testes</label>
-                <textarea name="testName" id="" placeholder="Nome De Testes" required></textarea>
-                </div>
+            <input type="text" id="lname" name="lname" placeholder="Last Name" required>
+          </div>
         </div>
+      </fieldset>
 
+      <fieldset>
+        <legend>Detalhes da Consulta</legend>
+        <div class="input-group">
+          <div class="input-container">
+            <label for="appointmentID">Appointment ID</label>
+            <input type="text" id="appointmentID" name="appointmentID" placeholder="Appointment ID" required>
+          </div>
+          <div class="input-container">
+            <label for="patientID">Patient ID</label>
+            <input type="text" id="patientID" name="patientID" placeholder="Patient ID" value="<%= patientID %>">
+          </div>
+          <div class="input-container">
+            <label for="phoneNumber">Phone Number</label>
+            <input type="text" id="phoneNumber" name="phoneNumber" placeholder="Phone Number" value="<%= phoneNumber %>">
+          </div>
+        </div>
+      </fieldset>
 
-        <button type="submit" class="insira">Submit</button>
-        <button type="submit" class="cancel">cancel</button>
+      <fieldset>
+       
+        <div class="input-container">
+          <label for="lab">Laboratorio</label>
+          <select name="labID" id="lab" required>
+            <option value="">--Selecione--</option>
+            <option value="primaLab">PrimaLab</option>
+            <option value="HCMLab">LabHCM</option>
+          </select>
+        </div>
+      </fieldset>
 
+      <fieldset>
+        
+        <div class="input-container">
+          <label for="testName">Nome De Testes</label>
+          <textarea id="testName" name="testName" placeholder="Nome De Testes" required></textarea>
+        </div>
+      </fieldset>
 
-
+      <div class="form-actions">
+        <button type="submit" class="btn btn-submit">Submit</button>
+        <button type="button" class="btn btn-cancel" onclick="window.history.back()">Cancel</button>
+      </div>
     </form>
-
-
-
-</div>
-
-
+  </div>
 </body>
 </html>

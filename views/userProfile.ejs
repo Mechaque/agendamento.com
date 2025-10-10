@@ -163,38 +163,46 @@ left: 370px;
       <label for="photo"><i class="fas fa-camera"></i></label>
       <input type="file" id="photo" />
     </div>
+<!-- ... -->
 
-    <form>
-      <div class="form-group">
-        <label for="name">Full Name</label>
-        <input type="text" id="name" value="Jane Doe" />
-      </div>
+<form action="/updateProfile" method="POST">
+  <div class="form-group">
+  <label for="name">Full Name</label>
+  <input type="text" id="name" name="fname" value="<%= user.fname %>" />
+</div>
 
-      <div class="form-group">
-        <label for="email">Email Address</label>
-        <input type="email" id="email" value="jane.doe@example.com" />
-      </div>
+<div class="form-group">
+  <label for="lname">Last Name</label>
+  <input type="text" id="lname" name="lname" value="<%= user.lname %>" />
+</div>
 
-      <div class="form-group">
-        <label for="phone">Phone Number</label>
-        <input type="tel" id="phone" value="+1 555 123 4567" />
-      </div>
 
-      <div class="form-group">
-        <label for="location">Location</label>
-        <input type="text" id="location" value="San Francisco, CA" />
-      </div>
+  <div class="form-group">
+    <label for="email">Email Address</label>
+    <input type="email" id="email" name="username" value="<%= user.username %>"  required/>
+  </div>
 
-      <div class="form-group">
-        <label for="bio">Bio</label>
-        <textarea id="bio">Passionate about product design and clean user experiences.</textarea>
-      </div>
+  <div class="form-group">
+    <label for="phone">Phone Number</label>
+    <input type="tel" id="phone" name="phoneNumber" value="<%= user.phoneNumber %>" />
+  </div>
 
-      <div class="button-row">
-        <button type="submit" class="btn btn-save">Save Changes</button>
-        <button type="reset" class="btn btn-cancel">Cancel</button>
-      </div>
-    </form>
+  <div class="form-group">
+    <label for="location">Patient ID</label>
+    <input type="text" id="location" name="patientID" value="<%= user.patientID %>" />
+  </div>
+
+  <div class="form-group">
+    <label for="bio">user ID</label>
+
+      <input type="text" id="userID" name="userID" value="<%= user.userID %>" />
+  </div>
+
+  <div class="button-row">
+    <button type="submit" class="btn btn-save">Save Changes</button>
+    <button type="reset" class="btn btn-cancel">Cancel</button>
+  </div>
+</form>
   </div>
 </body>
 </html>

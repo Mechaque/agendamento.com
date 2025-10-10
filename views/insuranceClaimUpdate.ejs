@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Insurance Claim Portal</title>
+  <%- include("partials/template.ejs") %>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f4f6f8;
+      margin: 0;
+      padding: 20px;
+    }
+  .container {
+  position: absolute;
+  left: 120px;
+  background: #fff;
+  padding: 30px;
+  max-width: 800px;
+  margin: 0;                 /* remove auto-centering */
+  margin-left: 20%;          /* push it 20% from the left */
+  box-shadow: 0 0 10px rgba(0,0,0,0.1);
+  border-radius: 8px;
+}
+
+    h2 {
+      text-align: center;
+      color: #333;
+    }
+    label {
+      display: block;
+      margin-top: 15px;
+      font-weight: bold;
+    }
+    input, textarea, select {
+      width: 100%;
+      padding: 10px;
+      margin-top: 5px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      box-sizing: border-box;
+    }
+    button {
+      margin-top: 20px;
+      background-color: #007bff;
+      color: white;
+      border: none;
+      padding: 12px 20px;
+      border-radius: 4px;
+      cursor: pointer;
+      width: 100%;
+    }
+    button:hover {
+      background-color: #0056b3;
+    }
+    .success-message {
+      margin-top: 20px;
+      color: green;
+      font-weight: bold;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+
+<div class="container">
+  <h2>Formulário de reclamação de seguro</h2>
+<form id="claimForm" action="/updateClaim" method="POST" enctype="multipart/form-data">
+  <label for="name">Nome Completo</label>
+  <input type="text" name="fname" id="name" required value="<%= claim.fullName %>">
+
+  <label for="email">Claim Reference</label>
+  <input type="text" name="claimID" id="email" required value="<%= claim.claimID %>">
+
+  <label for="clinicID">Claim Total</label>
+  <input type="text" name="claimTotal" id="clinicID" required value="<%= claim.claimTotal %>">
+
+  <label for="policyNumber">Status</label>
+  <input type="text" name="status" id="policyNumber" value="<%= claim.status %>">
+
+  <label for="submittedAT">Submitted On</label>
+  <input type="text" name="submittedAT" id="submittedAT" value="<%= claim.submittedAT %>">
+
+  <label for="claimType">Tipo de reclamação</label>
+  <select id="typeOfPolice" name="typeOfPolice" required>
+    <option value="">Selecione um tipo</option>
+    <option value="Dental" <%= claim.typeOfPolice === 'Dental' ? 'selected' : '' %>>Dental</option>
+    <option value="Optometrista" <%= claim.typeOfPolice === 'Optometrista' ? 'selected' : '' %>>Optometrista</option>
+    <option value="Consulta Normal" <%= claim.typeOfPolice === 'Consulta Normal' ? 'selected' : '' %>>Consulta Normal</option>
+    <option value="Medicamentos" <%= claim.typeOfPolice === 'Medicamentos' ? 'selected' : '' %>>Medicamentos</option>
+  </select>
+
+  <label for="description">Descrição da reivindicação</label>
+  <textarea id="description" name="description" rows="5"><%= claim.description %></textarea>
+
+  <label for="documents">Carregar documentos de suporte</label>
+  <input type="file" name="document" />
+
+  <div style="display: flex; justify-content: space-between; gap: 10px; margin-top: 20px;">
+    <button type="button" onclick="handleCancel()" style="background-color: #6c757d;">Cancelar</button>
+    <button type="submit">Atualizar</button>
+  </div>
+</form>
+
+  <a href="insurance">Back to home</a>
+
+  <!-- <div class="success-message" id="successMessage" style="display: none;">
+    ✅ Your claim has been submitted successfully!
+  </div> -->
+</div>
+<script>
+  function handleCancel() {
+    // Option 1: Reset the form
+    document.getElementById('claimList').reset();
+
+    // Option 2: Or redirect to another page instead of resetting
+    // window.location.href = '/insurance'; 
+  }
+</script>
+
+</body>
+</html>

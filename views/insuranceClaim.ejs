@@ -66,18 +66,29 @@
 
 <div class="container">
   <h2>Formulário de reclamação de seguro</h2>
-  <form id="claimForm" action="/claimForm" method="POST">
+  <form id="claimForm" action="/claimForm" method="POST" enctype="multipart/form-data">
     <label for="name">Nome Completo</label>
-    <input type="text"  name="fname"  id="name" required>
+    <input type="text"  name="fname"  id="name" value="<%= fname %>" readonly>
 
-    <label for="email">Endereço Email</label>
-    <input type="email" name="email" id="email" required>
+  <div style="display: flex; gap: 20px;">
+  <div style="flex: 1;">
+    <label for="totalClaim">Total Claim</label>
+    <input type="text" name="claimTotal" id="claimTotal" step="0.01" required />
+  </div>
 
-    <label for="clinicID">ID Da Clinica</label>
-    <input type="text" name="clinicID" id="clinicID" required>
-
-    <label for="policyNumber">Número da apólice</label>
+  <div style="flex: 1;">
+    <label for="reimbursed">Police Number</label>
     <input type="text" name="policeNumber" id="policyNumber" required>
+  </div>
+</div>
+
+  <div style="display: flex; gap: 20px;">
+    <div style="flex: 1;">
+    <label for="dateField">Clinic ID</label>
+    <input type="text" name="clinicID" id="clinicID" step="0.01" required />
+  </div>
+  
+</div>
 
     <label for="claimType">Tipo de reclamação</label>
     <select id="typeOfPolice" name="typeOfPolice"required>
@@ -92,25 +103,15 @@
     <textarea id="description" name="description" rows="5" ></textarea>
 
     <label for="documents">Carregar documentos de suporte</label>
-    <input type="file" id="documents" name="document" multiple>
+    <input type="file" name="document"  multiple />
 
     <button type="submit">Enviar reivindicação</button>
   </form>
   <a href="insurance">Back to home</a>
 
-  <!-- <div class="success-message" id="successMessage" style="display: none;">
-    ✅ Your claim has been submitted successfully!
-  </div> -->
+  
 </div>
-<!-- 
-<script>
-  document.getElementById('claimForm').addEventListener('submit', function(e) {
-    e.preventDefault();
-    // In a real app, form data would be sent to a backend server here.
-    document.getElementById('successMessage').style.display = 'block';
-    document.getElementById('claimForm').reset();
-  });
-</script> -->
+
 
 </body>
 </html>

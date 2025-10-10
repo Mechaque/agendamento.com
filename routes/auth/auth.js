@@ -39,6 +39,7 @@ saveUninitialized:true
 }));
 app.use(passport.authenticate('session'));
 
+
 const bcrypt = require('bcrypt');
 
  router.post("/login", passport.authenticate("local", {
@@ -110,12 +111,20 @@ passport.deserializeUser((user, cb) =>{
 
 
  //======================================log out ======================================
- router.post('/logout', function(req, res, next) {
+router.post('/logout', function(req, res, next) {
   req.logout(function(err) {
-    if (err) { return next(err); }
-    res.redirect('/');
+    if (err) return next(err);
+
+    req.session.destroy((err) => {
+      if (err) console.error(err);
+      res.clearCookie('connect.sid', { path: '/' });
+      res.redirect('/login');
+    });
   });
 });
+
+
+
     module.exports = router;
 
 

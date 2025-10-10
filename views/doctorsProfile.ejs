@@ -112,7 +112,7 @@ button.submit-btn:hover {
 #dateInput{
   position: relative;
   left: 580px;
-  top: -480px;
+  top: -460px;
   border: none;
 }
 #avaiButton{
@@ -200,9 +200,9 @@ h1 .fa-user {
         
        
             <div class="info-item"><span>Speciality</span><%= speciality %></div>
-            <div class="info-item"><span>Dr. ID:</span> <%= id %></div>
+            <div class="info-item"><span>Dr. ID:</span> <%= doctoreID %></div>
             <div class="info-item"><span>Email:</span><%= email %></div>
-            <input type="hidden" name="doctoreID" value="<%= id %>" />
+            <input type="hidden" name="doctoreID" value="<%= doctoreID %>" />
 
        
       </div>
@@ -217,27 +217,30 @@ h1 .fa-user {
 
    
   
-   <input type="text" value="<%= date %>" class="tempo">
+  
 
-<input type="hidden" id="userID" value="<%= id %>">
+<input type="hidden" id="userID" value="<%= doctoreID %>">
 
   
   <form id="dateForm" method="GET" action="/change-date">
-    <input type="hidden" name="userID" value="<%= id %>" />
-    <input type="date" name="date" id="dateInput" value="dateInput" onchange="document.getElementById('dateForm').submit()" />
-  </form>
+  <input type="hidden" name="userID" value="<%= doctoreID %>" />
+  <input type="hidden" name="doctoID" value="<%= doctoreID %>" />
+  <input
+  type="date"
+  name="date"
+  id="dateInput"
+  value="<%= date %>"
+  min="<%= new Date(Date.now() + 86400000).toISOString().split('T')[0] %>"
+  onchange="document.getElementById('dateForm').submit()"
+/>
+
+</form>
+
 <div class="availableTime">
  
 
       </div>
       </div>
-
-
-
-
-
-
-
 
 </body>
 </html>
