@@ -6,14 +6,12 @@
   <title>Doctors Profile</title>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
-   <%- include("partials/template.ejs") %>
+  <%- include("partials/template.ejs") %>
   <style>
-   
-
     .container {
       position: relative;
-      left: -360px;
-      width: 850px;
+      left: -213px;
+      width: 1050px;
       margin: 40px auto;
       background-color: #fff;
       border-radius: 10px;
@@ -24,7 +22,6 @@
     .main {
       width: 50%;
       padding: 40px;
-      
     }
 
     .section {
@@ -32,298 +29,163 @@
       left: -25px;
       margin-bottom: 30px;
       width: 500px;
-  max-width: 600px;
-  margin: 30px auto;
-  padding: 25px;
-  background: #ffffff;
-  border-radius: 12px;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
-  font-family: 'Segoe UI', Arial, sans-serif;
-  color: #2c3e50;
+      max-width: 600px;
+      margin: 30px auto;
+      padding: 25px;
+      background: #ffffff;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+      font-family: 'Segoe UI', Arial, sans-serif;
+      color: #2c3e50;
     }
 
     .section h1 {
-  font-size: 26px;
-  font-weight: 700;
-  color: #0d6efd; /* Bootstrap primary blue */
-  margin-bottom: 20px;
-  border-bottom: 2px solid #e9ecef;
-  padding-bottom: 10px;
-}
-
-    .section h3 {
-      color: #2e3b4e;
-      margin-bottom: 15px;
-      border-bottom: 2px solid #eee;
-      padding-bottom: 5px;
-    }
-
-    .info-item {
-      margin-bottom: 10px;
+      font-size: 26px;
+      font-weight: 700;
+      color: #0d6efd;
+      margin-bottom: 20px;
+      border-bottom: 2px solid #e9ecef;
+      padding-bottom: 10px;
     }
 
     .info-item span {
-      font-weight: bold;
       display: inline-block;
-      width: 150px;
-
-        margin: 10px 0;
-        font-size: 15px;
-        line-height: 1.6;
+      font-weight: 600;
+      color: #495057;
+      width: 120px;
     }
-.info-item span {
-  display: inline-block;
-  font-weight: 600;
-  color: #495057;
-  width: 120px;  /* aligns labels neatly */
-}
+
+    h1 .fa-user {
+      color: #0d6efd;
+      padding: 20px;
+      background: #e9f7fd;
+      border-radius: 50%;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    }
+
+    /* ✅ Bookings Card */
     #bookings {
-        position: relative;
-        left: 420px;
-        top: -400px;
-        
+      position: absolute;
+      top: 20px;
+      left: 550px;
+      max-width: 400px;
+      width: 100%;
+      margin: 30px auto;
+      background: #fff;
+      border-radius: 16px;
+      box-shadow: 0 6px 14px rgba(0,0,0,0.1);
+      padding: 30px;
+      text-align: center;
+      min-height: 450px;
+      z-index: 1000;
     }
-  button.submit-btn {
-  position: relative;
-  background-color: #007BFF;       /* Bootstrap blue */
-  right: -500px;
-  color: white;
-  padding: 12px 24px;
-  border: none;
-  border-radius: 15px;
-  font-size: 16px;
-  font-weight: 500;
-  cursor: pointer;
-  transition: background-color 0.3s ease, box-shadow 0.2s ease;
-  box-shadow: 0 4px 6px rgba(0, 123, 255, 0.1);
-  width: 200px;
-}
 
-button.submit-btn:hover {
-  background-color: #0056b3;       /* Darker blue */
-  box-shadow: 0 6px 10px rgba(0, 123, 255, 0.2);
-}
+    #bookings h5 {
+      color: #0d6efd;
+      font-weight: 600;
+      margin-bottom: 20px;
+    }
 
-.doctSchedul {
-  position: relative;
-  left: -445px;
-}
+    #dateInput {
+      margin: 0 auto 20px auto;
+      width: 60%;
+      padding: 8px 12px;
+      border: none;
+      font-size: 1rem;
+    }
 
-#dateInput{
-  position: fixed;
-  left: 950px;
-  top: 200px;
-  border: none;
-}
-#avaiButton{
-  border: none;
-}
-.availableTime {
-  position: relative;
-   left: 420px;
-  top: -805px;
-  border: none;
+    .time-grid-container {
+      max-height: 300px;
+      overflow-y: auto;
+      padding-right: 5px;
+      margin-bottom: 20px;
+    }
 
-}
-.tempo {
-  position: relative;
-   border: none;
-  width: 140px;
-  top: -380px;
-  left: 600px;
+    .time-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+      gap: 10px;
+    }
 
-}
+    .time-btn {
+      transition: all 0.2s ease-in-out;
+    }
 
-h1 .fa-user {
-  color: #0d6efd;              /* Bootstrap primary blue */
-  padding: 20px;
-  background: #e9f7fd;         /* light blue circle background */
-  border-radius: 50%;
-  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-}
+    .btn-check:checked + .time-btn {
+      background-color: #0d6efd !important;
+      color: #fff !important;
+      box-shadow: 0 0 8px rgba(13,110,253,0.6);
+      transform: scale(1.05);
+    }
 
-
-
-#bookings {
-  position: absolute;
-  max-width: 500px;
-  margin: 30px auto;
-  top: 30px;
-  left: 600px;
-}
-
-#bookings .card {
-  border-radius: 12px;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.08);
-  background: #ffffff;
-}
-
-#bookings .fa-suitcase-medical {
-  font-size: 22px;
-  margin-right: 10px;
-  vertical-align: middle;
-}
-
-#avaiButton {
-  background-color: #0d6efd;   /* Bootstrap primary blue */
-  color: #fff;
-  font-weight: 600;
-  border: none;
-  border-radius: 8px;
-  padding: 10px 18px;
-  cursor: pointer;
-  transition: background-color 0.3s, transform 0.2s;
-}
-
-#avaiButton:hover {
-  background-color: #0b5ed7;
-  transform: translateY(-2px);
-}
-
-#avaiButton:active {
-  transform: translateY(0);
-}
-
-  .time-btn:hover {
-    background-color: #28a745 !important; /* brighter green */
-    transform: scale(1.05);              /* subtle zoom */
-    box-shadow: 0 4px 10px rgba(40, 167, 69, 0.3);
-    transition: all 0.2s ease-in-out;
-  }
-
-  /* Active (when selected) */
-  .btn-check:checked + .time-btn {
-    background-color: #218838 !important; /* darker green */
-    color: #fff;
-    box-shadow: 0 4px 10px rgba(33, 136, 56, 0.4);
-  }
-
-    /* Default time buttons */
-  .time-btn {
-    transition: all 0.2s ease-in-out;
-  }
-
-  /* When hovered */
-  .time-btn:hover {
-    background-color: #218838 !important; /* darker green */
-    color: #fff;
-    transform: scale(1.05);
-  }
-
-  /* When selected */
-  .btn-check:checked + .time-btn {
-    background-color: #0d6efd !important; /* Bootstrap blue (or your highlight color) */
-    color: #fff !important;
-    box-shadow: 0 0 8px rgba(13, 110, 253, 0.6);
-    transform: scale(1.05);
-  }
-
+    .action-buttons {
+      display: flex;
+      justify-content: center;
+      gap: 15px;
+    }
   </style>
 </head>
 <body>
-
   <div class="container">
-    <!-- Left Sidebar -->
-    
-    <!-- Main Content -->
-  <h1><i class="fa-solid fa-user fa-5x" ></i></h1>
+    <h1><i class="fa-solid fa-user fa-5x"></i></h1>
     <div class="main">
       <div class="section">
-      
-        
         <h1>Dr. <%= docFName %></h1>
-        
-       
-            <div class="info-item"><span>Speciality</span><%= speciality %></div>
-            <div class="info-item"><span>Dr. ID:</span> <%= id %></div>
-            <div class="info-item"><span>Email:</span><%= email %></div>
-            <input type="hidden" name="doctoreID" value="<%= id %>" />
-
-       
+        <div class="info-item"><span>Speciality</span><%= speciality %></div>
+        <div class="info-item"><span>Dr. ID:</span> <%= id %></div>
+        <div class="info-item"><span>Email:</span><%= email %></div>
+        <input type="hidden" name="doctoreID" value="<%= id %>" />
       </div>
 
+      <div id="bookings">
+        <i class="fa-solid fa-suitcase-medical mb-2" style="color:#e63946; font-size:26px;"></i>
+        <h5>Available Days and Time</h5>
 
-<div id="bookings">
-  <div class="card p-4 text-center">
-    <span class="fa-solid fa-suitcase-medical" style="color: red;"></span>
-    <button id="avaiButton">&nbsp;View Availability</button>
-  </div>
-</div>
+        <!-- Date Selection -->
+        <form id="dateForm" method="GET" action="/change-date" class="mb-3">
+          <input type="hidden" name="userID" value="<%= id %>" />
+          <input type="date" name="date" id="dateInput" value="<%= data %>" onchange="this.form.submit()" readonly class="form-control">
+        </form>
 
+        <!-- Available Times -->
+        <% if (!message && tempo && tempo.length > 0) { %>
+        <form id="timeForm" action="/book-time" method="POST">
+          <input type="hidden" name="doctorID" value="<%= id %>">
+          <input type="hidden" name="clinicID" value="<%= clinicID %>">
+          <input type="hidden" name="date" value="<%= data %>">
+          <input type="hidden" name="docFName" value="<%= docFName %>">
+          <input type="hidden" name="docLName" value="<%= docLName %>">
 
-
-<div class="tempo">
-  <% if (message) { %>
-    <p class="text-danger"><%= message %></p>
-  <% } else { %>
-    <form id="timeForm" action="/book-time" method="POST">
-      <input type="hidden" name="doctorID" value="<%= id %>">
-      <input type="hidden" name="clinicID" value="<%= clinicID %>">
-      <input type="hidden" name="date" value="<%= data %>">
-      <input type="hidden" name="docFName" value="<%= docFName %>">
-       <input type="hidden" name="docLName" value="<%= docLName %>">
-      
-     
-      
-      <div class="row row-cols-3 g-2"> 
-        <% tempo.forEach(function(t, index){ %>
-          <div class="col text-center">
-            <!-- Radio button -->
-            <input class="btn-check" type="radio" name="time" id="time-<%= index %>" value="<%= t %>" autocomplete="off">
-            
-            <!-- Label styled as button -->
-            <label class="btn btn-success btn-sm w-100 time-btn" 
-                   style="font-size: 0.8rem;" 
-                   for="time-<%= index %>">
-              <%= t %>
-            </label>
+          <div class="time-grid-container">
+            <div class="time-grid">
+              <% tempo.forEach(function(t, index){ %>
+                <div>
+                  <input class="btn-check" type="radio" name="time" id="time-<%= index %>" value="<%= t %>" autocomplete="off">
+                  <label class="btn btn-success btn-sm w-100 time-btn" for="time-<%= index %>"><%= t %></label>
+                </div>
+              <% }) %>
+            </div>
           </div>
-        <% }) %>
+
+          <div class="action-buttons">
+            <button type="submit" class="btn btn-success px-4 py-2">Book Time</button>
+            <button type="button" id="resetTime" class="btn btn-outline-danger px-4 py-2">Reset</button>
+          </div>
+        </form>
+        <% } else if(message) { %>
+          <p class="text-danger mt-3"><%= message %></p>
+        <% } %>
       </div>
 
-      <div class="text-center mt-3 d-flex justify-content-center gap-3">
-        <!-- Submit button -->
-        <button type="submit" class="btn btn-success px-4 py-2">Book Time</button>
-        <!-- Reset button -->
-        <button type="button" id="resetTime" class="btn btn-outline-danger px-4 py-2">Reset</button>
-      </div>
-    </form>
-  <% } %>
-</div>
+      <script>
+        document.getElementById("resetTime").addEventListener("click", function() {
+          document.querySelectorAll("#timeForm input[type='radio']").forEach(radio => radio.checked = false);
+        });
+      </script>
 
-
-<script>
-  document.getElementById("resetTime").addEventListener("click", function() {
-    // Uncheck all radio buttons
-    document.querySelectorAll("#timeForm input[type='radio']").forEach(radio => {
-      radio.checked = false;
-    });
-  });
-</script>
-
-
-
-
-
-   
-
-<input type="hidden" id="userID" value="<%= id %>">
-
-  
-  <form id="dateForm" method="GET" action="/change-date">
-    <input type="hidden" name="userID" value="<%= id %>" />
-    <input type="date" name="date" id="dateInput" value="dateInput" onchange="document.getElementById('dateForm').submit()" />
-  </form>
-<div class="availableTime"> </div>
-
-</div>
-
-
-
-
-
-
-
-
+      <input type="hidden" id="userID" value="<%= id %>">
+      <div class="availableTime"></div>
+    </div>
+  </div>
 </body>
 </html>

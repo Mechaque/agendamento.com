@@ -101,9 +101,11 @@ router.post('/claimForm', upload.single('document'), (req, res) => {
       documents,
       clinicID,
       submittedAt,
-      phoneNumber
+      phoneNumber,
+      status
+
     )
-    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
   `;
 
   const values = [
@@ -116,7 +118,8 @@ router.post('/claimForm', upload.single('document'), (req, res) => {
     documentPath,
     clinicID,
     submittedAt,
-    phoneNumber
+    phoneNumber,
+    "Pending"
   ];
 
   connection.query(sql, values, (err, result) => {
@@ -133,7 +136,6 @@ router.post('/claimForm', upload.single('document'), (req, res) => {
 //-------------------------------------------edit claim------------------------------------------------
 router.get('/editClaim/:claimID', (req, res) => {
   const claimId = req.params.claimID;
-
   const sql = 'SELECT * FROM Claims WHERE claimID = ?';
 
   connection.query(sql, [claimId], (err, results) => {
@@ -146,12 +148,12 @@ router.get('/editClaim/:claimID', (req, res) => {
       return res.status(404).send('Claim not found');
     }
 
-    const claim = results[0]; // get the single result
+    const claim = results[0];
+    console.log("Loaded claim:", claim); // 👈 add this line
 
-    res.render('insuranceClaimUpdate', { claim }); // render your EJS template with claim data
+    res.render('insuranceClaimUpdate', { claim });
   });
 });
-
 
 //------------------------------------------Update claim --------------------------------------
 router.post('/updateClaim', upload.single('document'), (req, res) => {

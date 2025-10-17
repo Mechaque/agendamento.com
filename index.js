@@ -278,71 +278,121 @@ app.get("/appointmentBooking",ensureAuthenticated,  async (req, res) => {
 
  
 //================================================Add Appointment============================================================
-app.post("/makeAppointment",ensureAuthenticated,  (req, res) => {
-  
-    const authenticatedUser = req.user.phoneNumber;
-    const { numeroDaClinica, fname, email, phoneNumber, appointmentDate, appointmentTime, reasonForVisit } = req.body;
+app.post("/makeAppointment", ensureAuthenticated, (req, res) => {
+  const authenticatedUser = req.user.phoneNumber;
+  const {
+    numeroDaClinica,
+    fname,
+    email,
+    phoneNumber,
+    appointmentDate,
+    appointmentTime,
+    reasonForVisit
+  } = req.body;
 
-    // Step 1: Try to find patientID
-    connection.query(
-      "SELECT patientID FROM patient WHERE phoneNumber = ?",
-      [authenticatedUser],
-      (error, results) => {
-        if (error) {
-          console.log(error);
-          return res.send("Error looking up patient");
-        }
+  // ✅ Ensure numeroDaClinica is defined
+  const clinicPrefix = numeroDaClinica && numeroDaClinica.trim() !== "" ? numeroDaClinica.trim() : "CLIN";
 
-        // If no patient found → use string "New Patient"
-        const selectedUser = results.length > 0 ? results[0].patientID : "New Patient";
-
-        // Step 2: Find last appointment for this clinic
-        connection.query(
-          "SELECT appointmentID FROM appointment WHERE appointmentID LIKE ? ORDER BY appointmentID DESC LIMIT 1",
-          ["%" + numeroDaClinica + "%"],
-          (error2, result) => {
-            if (error2) {
-              console.log(error2);
-              return res.send("Error looking up appointments");
-            }
-
-            let lastID;
-            if (result.length > 0) {
-              const lastUser = result[0].appointmentID;
-              const model1 = lastUser.slice(0, 9);
-              const str = parseInt(lastUser.substring(9), 10) + 1;
-              lastID = model1 + str;
-            } else {
-              // first appointment for this clinic
-              lastID = numeroDaClinica + "000000001";
-            }
-
-            console.log("Generated AppointmentID:", lastID);
-
-            // Step 3: Insert new appointment
-            const sql = `
-              INSERT INTO appointment 
-              (appointmentID, fname, appointmentDate, appointmentTime, reasonForVisit, phoneNumber, patientID, clinicID) 
-              VALUES (?, ?, ?, ?, ?, ?, ?, ?)
-            `;
-
-            connection.query(
-              sql,
-              [lastID, fname, appointmentDate, appointmentTime, reasonForVisit, phoneNumber, selectedUser, numeroDaClinica],
-              (insertErr) => {
-                if (insertErr) {
-                  console.log(insertErr);
-                  return res.send("Failed to save appointment");
-                }
-
-                console.log("Appointment inserted successfully with patientID:", selectedUser);
-                return res.redirect("/appointmentHistory");
-              }
-            );
-          }
-        );
+  // Step 1: Check if patient exists
+  connection.query(
+    "SELECT patientID FROM patient WHERE phoneNumber = ?",
+    [authenticatedUser],
+    (error, results) => {
+      if (error) {
+        console.error("Error looking up patient:", error);
+        return res.send("Error looking up patient");
       }
-    );
+
+      const patientID = results.length > 0 ? results[0].patientID : "New Patient";
+
+      // ✅ Step 2: Find last appointment ID for this clinic (safe numeric sort)
+      const lookupQuery = `
+        SELECT appointmentID 
+        FROM appointment 
+        WHERE appointmentID LIKE ? 
+        ORDER BY CAST(SUBSTRING(appointmentID, LENGTH(?) + 1) AS UNSIGNED) DESC 
+        LIMIT 1
+      `;
+
+      connection.query(
+        lookupQuery,
+        [clinicPrefix + "%", clinicPrefix],
+        (err2, result) => {
+          if (err2) {
+            console.error("Error looking up last appointment:", err2);
+            return res.send("Error looking up appointments");
+          }
+
+          let appointmentID;
+
+          if (result.length > 0) {
+            const lastAppointmentID = result[0].appointmentID;
+            const prefix = clinicPrefix;
+            const numericPart = lastAppointmentID.replace(prefix, "").trim();
+            const lastNumber = Number.isInteger(parseInt(numericPart, 10))
+              ? parseInt(numericPart, 10)
+              : 0;
+            const nextNumber = lastNumber + 1;
+            const paddedNumber = String(nextNumber).padStart(9, "0");
+            appointmentID = prefix + paddedNumber;
+          } else {
+            appointmentID = clinicPrefix + "000000001";
+          }
+
+          console.log(`✅ Generated AppointmentID: ${appointmentID} for patientID: ${patientID}`);
+
+          // ✅ Step 3: Insert appointment with default status 'Pending'
+          const sql = `
+            INSERT INTO appointment (
+              appointmentID,
+              fname,
+              lname,
+              appointmentDate,
+              appointmentTime,
+              reasonForVisit,
+              appointment_status,
+              phoneNumber,
+              patientID,
+              userID,
+              prefDocName,
+              prefDocID,
+              clinicID,
+              email
+            ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+          `;
+
+          connection.query(
+            sql,
+            [
+              appointmentID,
+              fname,
+              "",
+              appointmentDate,
+              appointmentTime,
+              reasonForVisit,
+              "Pending",
+              phoneNumber,
+              patientID,
+              "",
+              "",
+              "",
+              clinicPrefix,
+              email
+            ],
+            (insertErr) => {
+              if (insertErr) {
+                console.error("Error inserting appointment:", insertErr);
+                return res.send("Failed to save appointment");
+              }
+
+              console.log("✅ Appointment inserted successfully with status 'Pending'.");
+              return res.redirect("/appointmentHistory");
+            }
+          );
+        }
+      );
+    }
+  );
 });
 
 //==================================================== Route to login page============================================================================
@@ -538,12 +588,14 @@ app.get("/appointmentHistory",ensureAuthenticated, async (req, res) =>{
         await connection.query('SELECT * FROM appointment where phoneNumber = ?', [authenticatedUser] ,function(error, result){
             
             if (error) console.log(error);
-        // console.log(result);
+        console.log(result);
         res.render('appointmentHistory.ejs', {appointment: result});
     });
+     console.log(result);
     } catch (err) {
         console.log(err);
     }
+    
     });
 //============================================lab test request =====================================
 app.get('/labTestRequest', ensureAuthenticated, (req, res) => {
@@ -919,15 +971,23 @@ app.get('/insuranceClaimUpdate', (req, res)=>{
 })
 //==========================add appointment without favorite dr. -------------------------
 app.post('/addAppointment', (req, res) => {
-  const {numeroDaClinica,fname,email,phoneNumber,clinicName,appointmentDate,appointmentTime,reasonForVisit} = req.body;
+  const {
+
+    numeroDaClinica,
+    fname,
+    email,
+    phoneNumber,
+    clinicName,
+    appointmentDate,
+    appointmentTime,
+    reasonForVisit
+  } = req.body;
 
   const authenticatedUser = req.user ? req.user.phoneNumber : null;
 
   if (!authenticatedUser) {
     return res.status(401).json({ message: "User is not authenticated" });
   }
-
-  console.log(numeroDaClinica, fname, phoneNumber, appointmentDate, appointmentTime, reasonForVisit);
 
   // Step 1: Try to find patientID
   connection.query(
@@ -941,49 +1001,85 @@ app.post('/addAppointment', (req, res) => {
 
       const selectedUser = results.length > 0 ? results[0].patientID : "New Patient";
 
-      // Step 2: Find last appointment for this clinic to generate unique appointmentID
+      // Step 2: Find last appointmentID for this clinic
+      connection.query(
+        'SELECT appointmentID FROM appointment WHERE appointmentID LIKE ? ORDER BY appointmentID DESC LIMIT 1',
+        [`${numeroDaClinica}%`],
+        (err, results) => {
+          if (err) {
+            console.error(err);
+            return res.status(500).json({ message: "Error looking up appointments", error: err });
+          }
 
- try {
-       connection.query('SELECT * FROM  appointment where appointmentID like ?',[`${numeroDaClinica}%`], function  (err, results) {
-            if(err) {
-            console.log(err);
-            }
-            if (results.length > 0){
-                console.log("Select", results)
-                let lastUser = results[results.length - 1];
-                console.log("lastUser is", lastUser);
-               let userId2 = lastUser.appointmentID;
-                console.log("The last appointment ID is", userId2);
-                let model1 = userId2.slice(0, 9);
-                 console.log("The last model1 user is", model1);
-                str = userId2.substring(9, userId2.length );
-                let str1 = parseInt(str,10);
-                str1 ++;
-                let lastID = model1 + str1;   
-                            
-                console.log(str1);
-                console.log("The last ID is ", lastID);
-        console.log(lastID, fname, phoneNumber, appointmentDate, appointmentTime, reasonForVisit); 
+          let lastID;
 
-            var sql = "INSERT INTO appointment (appointmentID,fname,patientID,appointmentDate, appointmentTime,reasonForVisit, phoneNumber) \
-            VALUES ('"+lastID+"','"+ req.body.fname+"', '"+ req.body.patientID+"','"+ req.body.appointmentDate+"','"+ req.body.appointmentTime+"', '"+ req.body.reasonForVisit+"','"+ req.body.phoneNumber+"')";
-             connection.query(sql, function (err, rows, fields){
-            if (err) console.log(err)
-           // req.flash('user',successfullReg);
-           res.redirect('/appointmentHistory');
-            });
-            
-            }
-            
-            });
-            } catch (err) {
-                console.log(err);
-            }
+          if (results.length > 0) {
+            const lastAppointmentID = results[0].appointmentID;
+            const prefix = lastAppointmentID.slice(0, 9);
+            const number = parseInt(lastAppointmentID.slice(9)) + 1;
+            const padded = String(number).padStart(9, '0');
+            lastID = prefix + padded;
+          } else {
+            // No existing appointments for this clinic
+            lastID = numeroDaClinica + "000000001";
+          }
+
+          console.log("Final Appointment ID:", lastID);
+
+          // Step 3: Insert new appointment using selectedUser (patientID)
+          const sql = `
+  INSERT INTO appointment (
+    appointmentID,
+    fname,
+    lname,
+    appointmentDate,
+    appointmentTime,
+    reasonForVisit,
+    appointment_status,
+    phoneNumber,
+    patientID,
+    userID,
+    prefDocName,
+    prefDocID,
+    clinicID,
+    email
+  ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+`;
+
+connection.query(
+  sql,
+  [
+    lastID,
+    fname,
+    "",
+    appointmentDate,
+    appointmentTime,
+    reasonForVisit,
+    "Pending", // ✅ now goes into appointment_status
+    phoneNumber,
+    selectedUser,
+    "",
+    "",
+    "",
+    numeroDaClinica,
+    email
+  ],
+  (insertErr) => {
+    if (insertErr) {
+      console.error("Error inserting appointment:", insertErr);
+      return res.send("Failed to save appointment");
+    }
+
+    console.log("✅ Appointment inserted successfully with status 'Pending'.");
+    return res.redirect("/appointmentHistory");
+  }
+);
+
         }
       );
     }
   );
-
+});
 
 
 
