@@ -170,45 +170,53 @@ app.get('/viewCliList',ensureAuthenticated,  async(req,res) => {
 });
 
 //===================================Doctors of the selected doctors==========================================
-app.get('/doctorsProfile',ensureAuthenticated,  async (req, res) => {
-  
-    var id = req.query.doctoreID;
+app.get('/doctorsProfile', ensureAuthenticated, (req, res) => {
+  var id = req.query.doctoreID;
 
-    const today = new Date();
-    const formattedDate = today.toISOString().substring(0, 10);
-    var date = formattedDate;
+  const today = new Date();
+  const formattedDate = today.toISOString().substring(0, 10);
 
-    const sql = "SELECT * FROM doctors WHERE doctoreID = ?";
+  const sql = "SELECT * FROM doctors WHERE doctoreID = ?";
+  connection.query(sql, [id], function (err, results) {
+    if (err) {
+      console.error('Error executing query:', err);
+      return res.sendStatus(500);
+    }
 
-    connection.query(sql, [id], function (err, results) {
+    if (results.length === 0) {
+      return res.send("No doctor found with that ID.");
+    }
+
+    var docFName = results[0].fname;
+    var docLName = results[0].lname;
+    var speciality = results[0].speciality;
+    var email = results[0].email;
+    var doctoreID = results[0].doctoreID;
+
+    // Default date for first render
+    var selectedDate = formattedDate;
+
+    // ✅ Fetch available times for the default date
+    const sqlTimes = "SELECT time FROM availableDays WHERE date = ? AND doctoreID = ?";
+    connection.query(sqlTimes, [selectedDate, doctoreID], (err, result) => {
       if (err) {
-        console.error('Error executing query:', err);
-        return;
+        console.error(err);
+        return res.sendStatus(500);
       }
 
-      if (results.length === 0) {
-        return res.send("No doctor found with that ID.");
-      }
-
-      var docFName = results[0].fname;
-      var docLName = results[0].lname;
-      var speciality = results[0].speciality;
-      var email = results[0].email;
-      var doctoreID = results[0].doctoreID; // ✅ doctorID from DB
-
-      console.log('Doctor:', results[0]);
+      const tempo = result.length > 0 ? result.map(r => r.time) : [];
 
       res.render('doctorsProfile.ejs', {
-        appointment: results,
         docFName,
         docLName,
         speciality,
         email,
-        date,
-        doctoreID // ✅ send to EJS
+        doctoreID,
+        date: selectedDate,
+        tempo
       });
     });
-
+  });
 });
 
 //=============================view doctors list from selected clinic===========================================
@@ -768,77 +776,54 @@ app.get("/registration", (req, res) => {
     success: req.flash("success"),
   });
 });
+app.get('/change-date', ensureAuthenticated, (req, res) => {
+  const { date, userID, doctoID } = req.query;
 
-app.get('/change-date',ensureAuthenticated,  (req, res) => {
+  const selectedDate = date || new Date().toISOString().split('T')[0];
+  const id = userID;
+  const doctorID = doctoID;
 
-    const { date, userID, doctoID } = req.query;
-    const selectedDate = date || new Date().toISOString().split('T')[0];
-    const id = userID;
-    const doctorID = doctoID; // from query
-    console.log("DoctorID:", doctorID);
+  connection.query("SELECT * FROM doctors WHERE doctoreID = ?", [id], (error, results) => {
+    if (error) return console.log(error);
 
-    var data = selectedDate.toString();
+    if (results.length === 0) return res.send("Doctor not found");
 
-    try {
-      connection.query("SELECT * FROM doctors WHERE doctoreID = ?", [id], (error, results) => {
-        if (error) {
-          console.log(error);
-          return;
-        }
+    const doctor = results[0];
+    const { clinics: clinicID, fname: docFName, lname: docLName, speciality, email } = doctor;
 
-        if (results.length > 0) {
-          var clinicID = results[0].clinics;
-          var docFName = results[0].fname;
-          var docLName = results[0].lname;
-          var speciality = results[0].speciality;
-          var email = results[0].email;
-
-          // ✅ Updated SQL with date + doctoreID
-          const sql = "SELECT time FROM availableDays WHERE date = ? AND doctoreID = ?";
-
-          connection.query(sql, [data, doctorID], function (err, result) {
-            if (err) {
-              console.log(err);
-              return;
-            }
-
-            if (result.length === 0) {
-              var tempo = [];
-              res.render("doctorAvaiability.ejs", {
-                tempo,
-                clinicID,
-                docFName,
-                speciality,
-                docLName,
-                email,
-                id,
-                data,
-                message: "No Time available",
-                doctorID
-              });
-            } else {
-              var tempo = result.map(r => r.time); // extract only the time field
-              res.render("doctorAvaiability.ejs", {
-                tempo,
-                clinicID,
-                docFName,
-                speciality,
-                docLName,
-                email,
-                id,
-                data,
-                message: null,
-                doctorID
-              });
-            }
-          });
-        } else {
-          res.send("Doctor not found");
-        }
-      });
-    } catch (err) {
-      console.log(err);
+    // Prepare available days (next 7 days)
+    const daysOfWeek = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+    const availableDays = [];
+    for (let i = 0; i < 7; i++) {
+      const d = new Date();
+      d.setDate(d.getDate() + i);
+      const formatted = d.toISOString().split('T')[0];
+      const dayName = daysOfWeek[d.getDay()];
+      availableDays.push({ date: formatted, dayName });
     }
+
+    // Get available times for the selected date
+    const sql = "SELECT time FROM availableDays WHERE date = ? AND doctoreID = ?";
+    connection.query(sql, [selectedDate, doctorID], (err, result) => {
+      if (err) return console.log(err);
+
+      const tempo = result && result.length > 0 ? result.map(r => r.time) : [];
+
+      res.render("doctorAvaiability.ejs", {
+        tempo,
+        clinicID,
+        docFName,
+        docLName,
+        speciality,
+        email,
+        id,
+        data: selectedDate,
+        message: tempo.length === 0 ? "No times available for this date." : null,
+        doctorID,
+        availableDays
+      });
+    });
+  });
 });
 //====================================appointment booking  Router==============================================================
  

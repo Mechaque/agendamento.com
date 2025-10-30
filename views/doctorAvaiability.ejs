@@ -8,6 +8,11 @@
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
   <%- include("partials/template.ejs") %>
   <style>
+    body {
+      font-family: 'Inter', sans-serif;
+      background: #f8f9fa;
+    }
+
     .container {
       position: relative;
       left: -213px;
@@ -35,7 +40,6 @@
       background: #ffffff;
       border-radius: 12px;
       box-shadow: 0 4px 12px rgba(0,0,0,0.08);
-      font-family: 'Segoe UI', Arial, sans-serif;
       color: #2c3e50;
     }
 
@@ -68,7 +72,7 @@
       position: absolute;
       top: 20px;
       left: 550px;
-      max-width: 400px;
+      max-width: 450px;
       width: 100%;
       margin: 30px auto;
       background: #fff;
@@ -86,12 +90,15 @@
       margin-bottom: 20px;
     }
 
-    #dateInput {
-      margin: 0 auto 20px auto;
-      width: 60%;
-      padding: 8px 12px;
-      border: none;
-      font-size: 1rem;
+    /* Day Selection Dropdown */
+    #daySelect {
+      margin-bottom: 25px;
+      font-weight: 600;
+      text-align: center;
+      border-radius: 8px;
+      border: 1px solid #ced4da;
+      padding: 6px 10px;
+      cursor: pointer;
     }
 
     .time-grid-container {
@@ -103,7 +110,7 @@
 
     .time-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(90px, 1fr));
       gap: 10px;
     }
 
@@ -118,10 +125,19 @@
       transform: scale(1.05);
     }
 
+    .time-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    }
+
     .action-buttons {
       display: flex;
       justify-content: center;
       gap: 15px;
+    }
+
+    #resetTime:hover {
+      transform: translateY(-1px);
     }
   </style>
 </head>
@@ -138,53 +154,60 @@
       </div>
 
       <div id="bookings">
-        <i class="fa-solid fa-suitcase-medical mb-2" style="color:#e63946; font-size:26px;"></i>
-        <h5>Available Days and Time</h5>
+  <i class="fa-solid fa-suitcase-medical mb-2" style="color:#e63946; font-size:26px;"></i>
+  <h5>Available Days & Times</h5>
 
-        <!-- Date Selection -->
-        <form id="dateForm" method="GET" action="/change-date" class="mb-3">
-          <input type="hidden" name="userID" value="<%= id %>" />
-          <input type="date" name="date" id="dateInput" value="<%= data %>" onchange="this.form.submit()" readonly class="form-control">
-        </form>
+  <!-- Select Day -->
+  <form id="dateForm" method="GET" action="/change-date" class="mb-3">
+    <input type="hidden" name="userID" value="<%= id %>" />
+    <input type="hidden" name="doctoID" value="<%= doctorID %>" />
+    
+    <select name="date" class="form-select" onchange="this.form.submit()">
+      <% availableDays.forEach(day => { %>
+        <option value="<%= day.date %>" <%= day.date === data ? "selected" : "" %>>
+          <%= day.dayName %> - <%= day.date %>
+        </option>
+      <% }) %>
+    </select>
+  </form>
 
-        <!-- Available Times -->
-        <% if (!message && tempo && tempo.length > 0) { %>
-        <form id="timeForm" action="/book-time" method="POST">
-          <input type="hidden" name="doctorID" value="<%= id %>">
-          <input type="hidden" name="clinicID" value="<%= clinicID %>">
-          <input type="hidden" name="date" value="<%= data %>">
-          <input type="hidden" name="docFName" value="<%= docFName %>">
-          <input type="hidden" name="docLName" value="<%= docLName %>">
+  <!-- Available Times -->
+  <% if (tempo && tempo.length > 0) { %>
+    <form id="timeForm" action="/book-time" method="POST">
+      <input type="hidden" name="doctorID" value="<%= id %>">
+      <input type="hidden" name="clinicID" value="<%= clinicID %>">
+      <input type="hidden" name="date" value="<%= data %>">
+      <input type="hidden" name="docFName" value="<%= docFName %>">
+      <input type="hidden" name="docLName" value="<%= docLName %>">
 
-          <div class="time-grid-container">
-            <div class="time-grid">
-              <% tempo.forEach(function(t, index){ %>
-                <div>
-                  <input class="btn-check" type="radio" name="time" id="time-<%= index %>" value="<%= t %>" autocomplete="off">
-                  <label class="btn btn-success btn-sm w-100 time-btn" for="time-<%= index %>"><%= t %></label>
-                </div>
-              <% }) %>
+      <div class="time-grid-container">
+        <div class="time-grid">
+          <% tempo.forEach((t, index) => { %>
+            <div>
+              <input class="btn-check" type="radio" name="time" id="time-<%= index %>" value="<%= t %>" autocomplete="off">
+              <label class="btn btn-success btn-sm w-100 time-btn" for="time-<%= index %>"><%= t %></label>
             </div>
-          </div>
-
-          <div class="action-buttons">
-            <button type="submit" class="btn btn-success px-4 py-2">Book Time</button>
-            <button type="button" id="resetTime" class="btn btn-outline-danger px-4 py-2">Reset</button>
-          </div>
-        </form>
-        <% } else if(message) { %>
-          <p class="text-danger mt-3"><%= message %></p>
-        <% } %>
+          <% }) %>
+        </div>
       </div>
 
-      <script>
-        document.getElementById("resetTime").addEventListener("click", function() {
-          document.querySelectorAll("#timeForm input[type='radio']").forEach(radio => radio.checked = false);
-        });
-      </script>
+      <div class="action-buttons">
+        <button type="submit" class="btn btn-success px-4 py-2">Book Time</button>
+        <button type="button" id="resetTime" class="btn btn-outline-danger px-4 py-2">Reset</button>
+      </div>
+    </form>
+  <% } else if(message) { %>
+    <p class="text-danger mt-3"><%= message %></p>
+  <% } %>
+</div>
+
+<script>
+  document.getElementById("resetTime")?.addEventListener("click", function() {
+    document.querySelectorAll("#timeForm input[type='radio']").forEach(radio => radio.checked = false);
+  });
+</script>
 
       <input type="hidden" id="userID" value="<%= id %>">
-      <div class="availableTime"></div>
     </div>
   </div>
 </body>

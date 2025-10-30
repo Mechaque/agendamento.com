@@ -148,33 +148,63 @@
       <input type="hidden" name="doctoreID" value="<%= doctoreID %>" />
     </div>
 
-    <!-- ✅ Updated Bookings Card -->
-    <div id="bookings">
-      <div class="card">
-        <i class="fa-solid fa-suitcase-medical"></i>
-        <h5>Book an Appointment</h5>
+<!-- ✅ Bookings Card with Day Selector -->
+<div id="bookings">
+  <div class="card text-center">
+    <i class="fa-solid fa-suitcase-medical fa-2x mb-2" style="color:#e63946;"></i>
+    <h5 class="mb-3">Select a Day to View Availability</h5>
 
-        <form id="dateForm" method="GET" action="/change-date">
-          <input type="hidden" name="userID" value="<%= doctoreID %>" />
-          <input type="hidden" name="doctoID" value="<%= doctoreID %>" />
+    <form id="dateForm" method="GET" action="/change-date">
+      <input type="hidden" name="userID" value="<%= doctoreID %>" />
+      <input type="hidden" name="doctoID" value="<%= doctoreID %>" />
 
-          <label for="dateInput">Select Date</label>
-          <input
-            type="date"
-            name="date"
-            id="dateInput"
-            value="<%= date %>"
-            min="<%= new Date(Date.now() + 86400000).toISOString().split('T')[0] %>"
-            onchange="document.getElementById('dateForm').submit()"
-          />
+      <label for="dateSelect" class="form-label fw-semibold">Choose a Day:</label>
+      <select name="date" id="dateSelect" class="form-select mb-3" onchange="this.form.submit()">
+        <% 
+          const daysOfWeek = ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];
+          const today = new Date();
+          for (let i = 1; i <= 7; i++) { 
+            const futureDate = new Date();
+            futureDate.setDate(today.getDate() + i);
+            const dayName = daysOfWeek[futureDate.getDay()];
+            const dateValue = futureDate.toISOString().split('T')[0];
+        %>
+          <option value="<%= dateValue %>" <%= dateValue === date ? "selected" : "" %>>
+            <%= dayName %>, <%= futureDate.toLocaleDateString("en-US", { month: "short", day: "numeric" }) %>
+          </option>
+        <% } %>
+      </select>
 
-          <button id="avaiButton" type="submit">
-            <i class="fa-solid fa-calendar-check"></i> Check Availability
-          </button>
-        </form>
-      </div>
-    </div>
+      <button id="avaiButton" type="submit" class="btn btn-primary">
+        <i class="fa-solid fa-calendar-check"></i> Check Availability
+      </button>
+    </form>
   </div>
+</div>
+
+
+   <!-- Display available times with day -->
+<div class="available-times" style="margin-top: 15px;">
+  <% if (tempo && tempo.length > 0) { %>
+    <p>Available Times:</p>
+    <ul style="list-style: none; padding: 0;">
+      <% 
+        // Convert selected date to weekday
+        const daysOfWeek = ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];
+        const selectedDay = new Date(date).getDay(); // 0-6
+        const dayName = daysOfWeek[selectedDay];
+      %>
+      <% tempo.forEach(function(time) { %>
+        <li><strong><%= dayName %></strong> - <%= time %></li>
+      <% }) %>
+    </ul>
+  <% } else { %>
+    
+  <% } %>
+</div>
+
+  </div>
+</div>
 
 </body>
 </html>
