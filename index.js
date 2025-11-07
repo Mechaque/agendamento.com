@@ -1065,7 +1065,31 @@ connection.query(
     }
   );
 });
+//----------------------------------Clinic Details ----------------------------------------------
+app.get('/clinicDetails',ensureAuthenticated,  async(req,res) => {
+    
+    let sql = "select * from clinics where clinicID = ?;";
+                var id = req.query.clinicID;
+                var clinicName = req.query.clinicName;
+                console.log(id);
+            try {
+            let query = await connection.query(sql,[id], (err, result) => {
+            if(err) console.log(err);
+            var clname = result[0].clinicName;
+            var claddress = result[0].clinicAddress;
+            var provincia = result[0].province;
 
+           
+
+            
+        res.render('clinicPage.ejs', {appointment:result,clname,claddress,provincia});
+
+           console.log(id);
+
+});} catch (err) {
+    console.log(err);
+}
+});
 
 
 // confirming that the server is running  on port 3000

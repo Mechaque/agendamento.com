@@ -65,9 +65,9 @@
 <body>
 
 <div class="container">
-  <h2>Formulário de reclamação de seguro</h2>
+  <h2>Insurance claim form</h2>
   <form id="claimForm" action="/claimForm" method="POST" enctype="multipart/form-data">
-    <label for="name">Nome Completo</label>
+    <label for="name">Full name</label>
     <input type="text"  name="fname"  id="name" value="<%= fname %>" readonly>
 
   <div style="display: flex; gap: 20px;">
@@ -90,22 +90,22 @@
   
 </div>
 
-    <label for="claimType">Tipo de reclamação</label>
+    <label for="claimType">Type of Claim</label>
     <select id="typeOfPolice" name="typeOfPolice"required>
-      <option value="">Selecione um tipo</option>
+      <option value="">Select a type</option>
       <option>Dental</option>
-      <option>Optometrista</option>
-      <option>Consulta Normal</option>
-      <option>Medicamentos</option>
+      <option>Optician</option>
+      <option>Normal Booking</option>
+      <option>Medicines</option>
     </select>
 
-    <label for="description">Descrição da reivindicação</label>
+    <label for="description">Description of the claim</label>
     <textarea id="description" name="description" rows="5" ></textarea>
 
-    <label for="documents">Carregar documentos de suporte</label>
+    <label for="documents">Upload supporting documents</label>
     <input type="file" name="document"  multiple />
 
-    <button type="submit">Enviar reivindicação</button>
+    <button type="submit">Submit claim</button>
   </form>
   <a href="insurance">Back to home</a>
 

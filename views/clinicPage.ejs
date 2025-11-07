@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Doctors List</title>
+<%- include("partials/template.ejs") %>
+
+<!-- Font Awesome for icons -->
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" rel="stylesheet">
+
+<style>
+  body {
+    font-family: 'Segoe UI', Arial, sans-serif;
+    background-color: #e8f0f6; /* soft healthcare background */
+    margin: 0;
+  }
+
+  /* Page title */
+  .titulo {
+    position: absolute;
+    top: 5px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 28px;
+    font-weight: 700;
+    color: #1976d2; /* healthcare blue */
+    text-align: center;
+  }
+
+  /* Clinic address box */
+  .endereco {
+    position: absolute;
+    top: 80px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 380px;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 3px 8px rgba(0,0,0,0.1);
+    color: #2c3e50;
+  }
+
+  .endereco h4 {
+    font-size: 16px;
+    font-weight: 600;
+    color: #1976d2;
+    margin-bottom: 8px;
+  }
+
+  .endereco p {
+    font-size: 14px;
+    color: #555;
+    margin: 0 0 10px 0;
+  }
+
+  /* Weekly schedule */
+  .dias {
+    position: absolute;
+    top: 200px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-family: 'Courier New', monospace;
+    background: #f1f8ff;
+    border-left: 4px solid #1976d2;
+    padding: 15px;
+    border-radius: 8px;
+    width: 380px;
+    color: #2c3e50;
+    line-height: 1.6;
+  }
+
+  /* Buttons */
+  .listD, .botao {
+    display: inline-block;
+    width: 180px;
+    font-size: 16px;
+    font-weight: 600;
+    padding: 10px;
+    border-radius: 8px;
+    border: none;
+    cursor: pointer;
+    text-align: center;
+    transition: transform 0.2s, background-color 0.3s;
+    margin: 10px;
+  }
+
+  .listD {
+    background-color: #1976d2;
+    color: #fff;
+  }
+  .listD:hover { background-color: #135ba1; transform: translateY(-2px); }
+
+  .botao {
+    background-color: #4caf50;
+    color: #fff;
+  }
+  .botao:hover { background-color: #388e3c; transform: translateY(-2px); }
+
+  /* Info box */
+  .maisInfo {
+    position: absolute;
+    top: 400px;
+    left: 50%;
+    transform: translateX(-50%);
+    max-width: 600px;
+    background: #fff;
+    border-left: 5px solid #1976d2;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 3px 8px rgba(0,0,0,0.1);
+    color: #2c3e50;
+    font-size: 15px;
+    line-height: 1.6;
+  }
+
+  /* Icons in headings */
+  .fa-map-marker-alt { color: #1976d2; margin-right: 6px; }
+  .fa-clock { color: #4caf50; margin-right: 6px; }
+  .fa-user-doctor, .fa-calendar-check { margin-right: 6px; }
+
+</style>
+</head>
+<body>
+
+<h3 class="titulo"><i class="fa-solid fa-hospital"></i> Welcome to <%= clname %></h3>
+
+<div class="endereco">
+  <h4><i class="fa-solid fa-map-marker-alt"></i> Address:</h4>
+  <p><%= claddress %>, <%= provincia %></p>
+  <h4><i class="fa-solid fa-clock"></i> Opening Hours:</h4>
+</div>
+
+<pre class="dias"><b>
+Monday:     9 AM - 5 PM
+Tuesday:    9 AM - 5 PM
+Wednesday:  9 AM - 5 PM
+Thursday:   9 AM - 5 PM
+Friday:     9 AM - 5 PM
+Saturday:   9 AM - 3 PM
+Sunday:     Closed
+</b></pre>
+
+<div class="container" style="position:absolute; top: 480px; left: 50%; transform: translateX(-50%); text-align:center;">
+  <% appointment.forEach(function(app){ %>
+    <!-- <a href="viewDocList?clinicID=<%= app.clinicID %>">
+      <button class="listD"><i class="fa-solid fa-user-doctor"></i> View Doctors</button>
+    </a>
+    <a href="appointmentBooking?clinicID=<%= app.clinicID %>">
+      <button class="botao"><i class="fa-solid fa-calendar-check"></i> Bookings</button>
+    </a> -->
+  <% }); %>
+</div>
+
+<div class="maisInfo" style="top: 600px;">
+  Click above buttons to view the listing of doctors and their availability or click Bookings to schedule an appointment.
+</div>
+
+
+<!-- Font Awesome JS (optional) -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/js/all.min.js"></script>
+
+</body>
+</html>

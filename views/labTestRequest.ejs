@@ -147,25 +147,25 @@
   <div class="container">
     <form action="/labtestes" method="POST" id="form-user" class="account">
       <div class="account-header">
-        <h1 class="account-title">Adicione Testes</h1>
+        <h1 class="account-title">Add Tests</h1>
       </div>
 
       <fieldset>
-        <legend>Informações Pessoais</legend>
+        <legend>Personal Information</legend>
         <div class="input-group">
           <div class="input-container">
-            <label for="fname">Nome</label>
+            <label for="fname">Name</label>
             <input type="text" id="fname" name="fname" placeholder="Name" value="<%= fname %>">
           </div>
           <div class="input-container">
-            <label for="lname">Apelido</label>
+            <label for="lname">Last Name</label>
             <input type="text" id="lname" name="lname" placeholder="Last Name" required>
           </div>
         </div>
       </fieldset>
 
       <fieldset>
-        <legend>Detalhes da Consulta</legend>
+        <legend>Appointment Details</legend>
         <div class="input-group">
           <div class="input-container">
             <label for="appointmentID">Appointment ID</label>
@@ -185,9 +185,9 @@
       <fieldset>
        
         <div class="input-container">
-          <label for="lab">Laboratorio</label>
+          <label for="lab">Laboratory</label>
           <select name="labID" id="lab" required>
-            <option value="">--Selecione--</option>
+            <option value="">--Select--</option>
             <option value="primaLab">PrimaLab</option>
             <option value="HCMLab">LabHCM</option>
           </select>
@@ -197,7 +197,7 @@
       <fieldset>
         
         <div class="input-container">
-          <label for="testName">Nome De Testes</label>
+          <label for="testName">Test Name</label>
           <textarea id="testName" name="testName" placeholder="Nome De Testes" required></textarea>
         </div>
       </fieldset>
