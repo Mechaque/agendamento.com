@@ -1,6 +1,9 @@
+<%- include('partials/header') %>
+
 <style>
 body {
   background-color: #E8ECEF;
+  overflow: hidden;
 }
 
 .centered {
@@ -18,34 +21,45 @@ body {
 /* Responsive tweaks */
 @media (max-width: 768px) {
   .centered {
-    padding-top: 100px; /* less padding on smaller screens */
+    padding-top: 100px;
   }
   .centered h1 {
-    font-size: 1.75rem; /* scale down heading */
+    font-size: 1.75rem;
   }
   .centered p {
     font-size: 1rem;
   }
   .centered i {
-    font-size: 3rem; /* shrink the key icon */
+    font-size: 3rem;
   }
   .btn-lg {
-    width: 100%; 
-    margin: 8px 0; /* stack buttons */
+    width: 100%;
+    margin: 8px 0;
   }
+}
+
+.lang {
+  position: absolute;
+  top: 60px;
+  right: 20px;
 }
 </style>
 
-<%- include('partials/header') %>
+<div class="lang">
+  <a href="/switch-lang/en">English</a> |
+  <a href="/switch-lang/fr">Français</a> |
+  <a href="/switch-lang/pt">Português</a>
+</div>
 
 <div class="jumbotron centered">
   <div class="container">
     <i class="fas fa-key fa-6x"></i>
-    <h1 class="display-3">Mozambican #1 Hospitals & Clinics Network</h1>
-    <p class="lead">Don't keep your secrets, share them anonymously!</p>
+
+    <h1 class="display-3"><%= __('front.title') %></h1>
+    <p class="lead"><%= __('front.subtitle') %></p>
     <hr>
-    <a class="btn btn-light btn-lg" href="/admin" role="button">Admin</a>
-    <a class="btn btn-dark btn-lg" href="/login" role="button">Login</a>
+    <a class="btn btn-light btn-lg" href="/admin" role="button"><%= __('front.admin') %></a>
+    <a class="btn btn-dark btn-lg" href="/login" role="button"><%= __('front.login') %></a>
   </div>
 </div>
 

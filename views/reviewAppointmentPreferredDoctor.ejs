@@ -3,148 +3,120 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-   
+    <title><%= __("reviewAppointment.title") %></title>
+
     <%- include("partials/template.ejs") %>
+
     <style>
-.first-box{
-      position: relative;
-      left: -400px;
-      width: 800px;
-      margin: auto;
-      padding: 30px;
-      border-radius: 10px;
-      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-}
+      .first-box {
+        position: relative;
+        left: -400px;
+        width: 800px;
+        margin: auto;
+        padding: 30px;
+        border-radius: 10px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      }
 
- .form {
-      background: rgb(197, 225, 243);
-      padding: 30px;
-      border-radius: 10px;
-      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    }
- h2 {
-    
-    top: 15px;
-      text-align: center;
-      margin-bottom: 25px;
-    }
-    label {
-      display: block;
-      margin: 10px 0 5px;
-    }
-    input, select, textarea {
-      width: 100%;
-      padding: 10px;
-      margin-bottom: 15px;
-      border: 1px solid #ccc;
-      border-radius: 5px;
-    }
-    button {
-      background-color: #2e86de;
-      color: white;
-      padding: 12px;
-      border: none;
-      width: 100%;
-      border-radius: 5px;
-      font-size: 16px;
-      cursor: pointer;
-    }
-    button:hover {
-      background-color: #1e6ab7;
-    }
+      .form {
+        background: rgb(197, 225, 243);
+        padding: 30px;
+        border-radius: 10px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      }
 
+      h2 {
+        top: 15px;
+        text-align: center;
+        margin-bottom: 25px;
+      }
 
+      label {
+        display: block;
+        margin: 10px 0 5px;
+      }
+
+      input, select, textarea {
+        width: 100%;
+        padding: 10px;
+        margin-bottom: 15px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+      }
+
+      button {
+        background-color: #2e86de;
+        color: white;
+        padding: 12px;
+        border: none;
+        width: 100%;
+        border-radius: 5px;
+        font-size: 16px;
+        cursor: pointer;
+      }
+
+      button:hover {
+        background-color: #1e6ab7;
+      }
     </style>
 </head>
+
 <body>
-    <div class="first-box">
-        
-      <div class="container">
-  
-          
-    <form class="form"  action="/makeAppointment" id="form-user" method="post">
-       <input type="text" id="clinicID" name="numeroDaClinica" value="<%= clID %>" hidden>
-    <h2>Review Your Appointment</h2>
-      <label for="fullname">Full Name</label>
-      <input type="text" id="fullname" name="fname" value="<%= name %> <%= lname %>" readonly>
+  <div class="first-box">
+    <div class="container">
+      <form class="form" action="/makeAppointment" id="form-user" method="post">
+        <input type="hidden" id="clinicID" name="numeroDaClinica" value="<%= clID %>">
 
-      <label for="email">Email Address</label>
-      <input type="email" id="email" name="email" value="<%= email %>" readonly>
+        <h2><%= __("reviewAppointment.title") %></h2>
 
-      <label for="phone">Phone Number</label>
-      <input type="tel" id="phone" name="phoneNumber" value="<%= telephone %>" readonly>
+        <label for="fullname"><%= __("reviewAppointment.labels.full_name") %></label>
+        <input type="text" id="fullname" name="fname" value="<%= name %> <%= lname %>" readonly>
 
-        <label for="phone">Clinic Name</label>
-      <input type="tel" id="phone" name="clinicName" value="<%= clname %>" readonly>
+        <label for="email"><%= __("reviewAppointment.labels.email") %></label>
+        <input type="email" id="email" name="email" value="<%= email %>" readonly>
 
-      <label>Select Date</label>
-      <input type="date" id="phone" name="appointmentDate" value="<%= date %>" readonly>
+        <label for="phone"><%= __("reviewAppointment.labels.phone") %></label>
+        <input type="tel" id="phone" name="phoneNumber" value="<%= telephone %>" readonly>
 
-      <label for="time">Selected Time</label>
-      <input type="text" id="timeInput" name="appointmentTime" maxlength="5" value="<%= time %>"placeholder="HHMM" />
+        <label for="clinicName"><%= __("reviewAppointment.labels.clinic_name") %></label>
+        <input type="text" id="clinicName" name="clinicName" value="<%= clname %>" readonly>
 
-       <label for="time">Prefered Doctor</label>
-      <input type="text" id="timeInput" name="PreferedDoctor" value="<%= docFName %> <%= docLName %>"  readonly/>
+        <label for="appointmentDate"><%= __("reviewAppointment.labels.select_date") %></label>
+        <input type="date" id="appointmentDate" name="appointmentDate" value="<%= date %>" readonly>
 
-       
-       
+        <label for="timeInput"><%= __("reviewAppointment.labels.selected_time") %></label>
+        <input type="text" id="timeInput" name="appointmentTime" maxlength="5" value="<%= time %>" placeholder="HH:MM" />
 
-      <label for="doctor">Service Type</label>
-      <select id="doctor" name="doctor" required>
-        <option value="">-- Select --</option>
-        <option value="dr_smith">Consulta Normal</option>
-        <option value="dr_lee">Verificação de rotina</option>
-        <option value="dr_khan">Tratamento</option>
-        <option value="dr_khan">follow-up</option>
-      </select>
+        <label for="preferredDoctor"><%= __("reviewAppointment.labels.preferred_doctor") %></label>
+        <input type="text" id="preferredDoctor" name="PreferredDoctor" value="<%= docFName %> <%= docLName %>" readonly>
 
-      <label for="notes">Additional Notes</label>
-      <textarea id="notes" name="reasonForVisit" rows="4" placeholder="Reason for visit, symptoms, etc."></textarea>
+        <label for="doctor"><%= __("reviewAppointment.labels.service_type") %></label>
+        <select id="doctor" name="doctor" required>
+          <option value=""><%= __("reviewAppointment.service_options.select") %></option>
+          <option value="consultation"><%= __("reviewAppointment.service_options.consultation") %></option>
+          <option value="checkup"><%= __("reviewAppointment.service_options.checkup") %></option>
+          <option value="treatment"><%= __("reviewAppointment.service_options.treatment") %></option>
+          <option value="follow_up"><%= __("reviewAppointment.service_options.follow_up") %></option>
+        </select>
 
-      <button type="submit">Book Appointment</button>
-    </form>
-    <script>
-document.getElementById('timeInput').addEventListener('input', function(e) {
-  let value = e.target.value.replace(/\D/g, ''); // Remove non-digits
+        <label for="notes"><%= __("reviewAppointment.labels.additional_notes") %></label>
+        <textarea id="notes" name="reasonForVisit" rows="4" placeholder="<%= __("reviewAppointment.placeholders.reason") %>"></textarea>
 
-  // Limit to 4 digits
-  if (value.length > 4) value = value.slice(0, 4);
-
-  // Extract hours and minutes
-  let hours = value.slice(0, 2);
-  let minutes = value.slice(2, 4);
-
-  // Enforce valid hours (00-23)
-  if (hours.length === 2) {
-    let h = parseInt(hours, 10);
-    if (h > 23) hours = '23';
-  }
-
-  // Enforce valid minutes (00-59)
-  if (minutes.length === 2) {
-    let m = parseInt(minutes, 10);
-    if (m > 59) minutes = '59';
-  }
-
-  // Format with colon
-  let formatted = hours;
-  if (minutes.length > 0) {
-    formatted += ':' + minutes;
-  }
-
-  e.target.value = formatted;
-});
-</script>
-
-  </div>
- 
-     
+        <button type="submit"><%= __("reviewAppointment.button") %></button>
+      </form>
     </div>
+  </div>
 
-   
-
-
-    
+  <script>
+    document.getElementById('timeInput').addEventListener('input', function(e) {
+      let value = e.target.value.replace(/\D/g, '');
+      if (value.length > 4) value = value.slice(0, 4);
+      let hours = value.slice(0, 2);
+      let minutes = value.slice(2, 4);
+      if (hours.length === 2 && parseInt(hours, 10) > 23) hours = '23';
+      if (minutes.length === 2 && parseInt(minutes, 10) > 59) minutes = '59';
+      e.target.value = hours + (minutes ? ':' + minutes : '');
+    });
+  </script>
 </body>
 </html>

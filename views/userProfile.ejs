@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Edit Profile</title>
+  <title><%= __('editProfile.title') %></title>
   <%- include("partials/template.ejs") %>
   <style>
     :root {
@@ -15,29 +15,28 @@
     }
 
     body {
-  margin: 5;
-  font-family: Arial, sans-serif;
-  background: #f5f7fa;
-  display: flex;
-  justify-content: flex-start;  /* 👈 align left instead of center */
-  align-items: flex-start;
-  padding: 20px;
-  color: var(--text);
-}
+      margin: 5px;
+      font-family: Arial, sans-serif;
+      background: #f5f7fa;
+      display: flex;
+      justify-content: flex-start;
+      align-items: flex-start;
+      padding: 20px;
+      color: var(--text);
+    }
 
-.edit-profile-container {
-position:absolute;
-top: 2px;
-left: 370px;
-  background: var(--card-bg);
-  border-radius: var(--radius);
-  width: 100%;
-  max-width: 700px;
-  padding: 30px 25px;
-  box-shadow: 0 10px 25px rgba(0,0,0,0.08);
-  margin-left: 0;   /* ensure it hugs left */
-}
-
+    .edit-profile-container {
+      position:absolute;
+      top: 2px;
+      left: 370px;
+      background: var(--card-bg);
+      border-radius: var(--radius);
+      width: 100%;
+      max-width: 700px;
+      padding: 30px 25px;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+      margin-left: 0;
+    }
 
     h2 {
       margin-bottom: 20px;
@@ -66,7 +65,7 @@ left: 370px;
     .photo-upload label {
       position: absolute;
       bottom: 40px;
-      left: 300px;
+      left: 260px;
       background: var(--primary);
       color: #fff;
       padding: 8px;
@@ -137,7 +136,6 @@ left: 370px;
 
     .btn-cancel:hover { background-color: #bbb; }
 
-    /* ✅ Responsive adjustments */
     @media (max-width: 768px) {
       .edit-profile-container {
         padding: 20px 16px;
@@ -151,58 +149,55 @@ left: 370px;
     }
   </style>
 
-  <!-- Font Awesome for icons -->
   <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
 </head>
 <body>
   <div class="edit-profile-container">
-    <h2>Edit Profile</h2>
+    <h2><%= __('editProfile.header') %></h2>
 
     <div class="photo-upload">
-      <img src="https://via.placeholder.com/120" alt="Profile Photo" />
-      <label for="photo"><i class="fas fa-camera"></i></label>
+      <img src="https://via.placeholder.com/120" alt="<%= __('editProfile.photo.alt') %>" />
+      <label for="photo"><i class="fas fa-camera"></i> <%= __('editProfile.photo.label') %></label>
       <input type="file" id="photo" />
     </div>
-<!-- ... -->
 
-<form action="/updateProfile" method="POST">
-  <div class="form-group">
-  <label for="name">Full Name</label>
-  <input type="text" id="name" name="fname" value="<%= user.fname %>" />
+    <form action="/updateProfile" method="POST">
+      <div class="form-group">
+        <label for="name"><%= __('editProfile.fields.fullName') %></label>
+        <input type="text" id="name" name="fname" value="<%= user.fname %>" />
+      </div>
+
+      <div class="form-group">
+        <label for="lname"><%= __('editProfile.fields.lastName') %></label>
+        <input type="text" id="lname" name="lname" value="<%= user.lname %>" />
+      </div>
+
+      <div class="form-group">
+        <label for="email"><%= __('editProfile.fields.email') %></label>
+        <input type="email" id="email" name="username" value="<%= user.username %>" required />
+      </div>
+
+      <div class="form-group">
+        <label for="phone"><%= __('editProfile.fields.phone') %></label>
+        <input type="tel" id="phone" name="phoneNumber" value="<%= user.phoneNumber %>" />
+      </div>
+
+      <div class="form-group">
+        <label for="location"><%= __('editProfile.fields.patientID') %></label>
+        <input type="text" id="location" name="patientID" value="<%= user.patientID %>" />
+      </div>
+
+      <div class="form-group">
+        <label for="userID"><%= __('editProfile.fields.userID') %></label>
+        <input type="text" id="userID" name="userID" value="<%= user.userID %>" />
+      </div>
+
+      <div class="button-row">
+  <button type="submit" class="btn btn-save"><%= __('editProfile.buttons.save') %></button>
+  <button type="button" class="btn btn-cancel" onclick="history.back();"><%= __('editProfile.buttons.cancel') %></button>
 </div>
 
-<div class="form-group">
-  <label for="lname">Last Name</label>
-  <input type="text" id="lname" name="lname" value="<%= user.lname %>" />
-</div>
-
-
-  <div class="form-group">
-    <label for="email">Email Address</label>
-    <input type="email" id="email" name="username" value="<%= user.username %>"  required/>
-  </div>
-
-  <div class="form-group">
-    <label for="phone">Phone Number</label>
-    <input type="tel" id="phone" name="phoneNumber" value="<%= user.phoneNumber %>" />
-  </div>
-
-  <div class="form-group">
-    <label for="location">Patient ID</label>
-    <input type="text" id="location" name="patientID" value="<%= user.patientID %>" />
-  </div>
-
-  <div class="form-group">
-    <label for="bio">user ID</label>
-
-      <input type="text" id="userID" name="userID" value="<%= user.userID %>" />
-  </div>
-
-  <div class="button-row">
-    <button type="submit" class="btn btn-save">Save Changes</button>
-    <button type="reset" class="btn btn-cancel">Cancel</button>
-  </div>
-</form>
+    </form>
   </div>
 </body>
 </html>

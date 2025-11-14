@@ -6,39 +6,98 @@ var session = require('express-session');
 var csrf = require('csurf');
 const multer = require('multer');
 const bodyParser = require("body-parser");
-const { fileURLToPath }= require("url") ;
+const { fileURLToPath } = require("url");
 const mysql = require("mysql");
 const passport = require("passport");
 const { request } = require("http");
 const pkg = require('passport-local');
-const {Strategy, strategy} = pkg;
+const { Strategy, strategy } = pkg;
+const flash = require("connect-flash");
+const i18n = require("i18n");  // ✅ i18n require
+
 const app = express();
 
+const claimsRouter = require('./routes/claims/claims.js');
+app.use('/', claimsRouter);
 
+// ===================== I18N CONFIGURATION =====================
+i18n.configure({
+    locales: ['en', 'fr', 'pt'],                  // Supported languages
+    directory: path.join(__dirname, 'locales'),  // Translation files folder
+    defaultLocale: 'en',                          // Default language
+    cookie: 'lang',                               // Cookie name for language
+    queryParameter: 'lang',                       // Optional: ?lang=fr
+    autoReload: true,
+    updateFiles: false,
+    objectNotation: true
+});
 
-var authRouter = require('./routes/auth/auth');
-
-//===========================================passport config ================
-// const flash = require('express-flash');
-const flash = require("connect-flash");
-
-
-
-
-// session
-
-app.use(session ({
-secret:'SecretStringForCookies',
-resave:false,
-saveUninitialized:false,
-cookie: {
-//maxAge: 24 * 60 * 60 * 1000
-}
+// ================== SESSION & AUTH ==================
+app.use(cookieParser());
+app.use(session({
+  secret: 'SecretStringForCookies',
+  resave: false,
+  saveUninitialized: false,
+  cookie: {}
 }));
+
 app.use(flash());
-app.use(passport.initialize())
+app.use(passport.initialize());
 app.use(passport.session());
-// Prevent browser caching globally
+
+// ================== I18N MIDDLEWARE ==================
+// Initialize i18n
+app.use(i18n.init);
+
+// ✅ Make translation helper `t()` available in all EJS views
+// Make __ available in all EJS templates
+app.use((req, res, next) => {
+  res.locals.__ = res.__;
+  next();
+});
+
+
+// ================== LANGUAGE SWITCH ROUTE ==================
+app.get('/switch-lang/:lang', (req, res) => {
+    const lang = req.params.lang;
+
+    // Store chosen language in cookie
+    res.cookie('lang', lang, { maxAge: 30*24*60*60*1000, httpOnly: false, sameSite: 'Lax' });
+
+    // Set language for current request
+    res.setLocale(lang);
+
+    // Redirect back to previous page
+    const backURL = req.get('Referer') || '/';
+    res.redirect(backURL);
+});
+
+// ================== DATABASE ==================
+var connection = mysql.createConnection({
+  port: '3306',
+  host: 'lyl3nln24eqcxxot.cbetxkdyhwsb.us-east-1.rds.amazonaws.com',
+  user: 'xg5zu6ft9vcegj1i',
+  password: 'u7ulq2hmz6797r5n',
+  database: 'rkycf99cdfosu3q0',
+  timeout: 10000
+});
+
+// ================== APP SETTINGS ===================
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(express.json());
+app.use(express.urlencoded({ extended: false }));
+app.use(express.static("public"));
+app.use('/uploads', express.static('uploads'));
+app.set("view engine", "ejs");
+
+// Flash messages globally
+app.use((req, res, next) => {
+  res.locals.success_msg = req.flash("success_msg");
+  res.locals.error_msg = req.flash("error_msg");
+  next();
+});
+
+// Prevent browser caching
 app.use((req, res, next) => {
   res.setHeader("Cache-Control", "no-store, no-cache, must-revalidate, proxy-revalidate");
   res.setHeader("Pragma", "no-cache");
@@ -47,74 +106,21 @@ app.use((req, res, next) => {
   next();
 });
 
-//const __dirname =dirname(fileURLToPath(import.meta.url));
-
-const { check, validationResult } = require('express-validator');
-const bcrypt = require('bcrypt');
-var connection = mysql.createConnection({
-port:'3306',
-host: 'lyl3nln24eqcxxot.cbetxkdyhwsb.us-east-1.rds.amazonaws.com',
-user: 'xg5zu6ft9vcegj1i',
-password: 'u7ulq2hmz6797r5n',
-database:'rkycf99cdfosu3q0',
-timeout: 10000 // 10 seconds
-
-});
-
-//-----------------------claim Insurance---------------------------
-
-
-
-
-// >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-
-app.use(bodyParser.urlencoded({extended:true}));
-app.set("view engine" , "ejs");
-app.use(express.static("public"));
-app.timeout = 300000;
-app.use('/uploads', express.static('uploads'));
-
-
-
-// For parsing form data
-app.use(express.json());
-
-const publicDirectory = path.join(__dirname, './public');
-// parse URL-encoded bodies . (as sent by HTML forms)
-app.use(express.urlencoded({extended:false}));
-//app.use(express.json);
-
-app.use('/', require('./routes/auth/auth'));
-app.use('/', require('./routes/claims/claims'));
-app.use('/', require('./routes/coverage/coveragePage'));
-app.use('/', require('./routes/resetPassword/resetPassword'));
-app.use('/', require('./routes/banking/banking'));
-app.use('/', require('./routes/forgot-password/forgot-password'));
-
-
-app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
-// ✅ Use the claim router
-const claimRoutes = require('./routes/claims/claims');
-app.use('/', claimRoutes);
-// make flash messages available in all views
-app.use((req, res, next) => {
-  res.locals.success_msg = req.flash("success_msg");
-  res.locals.error_msg = req.flash("error_msg");
-  next();
-});
-
+// Ensure Authentication middleware
 function ensureAuthenticated(req, res, next) {
-  if (req.isAuthenticated()) {
-    return next();
-  }
+  if (req.isAuthenticated()) return next();
   res.redirect('/login');
 }
 
+// ================== ROUTES ==================
+app.use('/', require('./routes/auth/auth'));
+
 // ---------------- Main Page ----------------
-app.get("/",  (req, res) => {
- 
-     res.render('front.ejs')
+app.get("/", (req, res) => {
+  console.log("🌍 Active locale:", req.getLocale());
+  res.render('front.ejs');
 });
+
 
 //================================================== Clinic per province==================================
   app.post('/provClinic', ensureAuthenticated,  async(req, res)=>{
@@ -405,11 +411,12 @@ app.post("/makeAppointment", ensureAuthenticated, (req, res) => {
 
 //==================================================== Route to login page============================================================================
 app.get("/login", (req, res) => {
-  res.render("login", {
+   res.render("login", {
     success: req.flash("success"),
-    error: req.flash("error")
+    error: req.flash("error"),
   });
 });
+
 
 //================================================Home page after successful login=====================================
 app.get('/home',ensureAuthenticated,  (req,res) => {
@@ -776,6 +783,7 @@ app.get("/registration", (req, res) => {
     success: req.flash("success"),
   });
 });
+//----------------------------------------------Another Router--------------------------------
 app.get('/change-date', ensureAuthenticated, (req, res) => {
   const { date, userID, doctoID } = req.query;
 
@@ -932,24 +940,27 @@ app.get('/insuranceSearch',ensureAuthenticated,  (req,res) => {
 });
 
 //-------------------------------------Edit claim--------------------------------------------
-// routes/claimRoutes.js or app.js
-// app.get('/editClaim/:claimID', async (req, res) => {
-//   const claimId = req.params.claimID;
+// GET route for editing a claim
+app.get('/editClaim/:claimID', (req, res) => {
+  const claimId = req.params.claimID;
+  const sql = 'SELECT * FROM Claims WHERE claimID = ?';
 
-//   try {
-//     // Fetch claim data from DB using claimId
-//     const claim = await ClaimModel.findById(claimID); // Adjust based on your DB
+  connection.query(sql, [claimId], (err, results) => {
+    if (err) {
+      console.error('Error loading claim:', err);
+      return res.status(500).send('Server Error');
+    }
 
-//     if (!claim) {
-//       return res.status(404).send('Claim not found');
-//     }
+    if (results.length === 0) {
+      return res.status(404).send('Claim not found');
+    }
 
-//     res.render('insuranceClaimUpdate', { claim }); // Render edit form with claim data
-//   } catch (error) {
-//     console.error('Error loading claim:', error);
-//     res.status(500).send('Server Error');
-//   }
-// });
+    const claim = results[0];
+    res.locals.__ = res.__; // make i18n function available
+    res.render('insuranceClaimUpdate', { claim });
+  });
+});
+//======================================
 app.get('/insuranceClaimUpdate', (req, res)=>{
 
   res.render('insuranceClaimUpdate.ejs');

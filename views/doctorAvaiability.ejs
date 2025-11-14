@@ -3,16 +3,13 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Doctors Profile</title>
+  <title><%= __('profileDoctor.title') %></title>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
   <%- include("partials/template.ejs") %>
-  <style>
-    body {
-      font-family: 'Inter', sans-serif;
-      background: #f8f9fa;
-    }
 
+  <style>
+    body { font-family: 'Inter', sans-serif; background: #f8f9fa; }
     .container {
       position: relative;
       left: -213px;
@@ -23,16 +20,10 @@
       box-shadow: 0 5px 15px rgba(0,0,0,0.1);
       overflow: hidden;
     }
-
-    .main {
-      width: 50%;
-      padding: 40px;
-    }
-
+    .main { width: 50%; padding: 40px; }
     .section {
       position: relative;
       left: -25px;
-      margin-bottom: 30px;
       width: 500px;
       max-width: 600px;
       margin: 30px auto;
@@ -42,7 +33,6 @@
       box-shadow: 0 4px 12px rgba(0,0,0,0.08);
       color: #2c3e50;
     }
-
     .section h1 {
       font-size: 26px;
       font-weight: 700;
@@ -51,14 +41,12 @@
       border-bottom: 2px solid #e9ecef;
       padding-bottom: 10px;
     }
-
     .info-item span {
       display: inline-block;
       font-weight: 600;
       color: #495057;
       width: 120px;
     }
-
     h1 .fa-user {
       color: #0d6efd;
       padding: 20px;
@@ -66,8 +54,6 @@
       border-radius: 50%;
       box-shadow: 0 4px 8px rgba(0,0,0,0.1);
     }
-
-    /* ✅ Bookings Card */
     #bookings {
       position: absolute;
       top: 20px;
@@ -83,63 +69,19 @@
       min-height: 450px;
       z-index: 1000;
     }
-
-    #bookings h5 {
-      color: #0d6efd;
-      font-weight: 600;
-      margin-bottom: 20px;
-    }
-
-    /* Day Selection Dropdown */
-    #daySelect {
-      margin-bottom: 25px;
-      font-weight: 600;
-      text-align: center;
-      border-radius: 8px;
-      border: 1px solid #ced4da;
-      padding: 6px 10px;
-      cursor: pointer;
-    }
-
-    .time-grid-container {
-  max-height: fit-content;
-  overflow: visible;
-  padding-right: 0;
-  margin-bottom: 20px;
-}
-
-
-    .time-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(90px, 1fr));
-      gap: 10px;
-    }
-
-    .time-btn {
-      transition: all 0.2s ease-in-out;
-    }
-
+    #bookings h5 { color: #0d6efd; font-weight: 600; margin-bottom: 20px; }
+    .time-grid-container { max-height: fit-content; overflow: visible; padding-right: 0; margin-bottom: 20px; }
+    .time-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(90px, 1fr)); gap: 10px; }
+    .time-btn { transition: all 0.2s ease-in-out; }
     .btn-check:checked + .time-btn {
       background-color: #0d6efd !important;
       color: #fff !important;
       box-shadow: 0 0 8px rgba(13,110,253,0.6);
       transform: scale(1.05);
     }
-
-    .time-btn:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
-    }
-
-    .action-buttons {
-      display: flex;
-      justify-content: center;
-      gap: 15px;
-    }
-
-    #resetTime:hover {
-      transform: translateY(-1px);
-    }
+    .time-btn:hover { transform: translateY(-2px); box-shadow: 0 2px 6px rgba(0,0,0,0.1); }
+    .action-buttons { display: flex; justify-content: center; gap: 15px; }
+    #resetTime:hover { transform: translateY(-1px); }
   </style>
 </head>
 <body>
@@ -148,59 +90,61 @@
     <div class="main">
       <div class="section">
         <h1>Dr. <%= docFName %></h1>
-        <div class="info-item"><span>Speciality</span><%= speciality %></div>
-        <div class="info-item"><span>Dr. ID:</span> <%= id %></div>
-        <div class="info-item"><span>Email:</span><%= email %></div>
+        <div class="info-item"><span><%= __('profileDoctor.speciality_label') %></span><%= speciality %></div>
+        <div class="info-item"><span><%= __('profileDoctor.doctor_id_label') %></span> <%= id %></div>
+        <div class="info-item"><span><%= __('profileDoctor.email_label') %></span><%= email %></div>
         <input type="hidden" name="doctoreID" value="<%= id %>" />
       </div>
 
       <div id="bookings">
-  <i class="fa-solid fa-suitcase-medical mb-2" style="color:#e63946; font-size:26px;"></i>
-  <h5>Available Days & Times</h5>
+        <i class="fa-solid fa-suitcase-medical mb-2" style="color:#e63946; font-size:26px;"></i>
+        <h5><%= __('profileDoctor.available_days_label') %></h5>
 
-  <!-- Select Day -->
-  <form id="dateForm" method="GET" action="/change-date" class="mb-3">
-    <input type="hidden" name="userID" value="<%= id %>" />
-    <input type="hidden" name="doctoID" value="<%= doctorID %>" />
-    
-    <select name="date" class="form-select" onchange="this.form.submit()">
-      <% availableDays.forEach(day => { %>
-        <option value="<%= day.date %>" <%= day.date === data ? "selected" : "" %>>
-          <%= day.dayName %> - <%= day.date %>
-        </option>
-      <% }) %>
-    </select>
-  </form>
+        <form id="dateForm" method="GET" action="/change-date" class="mb-3">
+          <input type="hidden" name="userID" value="<%= id %>" />
+          <input type="hidden" name="doctoID" value="<%= doctorID %>" />
+          <label for="dateSelect" class="form-label fw-semibold"><%= __('profileDoctor.select_day_label') %></label>
+          <select id="dateSelect" name="date" class="form-select" onchange="this.form.submit()">
+            <% availableDays.forEach(day => { %>
+              <option value="<%= day.date %>" <%= day.date === data ? "selected" : "" %>>
+                <%= day.dayName %> - <%= day.date %>
+              </option>
+            <% }) %>
+          </select>
+        </form>
 
-  <!-- Available Times -->
-  <% if (tempo && tempo.length > 0) { %>
-    <form id="timeForm" action="/book-time" method="POST">
-      <input type="hidden" name="doctorID" value="<%= id %>">
-      <input type="hidden" name="clinicID" value="<%= clinicID %>">
-      <input type="hidden" name="date" value="<%= data %>">
-      <input type="hidden" name="docFName" value="<%= docFName %>">
-      <input type="hidden" name="docLName" value="<%= docLName %>">
+        <% if (tempo && tempo.length > 0) { %>
+          <form id="timeForm" action="/book-time" method="POST">
+            <input type="hidden" name="doctorID" value="<%= id %>">
+            <input type="hidden" name="clinicID" value="<%= clinicID %>">
+            <input type="hidden" name="date" value="<%= data %>">
+            <input type="hidden" name="docFName" value="<%= docFName %>">
+            <input type="hidden" name="docLName" value="<%= docLName %>">
 
-      <div class="time-grid-container">
-        <div class="time-grid">
-          <% tempo.forEach((t, index) => { %>
-            <div>
-              <input class="btn-check" type="radio" name="time" id="time-<%= index %>" value="<%= t %>" autocomplete="off">
-              <label class="btn btn-success btn-sm w-100 time-btn" for="time-<%= index %>"><%= t %></label>
+            <div class="time-grid-container">
+              <div class="time-grid">
+                <% tempo.forEach((t, index) => { %>
+                  <div>
+                    <input class="btn-check" type="radio" name="time" id="time-<%= index %>" value="<%= t %>" autocomplete="off">
+                    <label class="btn btn-success btn-sm w-100 time-btn" for="time-<%= index %>"><%= t %></label>
+                  </div>
+                <% }) %>
+              </div>
             </div>
-          <% }) %>
-        </div>
+
+            <div class="action-buttons">
+              <button type="submit" class="btn btn-success px-4 py-2"><%= __('profileDoctor.book_time_button') %></button>
+              <button type="button" id="resetTime" class="btn btn-outline-danger px-4 py-2"><%= __('profileDoctor.reset_button') %></button>
+            </div>
+          </form>
+        <% } else if(message) { %>
+          <p class="text-danger mt-3"><%= __('profileDoctor.no_times_message') %></p>
+        <% } %>
       </div>
 
-      <div class="action-buttons">
-        <button type="submit" class="btn btn-success px-4 py-2">Book Time</button>
-        <button type="button" id="resetTime" class="btn btn-outline-danger px-4 py-2">Reset</button>
-      </div>
-    </form>
-  <% } else if(message) { %>
-    <p class="text-danger mt-3"><%= message %></p>
-  <% } %>
-</div>
+      <input type="hidden" id="userID" value="<%= id %>">
+    </div>
+  </div>
 
 <script>
   document.getElementById("resetTime")?.addEventListener("click", function() {
@@ -208,8 +152,5 @@
   });
 </script>
 
-      <input type="hidden" id="userID" value="<%= id %>">
-    </div>
-  </div>
 </body>
 </html>

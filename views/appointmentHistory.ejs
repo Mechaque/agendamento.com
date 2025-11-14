@@ -1,93 +1,95 @@
-  <!DOCTYPE html>
-  <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <title>Appointment History</title>
-    <%- include("partials/template.ejs") %>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Appointment History</title>
+  <%- include("partials/template.ejs") %>
 
-    <!-- Bootstrap 5 -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/css/bootstrap.min.css" integrity="sha512-GWZpQnDBwXoFlM9VKnR8iZzGrJCUi6yi5X1Xn3QeU3cM9A8H69I4t6eLtXn1KkFNh5sZ7E5KPOhxjQbxi8Yo8g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <!-- Bootstrap 5 -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/css/bootstrap.min.css" integrity="sha512-GWZpQnDBwXoFlM9VKnR8iZzGrJCUi6yi5X1Xn3QeU3cM9A8H69I4t6eLtXn1KkFNh5sZ7E5KPOhxjQbxi8Yo8g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
-    <!-- Font Awesome -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
-    <!-- DataTables -->
-    <link rel="stylesheet" href="https://cdn.datatables.net/v/dt/dt-2.3.1/datatables.min.css" />
+  <!-- DataTables -->
+  <link rel="stylesheet" href="https://cdn.datatables.net/v/dt/dt-2.3.1/datatables.min.css" />
 
-    <style>
-      body {
-        font-family: Arial, sans-serif;
-        background: #f8fafc;
-      }
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f8fafc;
+    }
 
+    .title {
+      position: absolute;
+      left: 500px;
+      font-family: 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
+      font-weight: 600;
+      color: #004080;
+      font-size: clamp(24px, 4vw, 36px);
+      margin: 40px auto 40px;
+      line-height: 1.4; 
+      word-break: break-word;
+      max-width: 90%;
+      text-align: center;
+    }
+
+    table.dataTable thead {
+      background: #0077b6;
+      color: #fff;
+    }
+
+    .btn-primary {
+      border-radius: 6px;
+      padding: 5px 12px;
+      font-size: 14px;
+    }
+
+    .btn-primary i {
+      margin-right: 4px;
+    }
+
+    /* Mobile tweaks */
+    @media (max-width: 768px) {
       .title {
-        position:absolute;
-    left: 600px;
-    top: 40px;
-      
-        font-weight: bold;
-        font-size: clamp(20px, 3vw, 32px);
-        color: #1e293b;
+        font-size: 24px;
       }
+    }
 
-      table.dataTable thead {
-        background: #0077b6;
-        color: #fff;
-      }
+    .table-left {
+      margin-left: 0 !important;
+    }
 
-      .btn-primary {
-        border-radius: 6px;
-        padding: 5px 12px;
-        font-size: 14px;
-      }
+    .caixa {
+      position: absolute;
+      left: 250px;
+      top: 100px;
+      width: 70%;
+    }
+  </style>
+</head>
+<body>
+  <!-- Bootstrap JS -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
 
-      .btn-primary i {
-        margin-right: 4px;
-      }
-
-      /* Mobile tweaks */
-      @media (max-width: 768px) {
-        .title {
-          font-size: 24px;
-        }
-      }
-      .table-left {
-    margin-left: 0 !important;
-  }
-
-  .caixa {
-    position: absolute;
-    left: 250px;   /* move slightly left */
-    top: 100px;
-    width: 70%;    /* adjust width */
-  }
-
-    </style>
-  </head>
-  <body>
-    <!-- Bootstrap JS -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
-
-    <h1 class="title">Appointment History</h1>
+  <h1 class="title"><%= __("historia.header") %></h1>
   <div class="caixa">
     <div class="container my-5">
       <div class="card shadow-sm">
         <div class="card-body">
           <div class="table-responsive">
-          
-              <table class="table table-striped table-bordered align-middle table-left" id="appointmentsTable" style="width:100%">
-
+            <table class="table table-striped table-bordered align-middle table-left" id="appointmentsTable" style="width:100%">
               <thead>
                 <tr>
-                  <th>Appointment ID</th>
-                  <th>Name</th>
-                  <th>Phone</th>
-                  <th>Date</th>
-                  <th>Time</th>
-                  <th>Reason</th>
-                  <th>ID Paciente</th>
-                  <th>Status</th>
+                  <th><%= __("historia.table.id") %></th>
+                  <th><%= __("historia.table.name") %></th>
+                  <th><%= __("historia.table.phone") %></th>
+                  <th><%= __("historia.table.date") %></th>
+                  <th><%= __("historia.table.time") %></th>
+                  <th><%= __("historia.table.reason") %></th>
+                  <th><%= __("historia.table.patient_id") %></th>
+                  <th><%= __("historia.table.status") %></th>
                 </tr>
               </thead>
               <tbody>
@@ -100,7 +102,7 @@
                   <td><%= appointment.appointmentTime %></td>
                   <td><%= appointment.reasonForVisit %></td>
                   <td><%= appointment.patientID %></td>
-                  <td> <%= appointment.appointment_status %></td>
+                  <td><%= appointment.appointment_status %></td>
                 </tr>
                 <% }); %>
               </tbody>
@@ -110,25 +112,26 @@
       </div>
     </div>
   </div>
-    <!-- jQuery -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 
-    <!-- DataTables -->
-    <script src="https://cdn.datatables.net/v/dt/dt-2.3.1/datatables.min.js"></script>
-    <script>
-      $(document).ready(function(){
-        $("#appointmentsTable").DataTable({
-          responsive: true,
-          order:[0, 'desc'],
-          pageLength: 5,
-          lengthMenu: [5, 10, 25, 50],
-          language: {
-            search: "Search:",
-            lengthMenu: "Show _MENU_ entries",
-            info: "Showing _START_ to _END_ of _TOTAL_ entries"
-          }
-        });
+  <!-- jQuery -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+
+  <!-- DataTables -->
+  <script src="https://cdn.datatables.net/v/dt/dt-2.3.1/datatables.min.js"></script>
+  <script>
+    $(document).ready(function(){
+      $("#appointmentsTable").DataTable({
+        responsive: true,
+        order:[0, 'desc'],
+        pageLength: 5,
+        lengthMenu: [5, 10, 25, 50],
+        language: {
+          search: "Search:",
+          lengthMenu: "Show _MENU_ entries",
+          info: "Showing _START_ to _END_ of _TOTAL_ entries"
+        }
       });
-    </script>
-  </body>
-  </html>
+    });
+  </script>
+</body>
+</html>

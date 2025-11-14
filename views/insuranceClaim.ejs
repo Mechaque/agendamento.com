@@ -65,53 +65,52 @@
 <body>
 
 <div class="container">
-  <h2>Insurance claim form</h2>
+  <h2><%= __('insuranceForm.header') %></h2>
+
   <form id="claimForm" action="/claimForm" method="POST" enctype="multipart/form-data">
-    <label for="name">Full name</label>
-    <input type="text"  name="fname"  id="name" value="<%= fname %>" readonly>
 
-  <div style="display: flex; gap: 20px;">
-  <div style="flex: 1;">
-    <label for="totalClaim">Total Claim</label>
-    <input type="text" name="claimTotal" id="claimTotal" step="0.01" required />
-  </div>
+    <label for="name"><%= __('insuranceForm.fields.fullName') %></label>
+    <input type="text" name="fname" id="name" value="<%= fname %>" readonly>
 
-  <div style="flex: 1;">
-    <label for="reimbursed">Police Number</label>
-    <input type="text" name="policeNumber" id="policyNumber" required>
-  </div>
-</div>
+    <div style="display: flex; gap: 20px;">
+      <div style="flex: 1;">
+        <label for="claimTotal"><%= __('insuranceForm.fields.totalClaim') %></label>
+        <input type="text" name="claimTotal" id="claimTotal" step="0.01" required />
+      </div>
 
-  <div style="display: flex; gap: 20px;">
-    <div style="flex: 1;">
-    <label for="dateField">Clinic ID</label>
-    <input type="text" name="clinicID" id="clinicID" step="0.01" required />
-  </div>
-  
-</div>
+      <div style="flex: 1;">
+        <label for="policyNumber"><%= __('insuranceForm.fields.policyNumber') %></label>
+        <input type="text" name="policeNumber" id="policyNumber" required>
+      </div>
+    </div>
 
-    <label for="claimType">Type of Claim</label>
-    <select id="typeOfPolice" name="typeOfPolice"required>
-      <option value="">Select a type</option>
-      <option>Dental</option>
-      <option>Optician</option>
-      <option>Normal Booking</option>
-      <option>Medicines</option>
+    <div style="display: flex; gap: 20px;">
+      <div style="flex: 1;">
+        <label for="clinicID"><%= __('insuranceForm.fields.clinicID') %></label>
+        <input type="text" name="clinicID" id="clinicID" required />
+      </div>
+    </div>
+
+    <label for="typeOfPolice"><%= __('insuranceForm.fields.claimType') %></label>
+    <select id="typeOfPolice" name="typeOfPolice" required>
+      <option value=""><%= __('insuranceForm.claimOptions.select') %></option>
+      <option><%= __('insuranceForm.claimOptions.dental') %></option>
+      <option><%= __('insuranceForm.claimOptions.optician') %></option>
+      <option><%= __('insuranceForm.claimOptions.booking') %></option>
+      <option><%= __('insuranceForm.claimOptions.medicines') %></option>
     </select>
 
-    <label for="description">Description of the claim</label>
-    <textarea id="description" name="description" rows="5" ></textarea>
+    <label for="description"><%= __('insuranceForm.fields.description') %></label>
+    <textarea id="description" name="description" rows="5"></textarea>
 
-    <label for="documents">Upload supporting documents</label>
-    <input type="file" name="document"  multiple />
+    <label for="documents"><%= __('insuranceForm.fields.uploadDocs') %></label>
+    <input type="file" name="document" multiple />
 
-    <button type="submit">Submit claim</button>
+    <button type="submit"><%= __('insuranceForm.buttons.submit') %></button>
   </form>
-  <a href="insurance">Back to home</a>
 
-  
+  <a href="/insurance"><%= __('insuranceForm.buttons.backHome') %></a>
 </div>
-
 
 </body>
 </html>

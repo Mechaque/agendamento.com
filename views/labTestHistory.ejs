@@ -69,50 +69,47 @@
   <!-- Bootstrap JS -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
 
-  <h1 class="title">Appointment History</h1>
+   <h1 class="title"><%= __('labTestHistory.title') %></h1>
 <div class="caixa">
   <div class="container my-5">
     <div class="card shadow-sm">
       <div class="card-body">
         <div class="table-responsive">
         
-            <table class="table table-striped table-bordered align-middle table-left" id="appointmentsTable" style="width:100%">
-
-            <thead>
-              <tr>
-                <th>Name</th>
-                <th>Lab ID</th>
-                <th>Test ID</th>
-                <th>Date </th>
-                <th>Test Name</th>
-                <th>Results</th>
-               
-                <th>Actions</th>
-              </tr>
-            </thead>
-            <tbody>
-              <% appointment.forEach(function(appointment){ %>
-              <tr>
-                <td><%= appointment.fname %></td>
-                <td><%= appointment.labID %></td>
-                <td><%= appointment.testID %></td>
-                <td><%= formattedDate %></td>
-                <td><%= appointment.testName   %></td>
-                <td><%= appointment.resultDate %></td>
-                
-                <td>
-                  <a href="deleteAppointments?appointmentID=<%= appointment.testID %>" class="btn btn-sm btn-danger">
-                    <i class="fa-solid fa-trash"></i> Delete
-                  </a>
-                  <a href="viewPages?patientID=<%= appointment.testID %>" class="btn btn-sm btn-primary">
-                    <i class="fa-solid fa-eye"></i> View
-                  </a>
-                </td>
-              </tr>
-              <% }); %>
-            </tbody>
-          </table>
-        </div>
+         <table class="table table-striped table-bordered align-middle table-left" id="appointmentsTable" style="width:100%">
+              <thead>
+                <tr>
+                  <th><%= __('labTestHistory.name') %></th>
+                  <th><%= __('labTestHistory.labID') %></th>
+                  <th><%= __('labTestHistory.testID') %></th>
+                  <th><%= __('labTestHistory.date') %></th>
+                  <th><%= __('labTestHistory.testName') %></th>
+                  <th><%= __('labTestHistory.results') %></th>
+                  <th><%= __('labTestHistory.actions') %></th>
+                </tr>
+              </thead>
+              <tbody>
+                <% appointment.forEach(function(appointment){ %>
+                  <tr>
+                    <td><%= appointment.fname %></td>
+                    <td><%= appointment.labID %></td>
+                    <td><%= appointment.testID %></td>
+                    <td><%= formattedDate %></td>
+                    <td><%= appointment.testName %></td>
+                    <td><%= appointment.resultDate %></td>
+                    <td>
+                      <a href="deleteAppointments?appointmentID=<%= appointment.testID %>" class="btn btn-sm btn-danger">
+                        <i class="fa-solid fa-trash"></i> <%= t("lbtesthistory.actions.delete") %>
+                      </a>
+                      <a href="viewPages?patientID=<%= appointment.testID %>" class="btn btn-sm btn-primary">
+                        <i class="fa-solid fa-eye"></i> <%= t("lbtesthistory.actions.view") %>
+                      </a>
+                    </td>
+                  </tr>
+                <% }); %>
+              </tbody>
+            </table>
+           </div>
       </div>
     </div>
   </div>

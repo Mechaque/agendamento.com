@@ -1,0 +1,454 @@
+{
+  "front": {
+    "title": "Réseau n°1 des hôpitaux et cliniques mozambicains",
+    "subtitle": "Ne gardez pas vos secrets, partagez-les anonymement!",
+    "admin": "Admin",
+    "login": "Connexion"
+  },
+  "login": {
+    "title": "Connexion - Réseau des Hôpitaux et Cliniques du Mozambique",
+    "heading": "Se Connecter",
+    "email": "E-mail",
+    "password": "Mot de passe",
+    "remember": "Se souvenir de moi",
+    "submit": "Connexion",
+    "noAccount": "Vous n'avez pas de compte?",
+    "signUp": "S'inscrire",
+    "forgotPassword": "Mot de passe oublié?"
+  },
+  "dashboard": {
+  "title": "Tableau de bord - Agendamento.com",
+  "nav": {
+    "dashboard": "Tableau de bord",
+    "profile": "Profil",
+    "appointments": "Rendez-vous",
+    "laboratories": "Laboratoires",
+    "insurance": "Assurance",
+    "settings": "Paramètres"
+  },
+  "logout": "Déconnexion",
+  "welcome": "Bienvenue sur la plateforme de planification",
+  "subtitle": "Trouvez tout ce dont vous avez besoin ici.",
+  "cards": {
+    "insurance": {
+      "title": "Assurance",
+      "text": "Parcourez et gérez vos prestataires d'assurance médicale. Trouvez la meilleure couverture pour vos besoins.",
+      "link": "Explorer les assureurs"
+    },
+    "laboratory": {
+      "title": "Laboratoires",
+      "text": "Réservez et suivez vos services de laboratoire",
+      "link": "Explorer les laboratoires"
+    },
+    "appointments": {
+      "title": "Rendez-vous",
+      "text": "Trouvez des cliniques à proximité, consultez les services proposés et planifiez vos rendez-vous médicaux.",
+      "link": "Explorer les cliniques"
+    },
+    "banking": {
+      "title": "Banque",
+      "text": "Gérez efficacement et en toute sécurité les transactions et comptes bancaires de votre clinique.",
+      "link": "Explorer les détails bancaires"
+    }
+  },
+  "footer": "Réseau d'Assurance du Mozambique."
+},
+"insurance": {
+  "title": "Tableau d'assurance",
+  "heading": "Votre espace personnel d'assurance santé",
+  "cards": {
+    "claimHistory": {
+      "title": "Historique des réclamations",
+      "text": "🕓 Parcourez facilement vos anciennes réclamations d'assurance et suivez votre historique médical en toute confiance.",
+      "link": "Historique des réclamations"
+    },
+    "submitClaim": {
+      "title": "Soumettre une réclamation",
+      "text": "✅ Soumettre vos réclamations n’a jamais été aussi simple — quelques étapes suffisent.",
+      "link": "Soumettre une réclamation"
+    },
+    "insuranceList": {
+      "title": "Liste des assurances",
+      "text": "🔍 Consultez les compagnies d’assurance offrant des avantages de santé pertinents et trouvez celle qui vous convient le mieux.",
+      "link": "Rechercher une assurance"
+    },
+    "coverage": {
+      "title": "Couverture",
+      "text": "💼 Consultez les détails de votre couverture d’assurance et comprenez les avantages inclus.",
+      "link": "Voir la couverture"
+    }
+  }
+},
+"sidebar": {
+  "title": "Navigation du tableau de bord",
+  "logo": "Agendamento.com",
+  "dashboard": "Tableau de bord",
+  "profile": "Profil",
+  "appointments": "Rendez-vous",
+  "laboratory": "Laboratoire",
+  "insurance": "Assurances",
+  "settings": {
+    "title": "Paramètres",
+    "resetPassword": "Réinitialiser le mot de passe",
+    "language": "Langue",
+    "notifications": "Notifications",
+    "darkMode": "Mode sombre"
+  },
+  "logout": "Déconnexion",
+  "footer": "Réseau d'assurance du Mozambique"
+},
+"laboratory": {
+  "title": "Services de Laboratoire",
+  "header": "Réservez et suivez vos services de laboratoire",
+
+  "history": {
+    "title": "Historique des Tests de Laboratoire",
+    "desc": "🧪 Suivez chaque test diagnostique que vous avez effectué. Consultez les résultats détaillés de vos examens précédents.",
+    "link": "Voir l’historique des tests"
+  },
+  "search": {
+    "title": "Rechercher un Laboratoire",
+    "desc": "🔎 Recherchez des laboratoires certifiés selon les services, les horaires et les avis.",
+    "link": "Explorer les laboratoires"
+  },
+  "book": {
+    "title": "Réserver un Test de Laboratoire",
+    "desc": "📅 Planifiez votre prochain test de laboratoire. Choisissez le test et l’heure qui vous conviennent.",
+    "link": "Demander un test"
+  }
+},
+
+  "appointment": {
+    "header": "Votre passerelle de confiance vers les rendez-vous de santé",
+    "history": {
+      "title": "Historique des rendez-vous",
+      "desc": "🕓 Consultez facilement vos réservations passées et à venir.",
+      "link": "Historique des rendez-vous"
+    },
+    "search": {
+      "title": "Rechercher une clinique",
+      "desc": "🔍 Trouvez une clinique près de chez vous et connectez-vous avec les meilleurs prestataires de soins.",
+      "link": "Liste des cliniques"
+    },
+    "book": {
+      "title": "Prendre rendez-vous",
+      "desc": "📅 Planifiez votre prochaine visite en quelques clics.",
+      "link": "Réservation de rendez-vous"
+    }
+  },
+  "clinic": {
+  "search_page": {
+    "title": "Rechercher une Clinique",
+    "header": "Rechercher une Clinique",
+    "table": {
+      "id": "ID de la Clinique",
+      "name": "Nom de la Clinique",
+      "address": "Adresse",
+      "phone": "Téléphone",
+      "province": "Province",
+      "action": "Action"
+    },
+    "view_button": "Voir"
+  }
+},
+
+  "list": {
+    "title": "Liste des Cliniques",
+    "header": "Liste des Cliniques",
+    "table": {
+      "id": "ID de la Clinique",
+      "name": "Nom de la Clinique",
+      "address": "Adresse",
+      "phone": "Téléphone",
+      "province": "Province/État",
+      "action": "Action"
+    },
+    "view_button": "Voir"
+  },
+  "doctor": {
+  "list": {
+    "title": "Liste des médecins",
+    "welcome": "Bienvenue à",
+    "address_label": "Adresse :",
+    "hours_label": "Heures d’ouverture :",
+    "view_doctors": "Voir les médecins",
+    "bookings": "Réservations",
+    "info_text": "Cliquez sur les boutons ci-dessus pour voir la liste des médecins et leur disponibilité, ou cliquez sur Réservations pour prendre un rendez-vous.",
+    "schedule": {
+      "monday": "Lundi :      9 h - 17 h",
+      "tuesday": "Mardi :      9 h - 17 h",
+      "wednesday": "Mercredi :   9 h - 17 h",
+      "thursday": "Jeudi :      9 h - 17 h",
+      "friday": "Vendredi :   9 h - 17 h",
+      "saturday": "Samedi :     9 h - 15 h",
+      "sunday": "Dimanche :   Fermé"
+    }
+  }
+},
+ "listDoctor": {
+    "title": "Liste des médecins",
+    "header": "Liste des médecins",
+    "table": {
+      "fname": "Prénom",
+      "lname": "Nom",
+      "speciality": "Spécialité",
+      "phone": "Téléphone",
+      "doctorID": "ID du médecin",
+      "select": "Sélectionner"
+    },
+    "view_button": "Voir le profil"
+  },
+   "doctorProfile": {
+    "title": "Profil du Médecin",
+    "select_day": "Sélectionnez un jour pour voir les disponibilités",
+    "choose_day": "Choisir un jour :",
+    "check_availability": "Vérifier la disponibilité",
+    "speciality": "Spécialité :",
+    "doctor_id": "ID du Médecin :",
+    "email": "E-mail :"
+  },
+  "profileDoctor": {
+  "title": "Profil du Médecin",
+  "header": "Jours et Heures Disponibles",
+  "speciality_label": "Spécialité :",
+  "doctor_id_label": "ID du Médecin :",
+  "email_label": "E-mail :",
+  "available_days_label": "Jours et Heures Disponibles",
+  "select_day_label": "Sélectionnez un jour :",
+  "book_time_button": "Réserver un créneau",
+  "reset_button": "Réinitialiser",
+  "no_times_message": "Aucun créneau disponible pour ce jour."
+},
+"reviewAppointment": {
+    "title": "Vérifiez votre rendez-vous",
+    "labels": {
+      "full_name": "Nom complet",
+      "email": "Adresse e-mail",
+      "phone": "Numéro de téléphone",
+      "clinic_name": "Nom de la clinique",
+      "select_date": "Sélectionnez la date",
+      "selected_time": "Heure sélectionnée",
+      "preferred_doctor": "Médecin préféré",
+      "service_type": "Type de service",
+      "additional_notes": "Notes supplémentaires"
+    },
+    "service_options": {
+      "select": "-- Sélectionner --",
+      "consultation": "Consultation",
+      "checkup": "Examen de routine",
+      "treatment": "Traitement",
+      "follow_up": "Suivi"
+    },
+    "placeholders": {
+      "reason": "Raison de la visite, symptômes, etc."
+    },
+    "button": "Confirmer le rendez-vous"
+  },
+  "historia": {
+    "title": "Historique des rendez-vous",
+    "header": "Historique des rendez-vous",
+    "table": {
+      "id": "ID du rendez-vous",
+      "name": "Nom",
+      "phone": "Téléphone",
+      "date": "Date",
+      "time": "Heure",
+      "reason": "Raison",
+      "patient_id": "ID du patient",
+      "status": "Statut"
+    },
+    "datatable": {
+      "search": "Recherche :",
+      "lengthMenu": "Afficher _MENU_ entrées",
+      "info": "Affichage de _START_ à _END_ sur _TOTAL_ entrées"
+    }
+  },
+ "labTestHistory": {
+    "title": "Historique des tests de laboratoire",
+    "name": "Nom",
+    "labID": "ID du laboratoire",
+    "testID": "ID du test",
+    "date": "Date",
+    "testName": "Nom du test",
+    "results": "Résultats",
+    "actions": "Actions",
+    "delete": "Supprimer",
+    "view": "Voir"
+  },
+
+  "datatables": {
+    "search": "Recherche :",
+    "lengthMenu": "Afficher _MENU_ entrées",
+    "info": "Affichage de _START_ à _END_ sur _TOTAL_ entrées"
+  },
+    "labSearchList": {
+  "title": "Rechercher un Laboratoire",
+  "columns": {
+    "lab_id": "ID du Laboratoire",
+    "lab_name": "Nom du Laboratoire",
+    "address": "Adresse",
+    "telephone": "Téléphone",
+    "province": "Province",
+    "action": "Action"
+  },
+  "actions": {
+    "view": "Voir"
+  },
+  "datatable": {
+    "search": "Rechercher :",
+    "lengthMenu": "Afficher _MENU_ entrées",
+    "info": "Affichage de _START_ à _END_ sur _TOTAL_ entrées"
+  }
+},
+  
+  "labTestReq": {
+    "header": "Demande d’Analyse de Laboratoire",
+
+    "sections": {
+      "personalInfo": "Informations Personnelles",
+      "appointmentDetails": "Détails du Rendez-vous"
+    },
+
+    "fields": {
+      "fname": "Prénom",
+      "lname": "Nom",
+      "appointmentID": "ID du Rendez-vous",
+      "patientID": "ID du Patient",
+      "phoneNumber": "Numéro de Téléphone",
+      "lab": "Sélectionner le Laboratoire",
+      "testName": "Nom / Description du Test"
+    },
+
+    "placeholders": {
+      "fname": "Entrer le prénom",
+      "lname": "Entrer le nom",
+      "appointmentID": "Entrer l’ID du rendez-vous",
+      "patientID": "Entrer l’ID du patient",
+      "phoneNumber": "Entrer le numéro de téléphone",
+      "lab": "Choisir un laboratoire",
+      "testName": "Décrire les tests demandés"
+    },
+
+    "labOptions": {
+      "primaLab": "Prima Lab",
+      "HCMLab": "Laboratoire HCM"
+    },
+
+    "buttons": {
+      "submit": "Soumettre la Demande",
+      "cancel": "Annuler"
+    }
+  }
+
+
+,
+"insuranceForm": {
+  "title": "Portail de Réclamations d’Assurance",
+  "header": "Formulaire de Réclamation d’Assurance",
+  "fields": {
+    "fullName": "Nom complet",
+    "totalClaim": "Montant total réclamé",
+    "policyNumber": "Numéro de police",
+    "clinicID": "ID de la clinique",
+    "claimType": "Type de réclamation",
+    "description": "Description de la réclamation",
+    "uploadDocs": "Télécharger les documents justificatifs"
+  },
+  "claimOptions": {
+    "select": "Sélectionnez un type",
+    "dental": "Dentaire",
+    "optician": "Opticien",
+    "booking": "Consultation normale",
+    "medicines": "Médicaments"
+  },
+  "buttons": {
+    "submit": "Soumettre la réclamation",
+    "backHome": "Retour à l’accueil"
+  },
+  "messages": {
+    "success": "Votre réclamation a été soumise avec succès !"
+  }
+},
+"editProfile": {
+  "title": "Modifier le profil",
+  "header": "Modifier le profil",
+  "fields": {
+    "fullName": "Prénom",
+    "lastName": "Nom de famille",
+    "email": "Adresse e-mail",
+    "phone": "Numéro de téléphone",
+    "patientID": "ID du patient",
+    "userID": "ID de l’utilisateur"
+  },
+  "buttons": {
+    "save": "Enregistrer les modifications",
+    "cancel": "Annuler"
+  },
+  "photo": {
+    "alt": "Photo de profil",
+    "label": "Télécharger la photo"
+  }
+},
+"insuranceClaimList": {
+  "title": "Toutes vos réclamations d’assurance au même endroit.",
+  "table": {
+    "headers": {
+      "date": "Date",
+      "benefitType": "Type de prestation",
+      "claimFor": "Réclamation pour",
+      "claimTotal": "Montant total",
+      "reimbursed": "Remboursé",
+      "reference": "Référence de la réclamation",
+      "status": "Statut",
+      "actions": "Actions"
+    },
+    "actions": {
+      "edit": "Modifier",
+      "delete": "Supprimer",
+      "confirmDelete": "Êtes-vous sûr de vouloir supprimer cette réclamation ?"
+    }
+  }
+},
+"insuranceSearch": {
+  "title": "Recherche intelligente d'assurances — Découvrez les plans qui vous conviennent.",
+  "table": {
+    "headers": {
+      "name": "Nom",
+      "address": "Adresse",
+      "telephone": "Téléphone",
+      "email": "Email",
+      "province": "Province",
+      "action": "Action"
+    },
+    "buttons": {
+      "view": "Voir"
+    }
+  }
+},
+"insuranceClaimUpdate": {
+    "title": "Portail de Réclamation d'Assurance",
+    "header": "Formulaire de Réclamation",
+    "fullName": "Nom Complet",
+    "claimReference": "Référence de Réclamation",
+    "claimTotal": "Total de la Réclamation",
+    "status": "Statut",
+    "submittedOn": "Soumis le",
+    "claimType": "Type de Réclamation",
+    "selectType": "Sélectionner le Type",
+    "types": {
+      "dental": "Dentaire",
+      "optometrista": "Optométriste",
+      "regularAppointment": "Rendez-vous Régulier",
+      "medicin": "Médicaments"
+    },
+    "description": "Description de la Réclamation",
+    "uploadDocuments": "Téléverser des Documents",
+    "cancel": "Annuler",
+    "update": "Mettre à Jour",
+    "backToHome": "Retour à l'accueil"
+  }
+
+
+
+
+}

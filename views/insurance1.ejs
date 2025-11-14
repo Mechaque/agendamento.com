@@ -32,12 +32,13 @@
       padding: 0 70px;
     }
 
-    .content {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: space-between;
-      gap: 30px;
-    }
+   .content {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 30px;
+  margin-top: -100px; /* ✅ Moves content up by 10px */
+}
 
     /* Cards */
     .card {
@@ -89,40 +90,39 @@
 
 
 </style>
-<h1 class="title">Your Personal Health Insurance Hub</h1>
+<h1 class="title"><%= __('insurance.heading') %></h1>
 
- <div class="container">
-    <div class="content">
-      <!-- Insurance Card -->
-      <div class="card" onclick="window.location.href='claimList'">
-        <h3>Claim History</h3>
-        <p>🕓 Easily browse your past insurance claims and keep track of your healthcare history with confidence.</p>
-        <a href="claimList">Claim History</a>
-      </div>
+<div class="container">
+  <div class="content">
+    <!-- Claim History Card -->
+    <div class="card" onclick="window.location.href='claimList'">
+      <h3><%= __('insurance.cards.claimHistory.title') %></h3>
+      <p><%= __('insurance.cards.claimHistory.text') %></p>
+      <a href="claimList"><%= __('insurance.cards.claimHistory.link') %></a>
+    </div>
 
-      <!-- Laboratories Card -->
-      <div class="card" onclick="window.location.href='insuranceClaim'">
-        <h3>Submit Claim</h3>
-        <p>✅ Submitting your claims has never been easier—just a few simple steps and you're done. ?</p>
-        <a href="insuranceClaim">Submit Claim</a>
-      </div>
+    <!-- Submit Claim Card -->
+    <div class="card" onclick="window.location.href='insuranceClaim'">
+      <h3><%= __('insurance.cards.submitClaim.title') %></h3>
+      <p><%= __('insurance.cards.submitClaim.text') %></p>
+      <a href="insuranceClaim"><%= __('insurance.cards.submitClaim.link') %></a>
+    </div>
 
-      <!-- Clinics Card -->
-      <div class="card" onclick="window.location.href='insuranceSearch'">
-        <h3>Insurance List</h3>
-        <p>🔍 View insurance companies offering meaningful health benefits—and see which one fits your needs best.</p>
-        <a href="insuranceSearch">Search Insurance</a>
-      </div>
+    <!-- Insurance List Card -->
+    <div class="card" onclick="window.location.href='insuranceSearch'">
+      <h3><%= __('insurance.cards.insuranceList.title') %></h3>
+      <p><%= __('insurance.cards.insuranceList.text') %></p>
+      <a href="insuranceSearch"><%= __('insurance.cards.insuranceList.link') %></a>
+    </div>
 
-        <!-- Laboratories Card -->
-      <div class="card" onclick="window.location.href='coverageInfo'">
-        <h3>Coverage</h3>
-        <p>✅ Submitting your claims has never been easier—just a few simple steps and you're done. ?</p>
-        <a href="coverage">Submit Claim</a>
-      </div>
+    <!-- Coverage Info Card -->
+    <div class="card" onclick="window.location.href='coverageInfo'">
+      <h3><%= __('insurance.cards.coverage.title') %></h3>
+      <p><%= __('insurance.cards.coverage.text') %></p>
+      <a href="coverageInfo"><%= __('insurance.cards.coverage.link') %></a>
     </div>
   </div>
+</div>
 
-    
 </body>
 </html>

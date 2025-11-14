@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Doctors List</title>
+<title><%= __('doctor.list.title') %></title>
 <%- include("partials/template.ejs") %>
 
 <!-- Font Awesome for icons -->
@@ -12,11 +12,10 @@
 <style>
   body {
     font-family: 'Segoe UI', Arial, sans-serif;
-    background-color: #e8f0f6; /* soft healthcare background */
+    background-color: #e8f0f6;
     margin: 0;
   }
 
-  /* Page title */
   .titulo {
     position: absolute;
     top: 5px;
@@ -24,11 +23,10 @@
     transform: translateX(-50%);
     font-size: 28px;
     font-weight: 700;
-    color: #1976d2; /* healthcare blue */
+    color: #1976d2;
     text-align: center;
   }
 
-  /* Clinic address box */
   .endereco {
     position: absolute;
     top: 80px;
@@ -55,7 +53,6 @@
     margin: 0 0 10px 0;
   }
 
-  /* Weekly schedule */
   .dias {
     position: absolute;
     top: 200px;
@@ -71,7 +68,6 @@
     line-height: 1.6;
   }
 
-  /* Buttons */
   .listD, .botao {
     display: inline-block;
     width: 180px;
@@ -98,10 +94,9 @@
   }
   .botao:hover { background-color: #388e3c; transform: translateY(-2px); }
 
-  /* Info box */
   .maisInfo {
     position: absolute;
-    top: 400px;
+    top: 600px;
     left: 50%;
     transform: translateX(-50%);
     max-width: 600px;
@@ -115,7 +110,6 @@
     line-height: 1.6;
   }
 
-  /* Icons in headings */
   .fa-map-marker-alt { color: #1976d2; margin-right: 6px; }
   .fa-clock { color: #4caf50; margin-right: 6px; }
   .fa-user-doctor, .fa-calendar-check { margin-right: 6px; }
@@ -124,41 +118,42 @@
 </head>
 <body>
 
-<h3 class="titulo"><i class="fa-solid fa-hospital"></i>Welcome To  <%= clname %></h3>
+<h3 class="titulo">
+  <i class="fa-solid fa-hospital"></i>
+  <%= __('doctor.list.welcome') %> <%= clname %>
+</h3>
 
 <div class="endereco">
-  <h4><i class="fa-solid fa-map-marker-alt"></i> Address:</h4>
+  <h4><i class="fa-solid fa-map-marker-alt"></i> <%= __('doctor.list.address_label') %></h4>
   <p><%= claddress %>, <%= provincia %></p>
-  <h4><i class="fa-solid fa-clock"></i>Openning Hours:</h4>
+  <h4><i class="fa-solid fa-clock"></i><%= __('doctor.list.hours_label') %></h4>
 </div>
 
 <pre class="dias"><b>
-Monday:     9 AM - 5 PM
-Tuesday:    9 AM - 5 PM
-Wednesday:  9 AM - 5 PM
-Thursday:   9 AM - 5 PM
-Friday:     9 AM - 5 PM
-Saturday:   9 AM - 3 PM
-Sunday:     Closed
+<%= __('doctor.list.schedule.monday') %>
+<%= __('doctor.list.schedule.tuesday') %>
+<%= __('doctor.list.schedule.wednesday') %>
+<%= __('doctor.list.schedule.thursday') %>
+<%= __('doctor.list.schedule.friday') %>
+<%= __('doctor.list.schedule.saturday') %>
+<%= __('doctor.list.schedule.sunday') %>
 </b></pre>
 
 <div class="container" style="position:absolute; top: 480px; left: 50%; transform: translateX(-50%); text-align:center;">
   <% appointment.forEach(function(app){ %>
     <a href="viewDocList?clinicID=<%= app.clinicID %>">
-      <button class="listD"><i class="fa-solid fa-user-doctor"></i> View Doctors</button>
+      <button class="listD"><i class="fa-solid fa-user-doctor"></i> <%= __('doctor.list.view_doctors') %></button>
     </a>
     <a href="appointmentBooking?clinicID=<%= app.clinicID %>">
-      <button class="botao"><i class="fa-solid fa-calendar-check"></i> Bookings</button>
+      <button class="botao"><i class="fa-solid fa-calendar-check"></i> <%= __('doctor.list.bookings') %></button>
     </a>
   <% }); %>
 </div>
 
-<div class="maisInfo" style="top: 600px;">
-  Click above buttons to view the listing of doctors and their availability or click Bookings to schedule an appointment.
+<div class="maisInfo">
+  <%= __('doctor.list.info_text') %>
 </div>
 
-
-<!-- Font Awesome JS (optional) -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/js/all.min.js"></script>
 
 </body>

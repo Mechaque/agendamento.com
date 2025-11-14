@@ -17,10 +17,20 @@
       text-align: center;
       padding: 20px;
     }
+    .newsLetter {
+     background-image: url('images/green_leaves.jpg');
+       position: absolute;
+      top: 5px;
+      right: 0px;
+      height: 100%;
+      width: 202px;
+      color: white;
+      text-align: center;
 
+    }
     .title {
       position: absolute;
-      left: 500px;
+      left: 300px;
       font-family: 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
       font-weight: 600;
       color: #004080;
@@ -37,7 +47,7 @@
       flex-wrap: wrap;
       justify-content: center;
       gap: 16px;
-      margin-bottom: 30px;
+      margin-top: 250px; /* ✅ pushes content up */
     }
 
     .appointment, .Insurance, .Laboratory {
@@ -146,30 +156,31 @@
 </head>
 <body>
 
-  <h1 class="title">Your Trusted Gateway to Health Appointments</h1>
+ <h1 class="title"><%= __('appointment.header') %></h1>
 
-  <div class="button-group">
-    <!-- Appointment History -->
-    <div class="appointment" onclick="window.location.href='appointmentHistory'">
-      <h4 class="cabelo">View Appointments History</h4>
-      <p style="color: black;">🕓 Review your past and upcoming bookings easily.</p>
-      <p class="para">Appointment History</p>
-    </div>
-
-    <!-- Search Clinic -->
-    <div class="Insurance" onclick="window.location.href='searchClinic'">
-      <h4 class="cabelo">Search A Clinic</h4>
-      <p style="color: black;">🔍 Find a clinic near you and connect with top healthcare providers.</p>
-      <p class="para">Clinic Listing</p>
-    </div>
-
-    <!-- Book Appointment -->
-    <div class="Laboratory" id="openModalBtn">
-      <h4 class="cabelo">Book Appointment</h4>
-      <p style="color: black;">📅 Schedule your next visit with just a few clicks.</p>
-      <p class="para">Appointment Booking</p>
-    </div>
+<div class="button-group">
+  <!-- Appointment History -->
+  <div class="appointment" onclick="window.location.href='appointmentHistory'">
+    <h4 class="cabelo"><%= __('appointment.history.title') %></h4>
+    <p style="color: black;"><%= __('appointment.history.desc') %></p>
+    <p class="para"><%= __('appointment.history.link') %></p>
   </div>
+
+  <!-- Search Clinic -->
+  <div class="Insurance" onclick="window.location.href='searchClinic'">
+    <h4 class="cabelo"><%= __('appointment.search.title') %></h4>
+    <p style="color: black;"><%= __('appointment.search.desc') %></p>
+    <p class="para"><%= __('appointment.search.link') %></p>
+  </div>
+
+  <!-- Book Appointment -->
+  <div class="Laboratory" id="openModalBtn">
+    <h4 class="cabelo"><%= __('appointment.book.title') %></h4>
+    <p style="color: black;"><%= __('appointment.book.desc') %></p>
+    <p class="para"><%= __('appointment.book.link') %></p>
+  </div>
+</div>
+
 
  
 

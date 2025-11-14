@@ -15,18 +15,16 @@
       margin: 0;
       padding: 0;
       background-color: #f3f3f9;
-      min-height: 105vh; /* 5% taller than the viewport height */
+      min-height: 105vh; 
     }
+
 .container {
   display: flex;
-  justify-content: flex-start; /* align left */
+  justify-content: flex-start;
   padding: 40px 20px;
-  margin-left: 2%; /* shift 20% from the left edge */
-  margin-top: -2%;  /* move it up by 2% */
-  
+  margin-left: 2%;
+  margin-top: -2%;  
 }
-
-
 
     .account {
       width: 100%;
@@ -147,64 +145,67 @@
   <div class="container">
     <form action="/labtestes" method="POST" id="form-user" class="account">
       <div class="account-header">
-        <h1 class="account-title">Add Tests</h1>
+        <h1 class="account-title"><%= __('labTestReq.header') %></h1>
       </div>
 
+      <!-- Personal Information -->
       <fieldset>
-        <legend>Personal Information</legend>
+        <legend><%= __('labTestReq.sections.personalInfo') %></legend>
         <div class="input-group">
           <div class="input-container">
-            <label for="fname">Name</label>
-            <input type="text" id="fname" name="fname" placeholder="Name" value="<%= fname %>">
+            <label for="fname"><%= __('labTestReq.fields.fname') %></label>
+            <input type="text" id="fname" name="fname" placeholder="<%= __('labTestReq.placeholders.fname') %>" value="<%= fname %>">
           </div>
           <div class="input-container">
-            <label for="lname">Last Name</label>
-            <input type="text" id="lname" name="lname" placeholder="Last Name" required>
+            <label for="lname"><%= __('labTestReq.fields.lname') %></label>
+            <input type="text" id="lname" name="lname" placeholder="<%= __('labTestReq.placeholders.lname') %>" required>
           </div>
         </div>
       </fieldset>
 
+      <!-- Appointment Details -->
       <fieldset>
-        <legend>Appointment Details</legend>
+        <legend><%= __('labTestReq.sections.appointmentDetails') %></legend>
         <div class="input-group">
           <div class="input-container">
-            <label for="appointmentID">Appointment ID</label>
-            <input type="text" id="appointmentID" name="appointmentID" placeholder="Appointment ID" required>
+            <label for="appointmentID"><%= __('labTestReq.fields.appointmentID') %></label>
+            <input type="text" id="appointmentID" name="appointmentID" placeholder="<%= __('labTestReq.placeholders.appointmentID') %>" required>
           </div>
           <div class="input-container">
-            <label for="patientID">Patient ID</label>
-            <input type="text" id="patientID" name="patientID" placeholder="Patient ID" value="<%= patientID %>">
+            <label for="patientID"><%= __('labTestReq.fields.patientID') %></label>
+            <input type="text" id="patientID" name="patientID" placeholder="<%= __('labTestReq.placeholders.patientID') %>" value="<%= patientID %>">
           </div>
           <div class="input-container">
-            <label for="phoneNumber">Phone Number</label>
-            <input type="text" id="phoneNumber" name="phoneNumber" placeholder="Phone Number" value="<%= phoneNumber %>">
+            <label for="phoneNumber"><%= __('labTestReq.fields.phoneNumber') %></label>
+            <input type="text" id="phoneNumber" name="phoneNumber" placeholder="<%= __('labTestReq.placeholders.phoneNumber') %>" value="<%= phoneNumber %>">
           </div>
         </div>
       </fieldset>
 
+      <!-- Laboratory Selection -->
       <fieldset>
-       
         <div class="input-container">
-          <label for="lab">Laboratory</label>
+          <label for="lab"><%= __('labTestReq.fields.lab') %></label>
           <select name="labID" id="lab" required>
-            <option value="">--Select--</option>
-            <option value="primaLab">PrimaLab</option>
-            <option value="HCMLab">LabHCM</option>
+            <option value="">--<%= __('labTestReq.placeholders.lab') %>--</option>
+            <option value="primaLab"><%= __('labTestReq.labOptions.primaLab') %></option>
+            <option value="HCMLab"><%= __('labTestReq.labOptions.HCMLab') %></option>
           </select>
         </div>
       </fieldset>
 
+      <!-- Test Details -->
       <fieldset>
-        
         <div class="input-container">
-          <label for="testName">Test Name</label>
-          <textarea id="testName" name="testName" placeholder="Nome De Testes" required></textarea>
+          <label for="testName"><%= __('labTestReq.fields.testName') %></label>
+          <textarea id="testName" name="testName" placeholder="<%= __('labTestReq.placeholders.testName') %>" required></textarea>
         </div>
       </fieldset>
 
+      <!-- Buttons -->
       <div class="form-actions">
-        <button type="submit" class="btn btn-submit">Submit</button>
-        <button type="button" class="btn btn-cancel" onclick="window.history.back()">Cancel</button>
+        <button type="submit" class="btn btn-submit"><%= __('labTestReq.buttons.submit') %></button>
+        <button type="button" class="btn btn-cancel" onclick="window.history.back()"><%= __('labTestReq.buttons.cancel') %></button>
       </div>
     </form>
   </div>

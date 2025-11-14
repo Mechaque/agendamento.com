@@ -3,122 +3,184 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Insurance Claim Portal</title>
+  <title><%= __('insuranceClaimUpdate.title') %></title>
   <%- include("partials/template.ejs") %>
   <style>
-    body {
-      font-family: Arial, sans-serif;
-      background: #f4f6f8;
-      margin: 0;
-      padding: 20px;
+    :root {
+      --primary: #007bff;
+      --primary-dark: #0056b3;
+      --card-bg: #fff;
+      --text: #333;
+      --radius: 12px;
     }
-  .container {
-  position: absolute;
-  left: 120px;
-  background: #fff;
-  padding: 30px;
-  max-width: 800px;
-  margin: 0;                 /* remove auto-centering */
-  margin-left: 20%;          /* push it 20% from the left */
-  box-shadow: 0 0 10px rgba(0,0,0,0.1);
-  border-radius: 8px;
-}
+
+    body {
+      margin: 5px;
+      font-family: Arial, sans-serif;
+      background: #f5f7fa;
+      display: flex;
+      justify-content: flex-start;
+      align-items: flex-start;
+      padding: 20px;
+      color: var(--text);
+    }
+
+    .claim-container {
+      position: absolute;
+      top: 2px;
+      left: 370px;
+      background: var(--card-bg);
+      border-radius: var(--radius);
+      width: 100%;
+      max-width: 700px;
+      padding: 30px 25px;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+      margin-left: 0;
+    }
 
     h2 {
+      margin-bottom: 20px;
+      font-size: 22px;
+      font-weight: bold;
       text-align: center;
-      color: #333;
     }
+
+    form .form-group {
+      margin-bottom: 18px;
+      text-align: left;
+    }
+
     label {
       display: block;
-      margin-top: 15px;
-      font-weight: bold;
+      margin-bottom: 6px;
+      font-weight: 600;
+      color: var(--text);
+      font-size: 14px;
     }
-    input, textarea, select {
+
+    input[type="text"],
+    input[type="email"],
+    input[type="tel"],
+    textarea,
+    select {
       width: 100%;
       padding: 10px;
-      margin-top: 5px;
       border: 1px solid #ccc;
-      border-radius: 4px;
+      border-radius: 6px;
+      font-size: 14px;
       box-sizing: border-box;
     }
-    button {
-      margin-top: 20px;
-      background-color: #007bff;
-      color: white;
+
+    textarea {
+      resize: vertical;
+      min-height: 80px;
+    }
+
+    .button-row {
+      display: flex;
+      justify-content: space-between;
+      gap: 10px;
+      margin-top: 25px;
+    }
+
+    .btn {
+      flex: 1;
+      padding: 12px;
+      font-size: 16px;
       border: none;
-      padding: 12px 20px;
-      border-radius: 4px;
+      border-radius: 6px;
       cursor: pointer;
-      width: 100%;
+      transition: background-color 0.3s;
     }
-    button:hover {
-      background-color: #0056b3;
+
+    .btn-save {
+      background-color: var(--primary);
+      color: white;
     }
-    .success-message {
-      margin-top: 20px;
-      color: green;
-      font-weight: bold;
-      text-align: center;
+
+    .btn-save:hover { background-color: var(--primary-dark); }
+
+    .btn-cancel {
+      background-color: #ddd;
+      color: #333;
+    }
+
+    .btn-cancel:hover { background-color: #bbb; }
+
+    @media (max-width: 768px) {
+      .claim-container {
+        padding: 20px 16px;
+      }
+      h2 { font-size: 20px; }
+    }
+
+    @media (max-width: 500px) {
+      .button-row { flex-direction: column; }
+      .btn { width: 100%; }
     }
   </style>
 </head>
 <body>
+  <div class="claim-container">
+    <h2><%= __('insuranceClaimUpdate.header') %></h2>
 
-<div class="container">
-  <h2>Formulário de reclamação de seguro</h2>
-<form id="claimForm" action="/updateClaim" method="POST" enctype="multipart/form-data">
-  <label for="name">Nome Completo</label>
-  <input type="text" name="fname" id="name" required value="<%= claim.fullName %>">
+    <form id="claimForm" action="/updateClaim" method="POST" enctype="multipart/form-data">
+      <div class="form-group">
+        <label for="name"><%= __('insuranceClaimUpdate.fullName') %></label>
+        <input type="text" id="name" name="fname" value="<%= claim.fullName %>" required />
+      </div>
 
-  <label for="email">Claim Reference</label>
-  <input type="text" name="claimID" id="email" required value="<%= claim.claimID %>">
+      <div class="form-group">
+        <label for="claimID"><%= __('insuranceClaimUpdate.claimReference') %></label>
+        <input type="text" id="claimID" name="claimID" value="<%= claim.claimID %>" required />
+      </div>
 
-  <label for="clinicID">Claim Total</label>
-  <input type="text" name="claimTotal" id="clinicID" required value="<%= claim.claimTotal %>">
+      <div class="form-group">
+        <label for="claimTotal"><%= __('insuranceClaimUpdate.claimTotal') %></label>
+        <input type="text" id="claimTotal" name="claimTotal" value="<%= claim.claimTotal %>" required />
+      </div>
 
- <label for="policyNumber">Status</label>
-<input type="text" name="status" id="policyNumber" value="<%= claim.status %>">
+      <div class="form-group">
+        <label for="status"><%= __('insuranceClaimUpdate.status') %></label>
+        <input type="text" id="status" name="status" value="<%= claim.status %>" />
+      </div>
 
-<label for="submittedAt">Submitted On</label>
-<input type="text" name="submittedAt" id="submittedAt" value="<%= claim.submittedAt %>">
+      <div class="form-group">
+        <label for="submittedAt"><%= __('insuranceClaimUpdate.submittedOn') %></label>
+        <input type="text" id="submittedAt" name="submittedAt" value="<%= claim.submittedAt %>" />
+      </div>
 
+      <div class="form-group">
+        <label for="typeOfPolice"><%= __('insuranceClaimUpdate.claimType') %></label>
+        <select id="typeOfPolice" name="typeOfPolice" required>
+          <option value=""><%= __('insuranceClaimUpdate.selectType') %></option>
+          <option value="Dental" <%= claim.typeOfPolice === 'Dental' ? 'selected' : '' %>><%= __('insuranceClaimUpdate.types.dental') %></option>
+          <option value="Optometrista" <%= claim.typeOfPolice === 'Optometrista' ? 'selected' : '' %>><%= __('insuranceClaimUpdate.types.optometrista') %></option>
+          <option value="Consulta Normal" <%= claim.typeOfPolice === 'Consulta Normal' ? 'selected' : '' %>><%= __('insuranceClaimUpdate.types.regularAppointment') %></option>
+          <option value="Medicamentos" <%= claim.typeOfPolice === 'Medicamentos' ? 'selected' : '' %>><%= __('insuranceClaimUpdate.types.medicin') %></option>
+        </select>
+      </div>
 
-  <label for="claimType">Tipo de reclamação</label>
-  <select id="typeOfPolice" name="typeOfPolice" required>
-    <option value="">Selecione um tipo</option>
-    <option value="Dental" <%= claim.typeOfPolice === 'Dental' ? 'selected' : '' %>>Dental</option>
-    <option value="Optometrista" <%= claim.typeOfPolice === 'Optometrista' ? 'selected' : '' %>>Optometrista</option>
-    <option value="Consulta Normal" <%= claim.typeOfPolice === 'Consulta Normal' ? 'selected' : '' %>>Consulta Normal</option>
-    <option value="Medicamentos" <%= claim.typeOfPolice === 'Medicamentos' ? 'selected' : '' %>>Medicamentos</option>
-  </select>
+      <div class="form-group">
+        <label for="description"><%= __('insuranceClaimUpdate.description') %></label>
+        <textarea id="description" name="description" rows="5"><%= claim.description %></textarea>
+      </div>
 
-  <label for="description">Descrição da reivindicação</label>
-  <textarea id="description" name="description" rows="5"><%= claim.description %></textarea>
+      <div class="form-group">
+        <label for="documents"><%= __('insuranceClaimUpdate.uploadDocuments') %></label>
+        <input type="file" name="document" />
+      </div>
 
-  <label for="documents">Carregar documentos de suporte</label>
-  <input type="file" name="document" />
+      <div class="button-row">
+        <button type="submit" class="btn btn-save"><%= __('insuranceClaimUpdate.update') %></button>
+      <button type="button" class="btn btn-cancel" onclick="window.history.back()">
+  <%= __('insuranceClaimUpdate.cancel') %>
+</button>
 
-  <div style="display: flex; justify-content: space-between; gap: 10px; margin-top: 20px;">
-    <button type="button" onclick="handleCancel()" style="background-color: #6c757d;">Cancelar</button>
-    <button type="submit">Atualizar</button>
+      </div>
+    </form>
+
+    <a href="/insurance" style="display:block; margin-top:15px;"><%= __('insuranceClaimUpdate.backToHome') %></a>
   </div>
-</form>
-
-  <a href="insurance">Back to home</a>
-
-  <!-- <div class="success-message" id="successMessage" style="display: none;">
-    ✅ Your claim has been submitted successfully!
-  </div> -->
-</div>
-<script>
-  function handleCancel() {
-    // Option 1: Reset the form
-    document.getElementById('claimList').reset();
-
-    // Option 2: Or redirect to another page instead of resetting
-    // window.location.href = '/insurance'; 
-  }
-</script>
-
 </body>
 </html>

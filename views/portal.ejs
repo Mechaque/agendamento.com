@@ -4,349 +4,128 @@
   <meta charset="UTF-8">
   <title>Professional Sidebar Navigation</title>
   
-   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
   <!-- Optional: Use Font Awesome for icons -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
   <!-- Bootstrap CSS -->
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
 
-<!-- Bootstrap JS (with Popper for dropdowns, tooltips, etc.) -->
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <!-- Bootstrap JS (with Popper for dropdowns, tooltips, etc.) -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 
   <style>
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0; 
-    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { overflow: hidden; font-family: 'Inter', sans-serif; background-color: #f8f9fa; color: #333; }
+    html, body { height: 100%; margin: 0; display: flex; flex-direction: column; }
 
-   body {
-   overflow: hidden;
-  font-family: 'Inter', sans-serif;
-  background-color: #f8f9fa;
-  color: #333;
-}
-html, body {
-  height: 100%;          /* Take full viewport height */
-  margin: 0;
-  display: flex;
-  flex-direction: column;
-}
+    .sidebar { width: 240px; background-color: #1e293b; color: #fff; padding: 30px 20px; display: flex; flex-direction: column; position: fixed; height: 100%; }
+    .sidebar .logo { font-size: 20px; font-weight: 600; margin-bottom: 40px; text-align: center; }
+    .nav-link { display: flex; align-items: center; padding: 12px 15px; border-radius: 6px; color: #cbd5e1; text-decoration: none; margin-bottom: 10px; transition: background 0.3s, color 0.3s; }
+    .nav-link:hover { background-color: #334155; color: #ffffff; }
+    .nav-link i { margin-right: 12px; font-size: 16px; width: 20px; text-align: center; }
 
-    /* Sidebar */
-    .sidebar {
-      width: 240px;
-      background-color: #1e293b;
-      color: #fff;
-      padding: 30px 20px;
-      display: flex;
-      flex-direction: column;
-      position: fixed;
-      height: 100%;
-    }
+    .main-content { margin-left: calc(240px - 10%); padding: 40px; flex: 1; }
+    .main-content h1 { font-size: 28px; font-weight: 600; margin-bottom: 10px; text-align: center; }
+    .main-content p { font-size: 16px; color: #555; text-align: center; margin-bottom: 30px; }
 
-    .sidebar .logo {
-      font-size: 20px;
-      font-weight: 600;
-      margin-bottom: 40px;
-      text-align: center;
-    }
+    .cards { display: flex; flex-wrap: wrap; gap: 20px; justify-content: center; margin-bottom: 30px; }
+    .card-btn { flex: 1 1 200px; max-width: 250px; height: 100px; display: flex; align-items: center; justify-content: center; background-color: #007bff; color: white; border-radius: 5px; font-size: 16px; cursor: pointer; transition: background 0.3s; text-decoration: none; }
+    .card-btn:hover { background-color: #0056b3; }
 
-    .nav-link {
-      display: flex;
-      align-items: center;
-      padding: 12px 15px;
-      border-radius: 6px;
-      color: #cbd5e1;
-      text-decoration: none;
-      margin-bottom: 10px;
-      transition: background 0.3s, color 0.3s;
-    }
+    .resource, .resourceContent { max-width: 350px; margin: 20px auto; border-radius: 6px; padding: 15px; }
+    .resource { background-color: #1e293b; color: white; text-align: center; font-weight: bold; }
+    .resourceContent { background-color: #c5d2e9; color: black; text-align: left; list-style: none; padding-left: 20px; }
 
-    .nav-link:hover {
-      background-color: #334155;
-      color: #ffffff;
-    }
+    footer { position: relative; text-align: center; background-color: rgb(245, 249, 245); color: black; padding: 20px 0; opacity: .7; margin-top: 40px; }
 
-    .nav-link i {
-      margin-right: 12px;
-      font-size: 16px;
-      width: 20px;
-      text-align: center;
-    }
-
-    /* Main */
-   .main-content {
-  margin-left: calc(240px - 10%); /* sidebar width minus 10% */
-  padding: 40px;
-  flex: 1;
-}
-
-
-    .main-content h1 {
-      font-size: 28px;
-      font-weight: 600;
-      margin-bottom: 10px;
-      text-align: center;
-    }
-
-    .main-content p {
-      font-size: 16px;
-      color: #555;
-      text-align: center;
-      margin-bottom: 30px;
-    }
-
-    /* Responsive cards instead of absolute buttons */
-    .cards {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 20px;
-      justify-content: center;
-      margin-bottom: 30px;
-    }
-
-    .card-btn {
-      flex: 1 1 200px;
-      max-width: 250px;
-      height: 100px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      background-color: #007bff;
-      color: white;
-      border-radius: 5px;
-      font-size: 16px;
-      cursor: pointer;
-      transition: background 0.3s;
-      text-decoration: none;
-    }
-
-    .card-btn:hover {
-      background-color: #0056b3;
-    }
-
-    /* Newsletter / Resource */
-    .resource, .resourceContent {
-      max-width: 350px;
-      margin: 20px auto;
-      border-radius: 6px;
-      padding: 15px;
-    }
-
-    .resource {
-      background-color: #1e293b;
-      color: white;
-      text-align: center;
-      font-weight: bold;
-    }
-
-    .resourceContent {
-      background-color: #c5d2e9;
-      color: black;
-      text-align: left;
-      list-style: none;
-      padding-left: 20px;
-    }
-
-    /* Footer */
-    footer {
-      position: relative;
-      text-align: center;
-      background-color: rgb(245, 249, 245);
-      color: black;
-      padding: 20px 0;
-      opacity: .7;
-      margin-top: 40px;
-    }
-
-    /* MOBILE RESPONSIVE */
     @media (max-width: 768px) {
-      body {
-        flex-direction: column;
-      }
-
-      .sidebar {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between; /* top links stay top, logout stays bottom */
-  height: 100vh;
-  position: fixed;
-  width: 240px;
-  padding: 30px 20px;
-  background-color: #1e293b;
-}
-
-
-      .main-content {
-        margin-left: 0;
-        padding: 20px;
-      }
-
-      .cards {
-        flex-direction: column;
-        align-items: center;
-      }
+      body { flex-direction: column; }
+      .sidebar { display: flex; flex-direction: column; justify-content: space-between; height: 100vh; position: fixed; width: 240px; padding: 30px 20px; background-color: #1e293b; }
+      .main-content { margin-left: 0; padding: 20px; }
+      .cards { flex-direction: column; align-items: center; }
     }
 
-    .topTitle {
-  font-size: 32px;               /* bigger, prominent */
-  font-weight: 700;              /* bold */
-  text-align: center;            /* center aligned */
-  color: #1e293b;                /* dark slate color */
-  margin-bottom: 15px;           /* space below */
-  letter-spacing: 1px;           /* subtle spacing */
-  text-transform: capitalize;    /* capitalize words */
-  position: relative;
-}
+    .topTitle { font-size: 32px; font-weight: 700; text-align: center; color: #1e293b; margin-bottom: 15px; letter-spacing: 1px; text-transform: capitalize; position: relative; }
+    .topTitle::after { content: ""; display: block; width: 80px; height: 3px; background: #007bff; margin: 8px auto 0; border-radius: 2px; }
 
-.topTitle::after {
-  content: "";
-  display: block;
-  width: 80px;                   /* underline length */
-  height: 3px;
-  background: #007bff;           /* blue accent underline */
-  margin: 8px auto 0;            /* center it */
-  border-radius: 2px;
-}
+    .container { max-width: 1200px; margin: 40px auto; padding: 0 55px; }
+    .content { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 30px; }
 
- /* Main Content */
-    .container {
-      max-width: 1200px;
-      margin: 40px auto;
-      padding: 0 55px;
-    }
-    
-    .content {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: space-between;
-      gap: 30px;
-    }
+    .card { background-color: white; border-radius: 12px; box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1); width: calc(33% - 20px); padding: 25px; text-align: center; cursor: pointer; transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out; }
+    .card:hover { transform: translateY(-10px); box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15); }
+    .card h3 { font-size: 24px; color: #00796b; margin-bottom: 15px; font-weight: 500; }
+    .card p { color: #666; font-size: 16px; margin-bottom: 20px; }
+    .card a { color: #00796b; font-weight: 500; text-decoration: none; border: 2px solid #00796b; padding: 8px 20px; border-radius: 6px; transition: background-color 0.3s ease-in-out; }
+    .card a:hover { background-color: #00796b; color: white; }
 
-    /* Cards */
-    .card {
-      background-color: white;
-      border-radius: 12px;
-      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
-      width: calc(33% - 20px);
-      padding: 25px;
-      text-align: center;
-      cursor: pointer;
-      transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
-    }
-
-    .card:hover {
-      transform: translateY(-10px);
-      box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
-    }
-
-    .card h3 {
-      font-size: 24px;
-      color: #00796b; /* Teal */
-      margin-bottom: 15px;
-      font-weight: 500;
-    }
-
-    .card p {
-      color: #666;
-      font-size: 16px;
-      margin-bottom: 20px;
-    }
-
-    .card a {
-      color: #00796b; /* Teal */
-      font-weight: 500;
-      text-decoration: none;
-      border: 2px solid #00796b; /* Teal */
-      padding: 8px 20px;
-      border-radius: 6px;
-      transition: background-color 0.3s ease-in-out;
-    }
-
-    .card a:hover {
-      background-color: #00796b; /* Teal */
+    .logout-form { margin-top: 20px; }
+    .logout-form button { background-color: #007bff; color: white; border: none; padding: 12px 20px; border-radius: 6px; font-weight: 600; width: 100%; cursor: pointer; transition: background-color 0.3s ease; }
+    .logout-form button:hover { background-color: #0056b3; }
+    .newsLetter {
+      background-image: url('images/green_leaves.jpg');
+       position: absolute;
+      top: 5px;
+      right: 0px;
+      height: 100%;
+      width: 202px;
       color: white;
+      text-align: center;
+
     }
-/* Logout Button Styling */
-.logout-form {
-  margin-top: 20px;
-}
-
-.logout-form button {
-  background-color: #007bff;
-  color: white;
-  border: none;
-  padding: 12px 20px;
-  border-radius: 6px;
-  font-weight: 600;
-  width: 100%;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-}
-
-.logout-form button:hover {
-  background-color: #0056b3;
-}
-
-
   </style>
 </head>
 <body>
 
   <nav class="sidebar">
     <div class="logo">Agendamento.com</div>
-    <a href="home" class="nav-link"><i class="fas fa-home"></i> Dashboard</a>
-    <a href="userProfile" class="nav-link"><i class="fas fa-user"></i> Profile</a>
-    <a href="appointment" class="nav-link"><i class="fas fa-calendar-alt"></i> Appointments</a>
-    <a href="laboratory" class="nav-link"><i class="fa-solid fa-flask-vial"></i> Laboratory</a>
-    <a href="insurance" class="nav-link"><i class="fa-solid fa-suitcase-medical"></i> Insurance</a>
-    <a href="#" class="nav-link"><i class="fas fa-cog"></i> Settings</a>
-     <!-- ✅ Logout POST form styled like nav-link -->
-<form action="/logout" method="POST" class="logout-form">
-  <button type="submit">Logout</button>
-</form>
+    <a href="home" class="nav-link"><i class="fas fa-home"></i> <%= __('dashboard.nav.dashboard') %></a>
+    <a href="userProfile" class="nav-link"><i class="fas fa-user"></i> <%= __('dashboard.nav.profile') %></a>
+    <a href="appointment" class="nav-link"><i class="fas fa-calendar-alt"></i> <%= __('dashboard.nav.appointments') %></a>
+    <a href="laboratory" class="nav-link"><i class="fa-solid fa-flask-vial"></i> <%= __('dashboard.nav.laboratories') %></a>
+    <a href="insurance" class="nav-link"><i class="fa-solid fa-suitcase-medical"></i> <%= __('dashboard.nav.insurance') %></a>
+    <a href="#" class="nav-link"><i class="fas fa-cog"></i> <%= __('dashboard.nav.settings') %></a>
 
+    <form action="/logout" method="POST" class="logout-form">
+      <button type="submit"><%= __('dashboard.logout') %></button>
+    </form>
   </nav>
 
   <div class="main-content">
-    <h1 class="topTitle">Welcome to Scheduling</h1>
-    <p>Find everything you need here.</p>
+    <h1 class="topTitle"><%= __('dashboard.welcome') %></h1>
+    <p><%= __('dashboard.subtitle') %></p>
 
-      <div class="container">
-<div class="content">
-  <!-- Insurance Card -->
-  <div class="card" onclick="window.location.href='insurance'">
-    <h3>Insurance</h3>
-    <p>💼 Browse and manage your medical insurance providers. Find the best coverage for your needs.</p>
-    <a href="insurance">Explore Insurance Providers</a>
+    <div class="container">
+      <div class="content">
+        <div class="card" onclick="window.location.href='insurance'">
+          <h3><%= __('dashboard.cards.insurance.title') %></h3>
+          <p><%= __('dashboard.cards.insurance.text') %></p>
+          <a href="insurance"><%= __('dashboard.cards.insurance.link') %></a>
+        </div>
+
+        <div class="card" onclick="window.location.href='laboratory'">
+          <h3><%= __('dashboard.cards.laboratory.title') %></h3>
+          <p><%= __('dashboard.cards.laboratory.text') %></p>
+          <a href="laboratory"><%= __('dashboard.cards.laboratory.link') %></a>
+        </div>
+
+        <div class="card" onclick="window.location.href='appointment'">
+          <h3><%= __('dashboard.cards.appointments.title') %></h3>
+          <p><%= __('dashboard.cards.appointments.text') %></p>
+          <a href="appointment"><%= __('dashboard.cards.appointments.link') %></a>
+        </div>
+
+        <div class="card" onclick="window.location.href='banking'">
+          <h3><%= __('dashboard.cards.banking.title') %></h3>
+          <p><%= __('dashboard.cards.banking.text') %></p>
+          <a href="banking"><%= __('dashboard.cards.banking.link') %></a>
+        </div>
+      </div>
+    </div>
+
+    <footer>
+      &copy; 2025 <%= __('dashboard.footer') %>
+    </footer>
   </div>
-
-  <!-- Laboratories Card -->
-  <div class="card" onclick="window.location.href='laboratory'">
-    <h3>Laboratories</h3>
-    <p>🧬 Book and manage your laboratory tests with ease. Stay on top of your health screenings.</p>
-    <a href="laboratory">Explore Laboratories</a>
-  </div>
-
-  <!-- Clinics Card -->
-  <div class="card" onclick="window.location.href='appointment'">
-    <h3>Appointments</h3>
-    <p>📅 Locate nearby clinics, check services offered, and schedule appointments for your healthcare.</p>
-    <a href="appointment">Explore Clinics</a>
-  </div>
-
-  <!-- ✅ Banking Card -->
-  <div class="card" onclick="window.location.href='banking'">
-    <h3>Banking</h3>
-    <p>🏦 Manage your clinic's bank transactions, accounts, and financial records efficiently and securely.</p>
-    <a href="banking">Explore Banking Details</a>
-  </div>
-</div>
-
-  <footer>
-    &copy; 2025 Moz Insurance Network.
-  </footer>
 
 </body>
 </html>

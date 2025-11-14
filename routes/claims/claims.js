@@ -4,8 +4,16 @@ const mysql = require('mysql');
 const multer = require('multer');
 const path = require('path');
 const fs = require('fs');
-
 // MySQL Connection
+
+// Middleware to make __ available in all templates rendered from this router
+router.use((req, res, next) => {
+  res.locals.__ = res.__; // ✅ important: makes __('...') work in EJS
+  next();
+});
+
+
+//-----------------
 const connection = mysql.createConnection({
   port: '3306',
   host: 'lyl3nln24eqcxxot.cbetxkdyhwsb.us-east-1.rds.amazonaws.com',
@@ -134,26 +142,7 @@ router.post('/claimForm', upload.single('document'), (req, res) => {
 });
 
 //-------------------------------------------edit claim------------------------------------------------
-router.get('/editClaim/:claimID', (req, res) => {
-  const claimId = req.params.claimID;
-  const sql = 'SELECT * FROM Claims WHERE claimID = ?';
 
-  connection.query(sql, [claimId], (err, results) => {
-    if (err) {
-      console.error('Error loading claim:', err);
-      return res.status(500).send('Server Error');
-    }
-
-    if (results.length === 0) {
-      return res.status(404).send('Claim not found');
-    }
-
-    const claim = results[0];
-    console.log("Loaded claim:", claim); // 👈 add this line
-
-    res.render('insuranceClaimUpdate', { claim });
-  });
-});
 
 //------------------------------------------Update claim --------------------------------------
 router.post('/updateClaim', upload.single('document'), (req, res) => {

@@ -1,52 +1,42 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Personal Laboratory Portal</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title><%= __('laboratory.title') %></title>
   <%- include("partials/template.ejs") %>
 
   <style>
-    * { box-sizing: border-box; }
-    html, body { margin: 0; padding: 0; overflow-x: hidden; -webkit-text-size-adjust: 100%; }
-
-    body {
-      font-family: Arial, sans-serif;
-      background: #f8f9fa;
-      color: #333;
-      text-align: center;
-      padding: 20px;
-    }
-
     /* Title */
-   /* Title */
     .title {
       position: absolute;
-      left: 500px;
+      left: 360px;
       font-family: 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
       font-weight: 600;
-      color: #004080; /* Deep healthcare blue */
+      color: #004080;
       font-size: clamp(24px, 4vw, 36px);
       margin: 40px auto 40px;
-      line-height: 1.4; 
+      line-height: 1.4;
       word-break: break-word;
       max-width: 90%;
       text-align: center;
-     
     }
- /* Main Content */
-      .container {
-      margin-top: 29vh; 
+
+    /* Main container */
+    .container {
+      margin-top: 29vh;
       max-width: 1200px;
-     margin-right: 12%;
+      margin-right: 12%;
       padding: 0 70px;
     }
-    
+
+    /* Content cards layout */
     .content {
       display: flex;
       flex-wrap: wrap;
       justify-content: space-between;
       gap: 30px;
+      margin-top: -10px; /* ✅ pushes content up */
     }
 
     /* Cards */
@@ -68,7 +58,7 @@
 
     .card h3 {
       font-size: 24px;
-      color: #00796b; /* Teal */
+      color: #00796b;
       margin-bottom: 15px;
       font-weight: 500;
     }
@@ -80,69 +70,50 @@
     }
 
     .card a {
-      color: #00796b; /* Teal */
+      color: #00796b;
       font-weight: 500;
       text-decoration: none;
-      border: 2px solid #00796b; /* Teal */
+      border: 2px solid #00796b;
       padding: 8px 20px;
       border-radius: 6px;
       transition: background-color 0.3s ease-in-out;
     }
 
     .card a:hover {
-      background-color: #00796b; /* Teal */
+      background-color: #00796b;
       color: white;
     }
   </style>
 </head>
+
 <body>
+  <h1 class="title"><%= __('laboratory.header') %></h1>
 
-  <!-- Title -->
-  <h1 class="title">Book, Track, and Access Lab Services Easily</h1>
-
- 
-<div class="container">
+  <div class="container">
     <div class="content">
-      <!-- Insurance Card -->
+
+      <!-- Lab History -->
       <div class="card" onclick="window.location.href='labHistory'">
-        <h3>Lab Test History</h3>
-        <p>🧪 Your Lab Test History
-        Track every diagnostic test you've taken.
-        Review detailed results past exams.</p>
-        <a href="labHistory">Test History</a>
+        <h3><%= __('laboratory.history.title') %></h3>
+        <p><%= __('laboratory.history.desc') %></p>
+        <a href="labHistory"><%= __('laboratory.history.link') %></a>
       </div>
 
-      <!-- Laboratories Card -->
+      <!-- Search Lab -->
       <div class="card" onclick="window.location.href='searchLab'">
-        <h3>Search Laboratory</h3>
-        <p>🔎 Search thousands of certified labs.
-        Compare by services, hours, and reviews.
-</p>
-        <a href="searchLab">Explore Laboratories</a>
+        <h3><%= __('laboratory.search.title') %></h3>
+        <p><%= __('laboratory.search.desc') %></p>
+        <a href="searchLab"><%= __('laboratory.search.link') %></a>
       </div>
 
-      <!-- Clinics Card -->
+      <!-- Book a Lab Test -->
       <div class="card" onclick="window.location.href='labTestRequest'">
-        <h3>Book A Lab Test</h3>
-        <p>📅 Schedule a Lab Appointment
-        Select the test you need today.
-        Pick a lab that fits your schedule.</p>
-        <a href="labTestRequest">Test Request</a>
+        <h3><%= __('laboratory.book.title') %></h3>
+        <p><%= __('laboratory.book.desc') %></p>
+        <a href="labTestRequest"><%= __('laboratory.book.link') %></a>
       </div>
+
     </div>
   </div>
-  
-
-  <script>
-    // Make div “buttons” keyboard accessible
-    document.querySelectorAll('.appointment, .Insurance, .Laboratory').forEach(el => {
-      el.setAttribute('role', 'button');
-      el.setAttribute('tabindex', '0');
-      el.addEventListener('keydown', (e) => {
-        if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); el.click(); }
-      });
-    });
-  </script>
-
 </body>
 </html>

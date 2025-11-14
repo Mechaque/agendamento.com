@@ -1,0 +1,457 @@
+{
+  "front": {
+    "title": "Rede nº1 de Hospitais e Clínicas de Moçambique",
+    "subtitle": "Não guarde seus segredos, compartilhe-os anonimamente!",
+    "admin": "Admin",
+    "login": "Login"
+  },
+  "login": {
+    "title": "Login - Rede de Hospitais e Clínicas de Moçambique",
+    "heading": "Entrar",
+    "email": "Email",
+    "password": "Senha",
+    "remember": "Lembrar-me",
+    "submit": "Login",
+    "noAccount": "Não tem uma conta?",
+    "signUp": "Registrar-se",
+    "forgotPassword": "Esqueceu a senha?"
+  },
+  "dashboard": {
+  "title": "Painel - Agendamento.com",
+  "nav": {
+    "dashboard": "Painel",
+    "profile": "Perfil",
+    "appointments": "Consultas",
+    "laboratories": "Laboratórios",
+    "insurance": "Seguro",
+    "settings": "Configurações"
+  },
+  "logout": "Sair",
+  "welcome": "Bem-vindo ao Agendamento",
+  "subtitle": "Encontre tudo o que precisa aqui.",
+  "cards": {
+    "insurance": {
+      "title": "Seguro",
+      "text": "Navegue e gerencie seus provedores de seguro médico. Encontre a melhor cobertura para suas necessidades.",
+      "link": "Explorar Seguradoras"
+    },
+    "laboratory": {
+      "title": "Laboratórios",
+      "text": "Agende e gerencie seus exames laboratoriais com facilidade. Mantenha-se em dia com sua saúde.",
+      "link": "Explorar Laboratórios"
+    },
+    "appointments": {
+      "title": "Consultas",
+      "text": "Encontre clínicas próximas, veja os serviços oferecidos e agende suas consultas médicas.",
+      "link": "Explorar Clínicas"
+    },
+    "banking": {
+      "title": "Banco",
+      "text": "Gerencie as transações, contas e registros financeiros da sua clínica com eficiência e segurança.",
+      "link": "Explorar Detalhes Bancários"
+    }
+  },
+  "footer": "Rede de Seguros de Moçambique."
+},
+"insurance": {
+  "title": "Painel de Seguro",
+  "heading": "Seu Hub Pessoal de Seguro de Saúde",
+  "cards": {
+    "claimHistory": {
+      "title": "Histórico de Reivindicações",
+      "text": "🕓 Navegue facilmente pelas suas reivindicações anteriores e acompanhe o seu histórico de saúde com confiança.",
+      "link": "Histórico de Reivindicações"
+    },
+    "submitClaim": {
+      "title": "Enviar Reivindicação",
+      "text": "✅ Enviar suas reivindicações nunca foi tão fácil — apenas alguns passos simples e está feito.",
+      "link": "Enviar Reivindicação"
+    },
+    "insuranceList": {
+      "title": "Lista de Seguros",
+      "text": "🔍 Veja companhias de seguro que oferecem benefícios de saúde significativos e escolha a melhor para você.",
+      "link": "Pesquisar Seguros"
+    },
+    "coverage": {
+      "title": "Cobertura",
+      "text": "💼 Revise os detalhes da sua cobertura de seguro e entenda quais benefícios estão incluídos.",
+      "link": "Ver Cobertura"
+    }
+  }
+},
+"sidebar": {
+  "title": "Navegação do Painel",
+  "logo": "Agendamento.com",
+  "dashboard": "Painel",
+  "profile": "Perfil",
+  "appointments": "Consultas",
+  "laboratory": "Laboratório",
+  "insurance": "Seguros",
+  "settings": {
+    "title": "Configurações",
+    "resetPassword": "Redefinir Senha",
+    "language": "Idioma",
+    "notifications": "Notificações",
+    "darkMode": "Modo Escuro"
+  },
+  "logout": "Sair",
+  "footer": "Rede de Seguros de Moçambique"
+},
+"laboratory": {
+  "title": "Serviços de Laboratório",
+  "header": "Agende, acompanhe e acesse serviços de laboratório facilmente",
+
+  "history": {
+    "title": "Histórico de Testes de Laboratório",
+    "desc": "🧪 Acompanhe todos os testes diagnósticos que você realizou. Revise os resultados detalhados de exames anteriores.",
+    "link": "Ver histórico de testes"
+  },
+  "search": {
+    "title": "Pesquisar Laboratório",
+    "desc": "🔎 Pesquise laboratórios certificados por serviços, horários e avaliações.",
+    "link": "Explorar laboratórios"
+  },
+  "book": {
+    "title": "Marcar um Teste de Laboratório",
+    "desc": "📅 Agende o seu próximo teste de laboratório. Escolha o exame e o horário que melhor se adequam a você.",
+    "link": "Solicitar teste"
+  }
+},
+
+  "appointment": {
+    "header": "Seu Portal de Confiança para Agendamentos de Saúde",
+    "history": {
+      "title": "Histórico de Consultas",
+      "desc": "🕓 Revise facilmente suas reservas passadas e futuras.",
+      "link": "Histórico de Consultas"
+    },
+    "search": {
+      "title": "Pesquisar  Clínica",
+      "desc": "🔍 Procure clínica mais proxima e liga-se com os melhores prestadores de saúde.",
+      "link": "Lista de Clínicas"
+    },
+    "book": {
+      "title": "Agendar Consulta",
+      "desc": "📅 Agende sua próxima visita com apenas alguns cliques.",
+      "link": "Agendamento de Consulta"
+    }
+  },
+  "clinic": {
+  "search_page": {
+    "title": "Pesquisar Clínica",
+    "header": "Pesquisar Clínica",
+    "table": {
+      "id": "ID da Clínica",
+      "name": "Nome da Clínica",
+      "address": "Endereço",
+      "phone": "Telefone",
+      "province": "Província",
+      "action": "Ação"
+    },
+    "view_button": "Ver"
+  }
+},
+"list": {
+    "title": "Lista de Clínicas",
+    "header": "Lista de Clínicas",
+    "table": {
+      "id": "ID da Clínica",
+      "name": "Nome da Clínica",
+      "address": "Endereço",
+      "phone": "Telefone",
+      "province": "Província/Estado",
+      "action": "Ação"
+    },
+    "view_button": "Ver"
+  },
+  "doctor": {
+  "list": {
+    "title": "Lista de Médicos",
+    "welcome": "Bem-vindo à",
+    "address_label": "Endereço:",
+    "hours_label": "Horário de Funcionamento:",
+    "view_doctors": "Ver Médicos",
+    "bookings": "Agendamentos",
+    "info_text": "Clique nos botões acima para ver a lista de médicos e suas disponibilidades ou clique em Agendamentos para marcar uma consulta.",
+    "schedule": {
+      "monday": "Segunda-feira:  9h - 17h",
+      "tuesday": "Terça-feira:    9h - 17h",
+      "wednesday": "Quarta-feira:   9h - 17h",
+      "thursday": "Quinta-feira:   9h - 17h",
+      "friday": "Sexta-feira:    9h - 17h",
+      "saturday": "Sábado:         9h - 15h",
+      "sunday": "Domingo:        Fechado"
+    }
+  }
+},
+ "listDoctor": {
+    "title": "Lista de Médicos",
+    "header": "Lista de Médicos",
+    "table": {
+      "fname": "Nome",
+      "lname": "Sobrenome",
+      "speciality": "Especialidade",
+      "phone": "Telefone",
+      "doctorID": "ID do Médico",
+      "select": "Selecionar"
+    },
+    "view_button": "Ver Perfil"
+  },
+    "doctorProfile": {
+    "title": "Perfil do Médico",
+    "select_day": "Selecione um dia para ver a disponibilidade",
+    "choose_day": "Escolha um dia:",
+    "check_availability": "Verificar Disponibilidade",
+    "speciality": "Especialidade:",
+    "doctor_id": "ID do Médico:",
+    "email": "E-mail:"
+  },
+  "profileDoctor": {
+  "title": "Perfil do Médico",
+  "header": "Dias e Horários Disponíveis",
+  "speciality_label": "Especialidade:",
+  "doctor_id_label": "ID do Médico:",
+  "email_label": "E-mail:",
+  "available_days_label": "Dias e Horários Disponíveis",
+  "select_day_label": "Selecione um dia:",
+  "book_time_button": "Agendar Horário",
+  "reset_button": "Redefinir",
+  "no_times_message": "Nenhum horário disponível para este dia."
+},
+
+"reviewAppointment": {
+    "title": "Revise a sua consulta",
+    "labels": {
+      "full_name": "Nome completo",
+      "email": "Endereço de e-mail",
+      "phone": "Número de telefone",
+      "clinic_name": "Nome da clínica",
+      "select_date": "Selecionar data",
+      "selected_time": "Hora selecionada",
+      "preferred_doctor": "Médico preferido",
+      "service_type": "Tipo de serviço",
+      "additional_notes": "Notas adicionais"
+    },
+    "service_options": {
+      "select": "-- Selecionar --",
+      "consultation": "Consulta normal",
+      "checkup": "Verificação de rotina",
+      "treatment": "Tratamento",
+      "follow_up": "Acompanhamento"
+    },
+    "placeholders": {
+      "reason": "Motivo da visita, sintomas, etc."
+    },
+    "button": "Marcar Consulta"
+  },
+  "historia": {
+    "title": "Histórico de Consultas",
+    "header": "Histórico de Consultas",
+    "table": {
+      "id": "ID da Consulta",
+      "name": "Nome",
+      "phone": "Telefone",
+      "date": "Data",
+      "time": "Hora",
+      "reason": "Motivo",
+      "patient_id": "ID do Paciente",
+      "status": "Estado"
+    },
+    "datatable": {
+      "search": "Pesquisar:",
+      "lengthMenu": "Mostrar _MENU_ registos",
+      "info": "A mostrar de _START_ a _END_ de _TOTAL_ registos"
+    }
+  },
+  "labTestHistory": {
+    "title": "Histórico de Testes Laboratoriais",
+    "name": "Nome",
+    "labID": "ID do Laboratório",
+    "testID": "ID do Teste",
+    "date": "Data",
+    "testName": "Nome do Teste",
+    "results": "Resultados",
+    "actions": "Ações",
+    "delete": "Eliminar",
+    "view": "Ver"
+  },
+
+  "datatables": {
+    "search": "Pesquisar:",
+    "lengthMenu": "Mostrar _MENU_ registos",
+    "info": "A mostrar de _START_ a _END_ de _TOTAL_ registos"
+  },
+  "labSearchList": {
+  "title": "Pesquisar Laboratório",
+  "columns": {
+    "lab_id": "ID do Laboratório",
+    "lab_name": "Nome do Laboratório",
+    "address": "Endereço",
+    "telephone": "Telefone",
+    "province": "Província",
+    "action": "Ação"
+  },
+  "actions": {
+    "view": "Ver"
+  },
+  "datatable": {
+    "search": "Pesquisar:",
+    "lengthMenu": "Mostrar _MENU_ entradas",
+    "info": "Mostrando _START_ até _END_ de _TOTAL_ entradas"
+  }
+}
+,
+
+ 
+  "labTestReq": {
+    "header": "Pedido de Exame Laboratorial",
+
+    "sections": {
+      "personalInfo": "Informações Pessoais",
+      "appointmentDetails": "Detalhes da Consulta"
+    },
+
+    "fields": {
+      "fname": "Nome",
+      "lname": "Sobrenome",
+      "appointmentID": "ID da Consulta",
+      "patientID": "ID do Paciente",
+      "phoneNumber": "Número de Telefone",
+      "lab": "Selecionar Laboratório",
+      "testName": "Nome / Descrição do Exame"
+    },
+
+    "placeholders": {
+      "fname": "Digite o nome",
+      "lname": "Digite o sobrenome",
+      "appointmentID": "Digite o ID da consulta",
+      "patientID": "Digite o ID do paciente",
+      "phoneNumber": "Digite o número de telefone",
+      "lab": "Escolher um laboratório",
+      "testName": "Descreva os exames solicitados"
+    },
+
+    "labOptions": {
+      "primaLab": "Prima Lab",
+      "HCMLab": "Laboratório HCM"
+    },
+
+    "buttons": {
+      "submit": "Enviar Pedido",
+      "cancel": "Cancelar"
+    }
+  }
+
+,
+  "insuranceForm": {
+  "title": "Portal de Reivindicação de Seguro",
+  "header": "Formulário de Reivindicação de Seguro",
+  "fields": {
+    "fullName": "Nome completo",
+    "totalClaim": "Valor total da reivindicação",
+    "policyNumber": "Número da apólice",
+    "clinicID": "ID da clínica",
+    "claimType": "Tipo de reivindicação",
+    "description": "Descrição da reivindicação",
+    "uploadDocs": "Carregar documentos de apoio"
+  },
+  "claimOptions": {
+    "select": "Selecione um tipo",
+    "dental": "Dentário",
+    "optician": "Oculista",
+    "booking": "Marcação normal",
+    "medicines": "Medicamentos"
+  },
+  "buttons": {
+    "submit": "Enviar reivindicação",
+    "backHome": "Voltar para a página inicial"
+  },
+  "messages": {
+    "success": "A sua reivindicação foi enviada com sucesso!"
+  }
+}
+,
+"editProfile": {
+  "title": "Editar Perfil",
+  "header": "Editar Perfil",
+  "fields": {
+    "fullName": "Nome completo",
+    "lastName": "Apelido",
+    "email": "Endereço de e-mail",
+    "phone": "Número de telefone",
+    "patientID": "ID do paciente",
+    "userID": "ID do utilizador"
+  },
+  "buttons": {
+    "save": "Guardar alterações",
+    "cancel": "Cancelar"
+  },
+  "photo": {
+    "alt": "Foto de perfil",
+    "label": "Carregar foto"
+  }
+}
+,
+"insuranceClaimList": {
+  "title": "Todas as suas reivindicações de seguro num só lugar.",
+  "table": {
+    "headers": {
+      "date": "Data",
+      "benefitType": "Tipo de benefício",
+      "claimFor": "Reivindicação para",
+      "claimTotal": "Total da reivindicação",
+      "reimbursed": "Reembolsado",
+      "reference": "Referência da reivindicação",
+      "status": "Estado",
+      "actions": "Ações"
+    },
+    "actions": {
+      "edit": "Editar",
+      "delete": "Eliminar",
+      "confirmDelete": "Tem a certeza de que deseja eliminar esta reivindicação?"
+    }
+  }
+},
+"insuranceSearch": {
+  "title": "Pesquisa Inteligente de Seguros — Descubra Planos que Funcionam para Você.",
+  "table": {
+    "headers": {
+      "name": "Nome",
+      "address": "Endereço",
+      "telephone": "Telefone",
+      "email": "Email",
+      "province": "Província",
+      "action": "Ação"
+    },
+    "buttons": {
+      "view": "Ver"
+    }
+  }
+}
+,
+"insuranceClaimUpdate": {
+    "title": "Portal de Reivindicação de Seguro",
+    "header": "Formulário de Reivindicação",
+    "fullName": "Nome Completo",
+    "claimReference": "Referência da Reivindicação",
+    "claimTotal": "Total da Reivindicação",
+    "status": "Status",
+    "submittedOn": "Enviado em",
+    "claimType": "Tipo de Reivindicação",
+    "selectType": "Selecionar Tipo",
+    "types": {
+      "dental": "Dental",
+      "optometrista": "Optometrista",
+      "regularAppointment": "Consulta Regular",
+      "medicin": "Medicamentos"
+    },
+    "description": "Descrição da Reivindicação",
+    "uploadDocuments": "Carregar Documentos",
+    "cancel": "Cancelar",
+    "update": "Atualizar",
+    "backToHome": "Voltar à Página Inicial"
+  }
+
+
+
+}

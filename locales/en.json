@@ -1,0 +1,455 @@
+{
+  "front": {
+    "title": "Mozambican #1 Hospitals & Clinics Network",
+    "subtitle": "Don't keep your secrets, share them anonymously!",
+    "admin": "Admin",
+    "login": "Login"
+  },
+  "login": {
+    "title": "Login - Mozambican Hospitals & Clinics Network",
+    "heading": "Sign In",
+    "email": "Email",
+    "password": "Password",
+    "remember": "Remember Me",
+    "submit": "Login",
+    "noAccount": "Don't have an account?",
+    "signUp": "Sign Up",
+    "forgotPassword": "Forgot Password?"
+  },
+  "dashboard": {
+    "title": "Dashboard - Agendamento.com",
+    "nav": {
+      "dashboard": "Dashboard",
+      "profile": "Profile",
+      "appointments": "Appointments",
+      "laboratories": "Laboratories",
+      "insurance": "Insurance",
+      "settings": "Settings"
+    },
+    "logout": "Logout",
+    "welcome": "Welcome to Scheduling",
+    "subtitle": "Find everything you need here.",
+    "cards": {
+      "insurance": {
+        "title": "Insurance",
+        "text": "Browse and manage your medical insurance providers. Find the best coverage for your needs.",
+        "link": "Explore Insurance Providers"
+      },
+      "laboratory": {
+        "title": "Laboratories",
+        "text": "Book and manage your laboratory tests with ease. Stay on top of your health screenings.",
+        "link": "Explore Laboratories"
+      },
+      "appointments": {
+        "title": "Appointments",
+        "text": "Locate nearby clinics, check services offered, and schedule appointments for your healthcare.",
+        "link": "Explore Clinics"
+      },
+      "banking": {
+        "title": "Banking",
+        "text": "Manage your clinic's bank transactions, accounts, and financial records efficiently and securely.",
+        "link": "Explore Banking Details"
+      }
+    },
+    "footer": "Moz Insurance Network."
+  },
+  "insurance": {
+    "title": "Insurance Dashboard",
+    "heading": "Your Personal Health Insurance Hub",
+    "cards": {
+      "claimHistory": {
+        "title": "Claim History",
+        "text": "🕓 Easily browse your past insurance claims and keep track of your healthcare history with confidence.",
+        "link": "Claim History"
+      },
+      "submitClaim": {
+        "title": "Submit Claim",
+        "text": "✅ Submitting your claims has never been easier—just a few simple steps and you're done.",
+        "link": "Submit Claim"
+      },
+      "insuranceList": {
+        "title": "Insurance List",
+        "text": "🔍 View insurance companies offering meaningful health benefits—and see which one fits your needs best.",
+        "link": "Search Insurance"
+      },
+      "coverage": {
+        "title": "Coverage",
+        "text": "💼 Review your insurance coverage details and understand what benefits are included.",
+        "link": "View Coverage"
+      }
+    }
+  },
+  "sidebar": {
+    "title": "Dashboard Navigation",
+    "logo": "Agendamento.com",
+    "dashboard": "Dashboard",
+    "profile": "Profile",
+    "appointments": "Appointments",
+    "laboratory": "Laboratory",
+    "insurance": "Insurances",
+    "settings": {
+      "title": "Settings",
+      "resetPassword": "Reset Password",
+      "language": "Language",
+      "notifications": "Notifications",
+      "darkMode": "Dark Mode"
+    },
+    "logout": "Logout",
+    "footer": "Moz Insurance Network"
+  },
+  "laboratory": {
+    "title": "Laboratory Services",
+    "header": "Book, Track, and Access Lab Services Easily",
+    "history": {
+      "title": "Lab Test History",
+      "desc": "🧪 Track every diagnostic test you've taken. Review detailed results from past exams.",
+      "link": "View Test History"
+    },
+    "search": {
+      "title": "Search Laboratory",
+      "desc": "🔎 Search certified labs by services, hours, and reviews.",
+      "link": "Explore Laboratories"
+    },
+    "book": {
+      "title": "Book a Lab Test",
+      "desc": "📅 Schedule your next lab appointment. Choose the test and time that works for you.",
+      "link": "Request a Test"
+    }
+  },
+  "appointment": {
+  "header": "Your Trusted Gateway to Health Appointments",
+  "history": {
+    "title": "Appointments History",
+    "desc": "🕓 Review your past and upcoming bookings easily.",
+    "link": "Appointment History"
+  },
+  "search": {
+    "title": "Search A Clinic",
+    "desc": "🔍 Find a clinic near you and connect with top healthcare providers.",
+    "link": "Clinic Listing"
+  },
+  "book": {
+    "title": "Book Appointment",
+    "desc": "📅 Schedule your next visit with just a few clicks.",
+    "link": "Appointment Booking"
+  }
+},
+"clinic": {
+  "search_page": {
+    "title": "Search Clinic",
+    "header": "Search Clinic",
+    "table": {
+      "id": "Clinic ID",
+      "name": "Clinic Name",
+      "address": "Address",
+      "phone": "Phone",
+      "province": "Province",
+      "action": "Action"
+    },
+    "view_button": "View"
+  }
+},
+ "list": {
+    "title": "Clinic List",
+    "header": "Clinic List",
+    "table": {
+      "id": "Clinic ID",
+      "name": "Clinic Name",
+      "address": "Address",
+      "phone": "Telephone",
+      "province": "Province/State",
+      "action": "Action"
+    },
+    "view_button": "View"
+  },
+  "doctor": {
+  "list": {
+    "title": "Doctors List",
+    "welcome": "Welcome To",
+    "address_label": "Address:",
+    "hours_label": "Opening Hours:",
+    "view_doctors": "View Doctors",
+    "bookings": "Bookings",
+    "info_text": "Click the buttons above to view the list of doctors and their availability, or click Bookings to schedule an appointment.",
+    "schedule": {
+      "monday": "Monday:     9 AM - 5 PM",
+      "tuesday": "Tuesday:    9 AM - 5 PM",
+      "wednesday": "Wednesday:  9 AM - 5 PM",
+      "thursday": "Thursday:   9 AM - 5 PM",
+      "friday": "Friday:     9 AM - 5 PM",
+      "saturday": "Saturday:   9 AM - 3 PM",
+      "sunday": "Sunday:     Closed"
+    }
+  }
+},
+ "listDoctor": {
+    "title": "Doctors List",
+    "header": "Doctors List",
+    "table": {
+      "fname": "First Name",
+      "lname": "Last Name",
+      "speciality": "Speciality",
+      "phone": "Telephone",
+      "doctorID": "Doctor ID",
+      "select": "Select"
+    },
+    "view_button": "View Profile"
+  },
+  "doctorProfile": {
+  "title": "Doctor Profile",
+  "select_day": "Select a Day to View Availability",
+  "choose_day": "Choose a Day:",
+  "check_availability": "Check Availability",
+  "speciality": "Speciality:",
+  "doctor_id": "Dr. ID:",
+  "email": "Email:"
+},
+"profileDoctor": {
+  "title": "Doctor Profile",
+  "header": "Available Days & Times",
+  "speciality_label": "Speciality:",
+  "doctor_id_label": "Doctor ID:",
+  "email_label": "Email:",
+  "available_days_label": "Available Days & Times",
+  "select_day_label": "Select a Day:",
+  "book_time_button": "Book Time",
+  "reset_button": "Reset",
+  "no_times_message": "No available times for this day."
+},
+"reviewAppointment": {
+    "title": "Review Your Appointment",
+    "labels": {
+      "full_name": "Full Name",
+      "email": "Email Address",
+      "phone": "Phone Number",
+      "clinic_name": "Clinic Name",
+      "select_date": "Select Date",
+      "selected_time": "Selected Time",
+      "preferred_doctor": "Preferred Doctor",
+      "service_type": "Service Type",
+      "additional_notes": "Additional Notes"
+    },
+    "service_options": {
+      "select": "-- Select --",
+      "consultation": "Consultation",
+      "checkup": "Routine Check-up",
+      "treatment": "Treatment",
+      "follow_up": "Follow-up"
+    },
+    "placeholders": {
+      "reason": "Reason for visit, symptoms, etc."
+    },
+    "button": "Book Appointment"
+  },
+    "historia": {
+    "title": "Appointment History",
+    "header": "Appointment History",
+    "table": {
+      "id": "Appointment ID",
+      "name": "Name",
+      "phone": "Phone",
+      "date": "Date",
+      "time": "Time",
+      "reason": "Reason",
+      "patient_id": "Patient ID",
+      "status": "Status"
+    },
+    "datatable": {
+      "search": "Search:",
+      "lengthMenu": "Show _MENU_ entries",
+      "info": "Showing _START_ to _END_ of _TOTAL_ entries"
+    }
+  },
+"labTestHistory": {
+    "title": "Historique des tests de laboratoire",
+    "name": "Nom",
+    "labID": "ID du laboratoire",
+    "testID": "ID du test",
+    "date": "Date",
+    "testName": "Nom du test",
+    "results": "Résultats",
+    "actions": "Actions",
+    "delete": "Supprimer",
+    "view": "Voir"
+  },
+
+  "datatables": {
+    "search": "Recherche :",
+    "lengthMenu": "Afficher _MENU_ entrées",
+    "info": "Affichage de _START_ à _END_ sur _TOTAL_ entrées"
+  },
+   "labSearchList": {
+  "title": "Search Laboratory",
+  "columns": {
+    "lab_id": "Lab ID",
+    "lab_name": "Lab Name",
+    "address": "Address",
+    "telephone": "Telephone",
+    "province": "Province",
+    "action": "Action"
+  },
+  "actions": {
+    "view": "View"
+  },
+  "datatable": {
+    "search": "Search:",
+    "lengthMenu": "Show _MENU_ entries",
+    "info": "Showing _START_ to _END_ of _TOTAL_ entries"
+  }
+}
+,
+
+  "labTestReq": {
+    "header": "Laboratory Test Request",
+
+    "sections": {
+      "personalInfo": "Personal Information",
+      "appointmentDetails": "Appointment Details"
+    },
+
+    "fields": {
+      "fname": "First Name",
+      "lname": "Last Name",
+      "appointmentID": "Appointment ID",
+      "patientID": "Patient ID",
+      "phoneNumber": "Phone Number",
+      "lab": "Select Laboratory",
+      "testName": "Test Name / Description"
+    },
+
+    "placeholders": {
+      "fname": "Enter first name",
+      "lname": "Enter last name",
+      "appointmentID": "Enter appointment ID",
+      "patientID": "Enter patient ID",
+      "phoneNumber": "Enter phone number",
+      "lab": "Choose a lab",
+      "testName": "Describe the requested tests"
+    },
+
+    "labOptions": {
+      "primaLab": "Prima Lab",
+      "HCMLab": "HCM Laboratory"
+    },
+
+    "buttons": {
+      "submit": "Submit Request",
+      "cancel": "Cancel"
+    }
+  }
+
+,
+  "insuranceForm": {
+  "title": "Insurance Claim Portal",
+  "header": "Insurance Claim Form",
+  "fields": {
+    "fullName": "Full Name",
+    "totalClaim": "Total Claim",
+    "policyNumber": "Policy Number",
+    "clinicID": "Clinic ID",
+    "claimType": "Type of Claim",
+    "description": "Description of the Claim",
+    "uploadDocs": "Upload Supporting Documents"
+  },
+  "claimOptions": {
+    "select": "Select a Type",
+    "dental": "Dental",
+    "optician": "Optician",
+    "booking": "Normal Booking",
+    "medicines": "Medicines"
+  },
+  "buttons": {
+    "submit": "Submit Claim",
+    "backHome": "Back to Home"
+  },
+  "messages": {
+    "success": "Your claim has been successfully submitted!"
+  }
+},
+"editProfile": {
+  "title": "Edit Profile",
+  "header": "Edit Profile",
+  "fields": {
+    "fullName": "Full Name",
+    "lastName": "Last Name",
+    "email": "Email Address",
+    "phone": "Phone Number",
+    "patientID": "Patient ID",
+    "userID": "User ID"
+  },
+  "buttons": {
+    "save": "Save Changes",
+    "cancel": "Cancel"
+  },
+  "photo": {
+    "alt": "Profile Photo",
+    "label": "Upload Photo"
+  }
+},
+"insuranceClaimList": {
+  "title": "All Your Insurance Claims in One Place.",
+  "table": {
+    "headers": {
+      "date": "Date",
+      "benefitType": "Benefit Type",
+      "claimFor": "Claim is For",
+      "claimTotal": "Claim Total",
+      "reimbursed": "Reimbursed",
+      "reference": "Claim Reference",
+      "status": "Status",
+      "actions": "Actions"
+    },
+    "actions": {
+      "edit": "Edit",
+      "delete": "Delete",
+      "confirmDelete": "Are you sure you want to delete this claim?"
+    }
+  }
+},
+"insuranceSearch": {
+  "title": "Smart Insurance Search — Discover Plans That Work for You.",
+  "table": {
+    "headers": {
+      "name": "Name",
+      "address": "Address",
+      "telephone": "Telephone",
+      "email": "Email",
+      "province": "Province",
+      "action": "Action"
+    },
+    "buttons": {
+      "view": "View"
+    }
+  }
+},
+ "insuranceClaimUpdate": {
+    "title": "Insurance Claim Portal",
+    "header": "Form Claim",
+    "fullName": "Full Name",
+    "claimReference": "Claim Reference",
+    "claimTotal": "Claim Total",
+    "status": "Status",
+    "submittedOn": "Submitted On",
+    "claimType": "Claim Type",
+    "selectType": "Select Type",
+    "types": {
+      "dental": "Dental",
+      "optometrista": "Optometrista",
+      "regularAppointment": "Regular Appointment",
+      "medicin": "Medicin"
+    },
+    "description": "Claim Description",
+    "uploadDocuments": "Upload Supporting Documents",
+    "cancel": "Cancel",
+    "update": "Update",
+    "backToHome": "Back to home"
+  }
+
+
+
+
+
+
+
+
+}
