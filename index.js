@@ -297,6 +297,7 @@ app.post("/makeAppointment", ensureAuthenticated, (req, res) => {
   const {
     numeroDaClinica,
     fname,
+    lname,
     email,
     phoneNumber,
     appointmentDate,
@@ -380,7 +381,7 @@ app.post("/makeAppointment", ensureAuthenticated, (req, res) => {
             [
               appointmentID,
               fname,
-              "",
+              lname,
               appointmentDate,
               appointmentTime,
               reasonForVisit,
@@ -854,7 +855,7 @@ try {
      const sql = "SELECT * FROM clinics WHERE clinicID = ?";
     connection.query(sql, [clinicID], function (err,result){
         const name = results[0].fname;
-        const lname = results[0].lastName;
+        const lname = results[0].lname;
         const email = results[0].username;
         const telephone = results[0].phoneNumber;
         const clname = result[0].clinicName;

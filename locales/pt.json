@@ -223,6 +223,7 @@
     "title": "Revise a sua consulta",
     "labels": {
       "full_name": "Nome completo",
+       "last_name": "Apelido",
       "email": "Endereço de e-mail",
       "phone": "Número de telefone",
       "clinic_name": "Nome da clínica",

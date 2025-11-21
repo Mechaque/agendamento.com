@@ -223,6 +223,7 @@
     "title": "Vérifiez votre rendez-vous",
     "labels": {
       "full_name": "Nom complet",
+       "last_name": "Nom",
       "email": "Adresse e-mail",
       "phone": "Numéro de téléphone",
       "clinic_name": "Nom de la clinique",

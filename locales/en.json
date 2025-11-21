@@ -220,6 +220,7 @@
     "title": "Review Your Appointment",
     "labels": {
       "full_name": "Full Name",
+       "last_name": "Last Name",
       "email": "Email Address",
       "phone": "Phone Number",
       "clinic_name": "Clinic Name",

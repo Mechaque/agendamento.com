@@ -66,11 +66,16 @@
     <div class="container">
       <form class="form" action="/makeAppointment" id="form-user" method="post">
         <input type="hidden" id="clinicID" name="numeroDaClinica" value="<%= clID %>">
-
+        
         <h2><%= __("reviewAppointment.title") %></h2>
 
         <label for="fullname"><%= __("reviewAppointment.labels.full_name") %></label>
-        <input type="text" id="fullname" name="fname" value="<%= name %> <%= lname %>" readonly>
+        <input type="text" id="fullname" name="fname" value="<%= name %>" readonly>
+
+        <label for="lastname"><%= __("reviewAppointment.labels.last_name") %></label>
+        <input type="text" id="lastname" name="lname" value="<%= lname %>" readonly>
+
+
 
         <label for="email"><%= __("reviewAppointment.labels.email") %></label>
         <input type="email" id="email" name="email" value="<%= email %>" readonly>
